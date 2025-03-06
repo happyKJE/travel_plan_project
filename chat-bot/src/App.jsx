@@ -1,10 +1,13 @@
 import React from 'react'
 import ChatBotStart from './Component/ChatBotStart'
+import ChatBotApp from './Component/ChatBotApp'
 
 const App = () => {
   return (
-    <ChatBotStart>
-    </ChatBotStart>
+    <div className='container'>
+    {/* <ChatBotStart /> */}
+    <ChatBotApp />
+    </div>
   )
 }
 
