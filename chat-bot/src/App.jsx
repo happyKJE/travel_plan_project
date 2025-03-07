@@ -1,12 +1,8 @@
-import React, { useState } from 'react'
-import ChatBotStart from './Component/ChatBotStart'
-import ChatBotApp from "./Component/ChatBotApp.jsx";
+import React from 'react'
 import RouterComponent from "./RouterComponent.jsx";
 import {BrowserRouter} from "react-router-dom";
 
 const App = () => {
-  // const [ isChatting, setIsChatting ] = useState(false);
-
   return (
       <BrowserRouter>
         <div className='container'>
