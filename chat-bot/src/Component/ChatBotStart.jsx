@@ -1,6 +1,5 @@
 import React from 'react'
 import './ChatBotStart.css'
-import ChatBotApp from "./ChatBotApp.jsx";
 import {useNavigate} from "react-router-dom";
 
 const ChatBotStart = () => {
