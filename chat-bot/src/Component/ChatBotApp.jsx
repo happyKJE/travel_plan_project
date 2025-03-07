@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import "./ChatBotApp.css"
+import {Link} from "react-router-dom";
 
-export class ChatBotApp extends Component {
-  render() {
+
+
+
+const ChatBotApp = () => {
     return (
       <div className='chat-app'>
         <div className='chat-list'>
@@ -26,7 +29,9 @@ export class ChatBotApp extends Component {
         <div className='chat-window'>
             <div className='chat-title'>
                 <h3>Chat with AI</h3>
-                <i className='bx bx-arrow-back arrow'></i>
+                <Link to='/'>
+                    <i className='bx bx-arrow-back arrow'></i>
+                </Link>
             </div>
             <div className='chat'>
                 <div className='prompt'>
@@ -50,6 +55,5 @@ export class ChatBotApp extends Component {
       </div>
     )
   }
-}
 
-export default ChatBotApp
+export default ChatBotApp;
