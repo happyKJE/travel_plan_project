@@ -10,6 +10,5 @@ const ChatBotStart = () => {
     </div>
   )
 }
-
 export default ChatBotStart
  
