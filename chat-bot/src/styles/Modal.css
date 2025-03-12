@@ -1,0 +1,44 @@
+/* body, html의 기본 여백 제거(프로젝트 전체적으로 설정되어 있지 않다면 추가) */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+/* 모달 백드롭(어두운 배경) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    /* 수직·수평 중앙 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 다른 요소보다 위에 표시 */
+    z-index: 1000;
+}
+
+/* 모달 콘텐츠 박스 */
+.modal-content {
+    width: 80vw;
+    max-width: 500px;
+
+    /* 만약 고정 높이 1000px을 꼭 써야 한다면, 화면보다 클 경우 아래쪽이 짤리거나 스크롤이 생길 수 있음 */
+    /* height: 1000px; */
+
+    /* 화면에 맞춰서 자동 스크롤하고 싶다면: */
+    max-height: 80vh;
+    overflow-y: auto;
+
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    position: relative; /* 꼭 필요한 경우가 아니라면 relative 유지 */
+    margin: 0; /* 혹시 모를 기본 margin 제거 */
+}
