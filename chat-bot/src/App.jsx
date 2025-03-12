@@ -4,7 +4,6 @@ import { ChatProvider } from './context/UseContext.jsx';
 import Header from './components/Header';
 import IntroSection from './components/IntroSection';
 import Background from './components/Background';
-import PlanSelection from './pages/PlanSelection';
 import PeopleCount from './pages/PeopleCount';
 import RandomPlanStep from './pages/RandomPlanStep';
 import CustomizedPlanStep from './pages/CustomizedPlanStep';
@@ -31,7 +30,7 @@ const App = () => {
                     <IntroSection />
                     <Routes>
                         <Route path="/" element={<IntroButton />} />
-                        <Route path="plan-selection" element={<PlanSelection />} />
+                        <Route path="plan-selection" element={<IntroButton />} />
                         <Route path="" element={<ModalRoute />}>
                             <Route path="people-count" element={<PeopleCount />} />
                             <Route path="plan-details/random" element={<RandomPlanStep />} />

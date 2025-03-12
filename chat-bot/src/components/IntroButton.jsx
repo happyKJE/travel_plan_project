@@ -19,6 +19,7 @@ const Button = ({ type, text, onClick, animationDelay }) => {
 };
 
 const IntroButton = () => {
+
     const { state,dispatch } = useStore();
     const navigate = useNavigate();
 
@@ -27,17 +28,19 @@ const IntroButton = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        navigate('/people-count')
+        if(state.planType)
+            navigate('/people-count')
     }, [state.planType]);
 
   return (
-    <div className="buttons">
+    <div className="plan-buttons">
       <Button
         type="random-plan"
         text="Random PLAN ▶"
         animationDelay={1.2}
         onClick={() => {handlePlanSelect('random')} }
       />
+
       <Button
         type="custom-plan"
         text="Customized Travel PLAN ▶"
