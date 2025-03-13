@@ -35,13 +35,13 @@ const CustomizedPlanStep = () => {
       />
       <OptionSelector
           label={"선호하는 장소"}
-          type={"선호하는 장소"}
+          type={"선호하는장소"}
           options={placeOptions}
           selected={state.inputValues.place}
       />
       <OptionSelector
           label={"이동 수단"}
-          type={"이동 수단"}
+          type={"이동수단"}
           options={transportOptions}
           selected={state.inputValues.transport}
       />
