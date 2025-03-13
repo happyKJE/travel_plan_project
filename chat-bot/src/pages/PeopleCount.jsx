@@ -18,7 +18,7 @@ import NavigationButtons from "../components/NavigationButtons.jsx";
 
 const PeopleCount = () => {
   const navigate = useNavigate();
-  const { state } = useStore();
+  const { state, dispatch } = useStore();
 
 
   return (
@@ -37,7 +37,10 @@ const PeopleCount = () => {
       />
 
       <NavigationButtons
-        onBack={()=>navigate('/plan-selection')}
+        onBack={()=> {
+          dispatch({ type: 'SELECT_PLAN', payload: null });
+          navigate('/plan-selection')
+        }}
         onNext={()=>navigate(`/plan-details/${state.planType}`)}
       />
     </motion.div>
