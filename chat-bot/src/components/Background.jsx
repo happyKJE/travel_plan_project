@@ -1,3 +1,12 @@
+/**
+ * @file Background.jsx
+ * @description 백그라운드 이미지 에니메이션 효과
+ * @author jaeyeol
+ * @created 2025-03-11
+ * @lastModifiedBy jaeyeol
+ * @lastModifiedDate 2025-03-11
+ */
+
 import React from "react";
 import { motion } from "framer-motion";
 import "../styles/Background.css";

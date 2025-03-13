@@ -1,3 +1,12 @@
+/**
+ * @file PeopleCount.jsx
+ * @description 인원 입력 컨포넌트
+ * @author jaeyeol
+ * @created 2025-03-11
+ * @lastModifiedBy jungeun
+ * @lastModifiedDate 2025-03-12
+ */
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -23,7 +32,7 @@ const PeopleCount = () => {
 
       <OptionSelector
           label={"인원"}
-          type = 'personnel'
+          type = '인원'
           options={personnelOptions}
       />
 

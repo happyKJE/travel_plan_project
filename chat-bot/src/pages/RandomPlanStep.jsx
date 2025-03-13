@@ -1,3 +1,12 @@
+/**
+ * @file RandomPlanStep.jsx
+ * @description 랜덤 플랜을 위한 옵션 표출 컨포넌트
+ * @author jaeyeol
+ * @created 2025-03-11
+ * @lastModifiedBy jungeun
+ * @lastModifiedDate 2025-03-12
+ */
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';

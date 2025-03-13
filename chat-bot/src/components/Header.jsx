@@ -1,3 +1,12 @@
+/**
+ * @file Header.jsx
+ * @description 공통 헤더 컨포넌트
+ * @author jaeyeol
+ * @created 2025-03-11
+ * @lastModifiedBy jaeyeol
+ * @lastModifiedDate 2025-03-11
+ */
+
 import React from 'react'
 import '../styles/Header.css'
 import logoImg from '../assets/logo_wheretogo.png'
