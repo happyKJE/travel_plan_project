@@ -1,4 +1,12 @@
-// CustomizedPlanStep.jsx
+/**
+ * @file CustomizedPlanStep.jsx
+ * @description 맞춤형 여행을 위한 질문 옵션 표출 컨포넌트
+ * @author jaeyeol
+ * @created 2025-03-11
+ * @lastModifiedBy jungeun
+ * @lastModifiedDate 2025-03-12
+ */
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -21,19 +29,19 @@ const CustomizedPlanStep = () => {
       <h2>아래 내용에서 골라주세요</h2>
       <OptionSelector
           label={"여행스타일"}
-          type={"travel"}
+          type={"여행스타일"}
           options={travelSpeedOptions}
           selected={state.inputValues.speed}
       />
       <OptionSelector
           label={"선호하는 장소"}
-          type={"place"}
+          type={"선호하는 장소"}
           options={placeOptions}
           selected={state.inputValues.place}
       />
       <OptionSelector
           label={"이동 수단"}
-          type={"transport"}
+          type={"이동 수단"}
           options={transportOptions}
           selected={state.inputValues.transport}
       />

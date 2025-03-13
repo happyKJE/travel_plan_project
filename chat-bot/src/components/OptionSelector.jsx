@@ -1,3 +1,12 @@
+/**
+ * @file OptionSelector.jsx
+ * @description 옵션 데이터 렌더링 컨포넌트
+ * @author jaeyeol
+ * @created 2025-03-11
+ * @lastModifiedBy jungeun
+ * @lastModifiedDate 2025-03-12
+ */
+
 import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import useStore from "../context/UseStore.jsx";
@@ -17,6 +26,7 @@ const OptionSelector = ({ label, type, options }) => {
 
         if (value === "direct") {
             setInputValue("");
+            value='';
         }
         dispatch({ type: "SET_OPTION", payload: { type, value } });
 

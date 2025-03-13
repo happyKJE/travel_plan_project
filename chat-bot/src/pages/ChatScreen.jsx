@@ -1,3 +1,12 @@
+/**
+ * @file ChatScreen.jsx
+ * @description chat bot 컨포넌트
+ * @author jungeun
+ * @created 2025-03-12
+ * @lastModifiedBy jungeun
+ * @lastModifiedDate 2025-03-12
+ */
+
 import React, {useState, useCallback, useEffect} from 'react';
 import "../styles/ChatBotApp.css";
 import useStore from '../context/UseStore.jsx';
@@ -87,7 +96,7 @@ const ChatScreen = () => {
         <div className='chat-app'>
             <div className='chat-list'>
                 <div className='chat-list-header'>
-                    <h2>Chat List</h2>
+                    <h4>Plan List</h4>
                     <i className='bx bx-edit-alt new-chat' onClick={() => dispatch({ type: 'CREATE_CHAT' })}></i>
                 </div>
                 {state.chats.map((chat) => (

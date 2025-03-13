@@ -1,3 +1,12 @@
+/**
+ * @file IntroSection.jsx
+ * @description 공통 메인화면 인트로 문구
+ * @author jaeyeol
+ * @created 2025-03-11
+ * @lastModifiedBy jaeyeol
+ * @lastModifiedDate 2025-03-11
+ */
+
 import React from 'react'
 import '../styles/IntroSection.css'
 
