@@ -10,6 +10,7 @@ import RandomPlanStep from './pages/RandomPlanStep';
 import CustomizedPlanStep from './pages/CustomizedPlanStep';
 import ChatScreen from './pages/ChatScreen';
 import PlanSelection from "./pages/PlanSelection.jsx";
+import ChatBot from './Components/chatBot' // 챗봇  import 추가 
 
 const App = () => {
     const ModalRoute = () => {
