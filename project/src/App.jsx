@@ -9,6 +9,10 @@ import RandomPlanStep from './pages/RandomPlanStep';
 import CustomizedPlanStep from './pages/CustomizedPlanStep';
 import ChatScreen from './pages/ChatScreen';
 import Modal from './Components/Modal';
+import ChatBot from './Components/chatBot'
+
+
+
 
 const App = () => {
   // 단계: 1 - 플랜 선택, 2 - 인원수 입력, 3 - 플랜 상세 입력, 4 - 챗봇 화면
