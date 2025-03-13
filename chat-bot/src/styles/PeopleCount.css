@@ -1,0 +1,45 @@
+.next-screen {
+    gap: 1rem;
+    width: 100%;
+}
+
+.options-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    height: 60px;
+}
+
+.circle-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.circle-button:hover {
+    border-color: #007bff;
+}
+
+.circle-button.selected {
+    border: 2px solid #007bff;
+    background-color: #e7f3ff;
+}
+
+.custom-input-container {
+    margin-bottom: 20px;
+}
+
+.custom-input {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+}
