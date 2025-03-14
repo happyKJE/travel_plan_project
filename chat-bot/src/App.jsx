@@ -5,6 +5,7 @@ import Header from './components/Header';
 import IntroSection from './components/IntroSection';
 import Background from './components/Background';
 import Modal from "./components/Modal.jsx";
+import PlanSelection from "./pages/PlanSelection.jsx";
 
 
 

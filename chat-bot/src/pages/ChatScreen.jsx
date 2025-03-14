@@ -162,6 +162,7 @@ const ChatBot = () => {
     const [activeChat, setActiveChat] = useState(false);
     const [messages, setMessages] = useState([]);
     const [chats, setChats] = useState([]);
+    const [backgroundImage, setBackgroundImage] = useState('/src/assets/nomatterBackground.jfif');
     const {state, dispatch} = useStore();
     const inputRef = useRef(null);
 
@@ -172,8 +173,10 @@ const ChatBot = () => {
     };
 
     useEffect(() => {
+        setBackgroundImage(`/src/assets/${state.inputValues.placeOption}Background.jfif`)
        handleNewChat();
     }, []);
+
 
     useEffect(() => {
         const activeChatObject = chats.find((chat) => chat.id === activeChat?.id);
@@ -190,7 +193,7 @@ const ChatBot = () => {
     };
 
     const sendMessage = async () => {
-        if (inputMessage.trim() === '') return;
+        if (inputRef.current.trim() === '') return;
 
         // 비행기 애니메이션 시작
         setShowPlane(true);
@@ -199,7 +202,7 @@ const ChatBot = () => {
         const newMessage = {
             id: uuidv4(),
             type: 'prompt',
-            text: inputMessage,
+            text: inputRef.current,
             timestamp: new Date().toLocaleDateString('ko-KR')
         };
 
@@ -292,7 +295,7 @@ const ChatBot = () => {
     };
 
     return (
-        <div className="app-container">
+        <div className="app-container" style={{backgroundImage}}>
             {/*<div className="chat-list">*/}
             {/*    <div className="chatbot-image">*/}
             {/*        <img src="https://cdn-icons-png.flaticon.com/512/2040/2040946.png" alt="Cute Robot" />*/}
