@@ -1,5 +1,8 @@
-svg {
-    transform: scale(0.9);
+div {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .name_box {

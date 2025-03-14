@@ -41,7 +41,7 @@ const PeopleCount = () => {
           dispatch({ type: 'SELECT_PLAN', payload: null });
           navigate('/plan-selection')
         }}
-        onNext={()=>navigate(`/region-selection`)}
+        onNext={()=>navigate('/dates-selection')}
       />
     </motion.div>
   );

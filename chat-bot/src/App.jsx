@@ -12,6 +12,7 @@ import CustomizedPlanStep from './pages/CustomizedPlanStep';
 import ChatScreen from './pages/ChatScreen';
 import PlanSelection from "./pages/PlanSelection.jsx";
 import RegionSelection from "./pages/RegionSelection"; // 추가
+import DatesSelection from "./pages/DatesSelection"
 
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
                         <Route path="plan-selection" element={<PlanSelection />} />
                         <Route path="" element={<ModalRoute />}>
                             <Route path="people-count" element={<PeopleCount />} />
+                            <Route path="dates-selection" element={<DatesSelection />} />
                             <Route path="region-selection" element={<RegionSelection />} />
                             <Route path="plan-details/random" element={<RandomPlanStep />} />
                             <Route path="plan-details/custom" element={<CustomizedPlanStep />} />

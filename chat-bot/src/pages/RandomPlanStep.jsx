@@ -26,7 +26,7 @@ const RandomPlanStep = () => {
       <p>돌림판이 들어갈 자리</p>
       <NavigationButtons
           onBack={()=>navigate('/people-count')}
-          onNext={()=>navigate(`/chat`)}
+          onNext={()=>navigate('/chat')}
       />
     </motion.div>
   );

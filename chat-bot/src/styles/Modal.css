@@ -24,11 +24,7 @@ html, body {
 
 /* 모달 콘텐츠 박스 */
 .modal-content {
-    width: 80vw;
-    max-width: 500px;
-
-    /* 만약 고정 높이 1000px을 꼭 써야 한다면, 화면보다 클 경우 아래쪽이 짤리거나 스크롤이 생길 수 있음 */
-    /* height: 1000px; */
+    min-width: 700px;
 
     /* 화면에 맞춰서 자동 스크롤하고 싶다면: */
     max-height: 80vh;

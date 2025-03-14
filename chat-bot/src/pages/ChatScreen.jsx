@@ -116,7 +116,9 @@ const ChatScreen = () => {
             <div className='chat-window'>
                 <div className='chat-title'>
                     <h3>Chat with AI</h3>
-                    <i onClick={() => navigate('/plan-selection')} className='bx bx-arrow-back arrow'></i>
+                    <i onClick={() => {
+                        dispatch({ type: 'SELECT_PLAN', payload: null });
+                        navigate('/plan-selection')}} className='bx bx-arrow-back arrow'></i>
                 </div>
                 <div className='chat'>
                     {activeChat?.messages.map((msg, index) => (
