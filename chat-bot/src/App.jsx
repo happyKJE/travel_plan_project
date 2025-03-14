@@ -1,14 +1,16 @@
-    import React, {lazy, Suspense} from 'react';
-    import {BrowserRouter as Router, Routes, Route, Outlet} from 'react-router-dom';
-    import { ChatProvider } from './context/UseContext.jsx';
-    import Header from './components/Header';
-    import IntroSection from './components/IntroSection';
-    import Background from './components/Background';
-    import Modal from "./components/Modal.jsx";
-    import PlanSelection from "./pages/PlanSelection.jsx";
+import React, {lazy, Suspense} from 'react';
+import {BrowserRouter as Router, Routes, Route, Outlet} from 'react-router-dom';
+import { ChatProvider } from './context/UseContext.jsx';
+import Header from './components/Header';
+import IntroSection from './components/IntroSection';
+import Background from './components/Background';
+import Modal from "./components/Modal.jsx";
+
+
 
     //laze : 컴포넌트를 동적으로 로드 => 필요할때만 호출. Suspense로 감싸지않으면 오류
     const PeopleCount = lazy(() => import('./pages/PeopleCount'));
+    const RegionSelection = lazy(() => import('./pages/RegionSelection'));
     const RandomPlanStep = lazy(() => import('./pages/RandomPlanStep'));
     const CustomizedPlanStep = lazy(() => import('./pages/CustomizedPlanStep'));
     const ChatScreen = lazy(() => import('./pages/ChatScreen'));
@@ -39,6 +41,11 @@
                                     <PeopleCount />
                                 </Suspense>
                             } />
+                            <Route path="region-selection" element={
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    <RegionSelection />
+                                </Suspense>
+                            } />
                             <Route path="plan-details/random" element={
                                 <Suspense fallback={<div>Loading...</div>}>
                                     <RandomPlanStep />
@@ -64,5 +71,5 @@
     );
 };
 
-    export default App;
+export default App;
 

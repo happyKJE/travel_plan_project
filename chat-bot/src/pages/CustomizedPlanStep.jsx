@@ -46,7 +46,7 @@ const CustomizedPlanStep = () => {
           selected={state.inputValues.transport}
       />
       <NavigationButtons
-          onBack={()=>navigate('/people-count')}
+          onBack={()=>navigate('/region-selection')}
           onNext={()=>navigate('/chat')}
       />
     </motion.div>
