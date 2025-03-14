@@ -32,7 +32,7 @@ const PeopleCount = () => {
 
       <OptionSelector
           label={"인원"}
-          type = '인원'
+          type = 'personnelOption'
           options={personnelOptions}
       />
 
