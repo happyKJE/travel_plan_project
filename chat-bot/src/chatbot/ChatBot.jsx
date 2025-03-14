@@ -1,13 +1,13 @@
-import React, { useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './ChatBot.css';
 import { v4 as uuidv4 } from 'uuid';
 
-const ChatBot = ({onGoBack, chats, setChats, activeChat, setActiveChat, onNewChat}) => {
+const ChatBot = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const [currentStep, setCurrentStep] = useState(0);
   const [showPlane, setShowPlane] = useState(false);
-  
+  const inputRef = useRef(null);
+
   useEffect(() => {
     const activeChatObject = chats.find((chat) => chat.id === activeChat?.id);
     if (activeChatObject) { 
@@ -20,10 +20,6 @@ const ChatBot = ({onGoBack, chats, setChats, activeChat, setActiveChat, onNewCha
       handleNewChat();
     }
   }, []);
-
-  const handleInputChange = (e) => {
-    setInputMessage(e.target.value);
-  };
 
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -62,7 +58,7 @@ const ChatBot = ({onGoBack, chats, setChats, activeChat, setActiveChat, onNewCha
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer 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'
+          'Authorization': `Bearer ${process.env.REACT_APP_CLIENT_ID}`
         },
         body: JSON.stringify({
           model: 'gpt-3.5-turbo',
@@ -199,8 +195,7 @@ const ChatBot = ({onGoBack, chats, setChats, activeChat, setActiveChat, onNewCha
           <input
             type="text"
             className="chat-input"
-            value={inputMessage}
-            onChange={handleInputChange}
+            ref={inputRef}
             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage(e)}
             placeholder="입력해 주세요"
           />
