@@ -32,7 +32,7 @@
 //         if (state.chats.length === 0) {
 //             dispatch({ type: 'CREATE_CHAT' });
 //         }
-//         const initMessages = `${state.inputValues.인원}인원이 여행을 가려고 하는데, 선호하는 장소는 ${state.inputValues.선호하는장소}. 여행 스타일은 ${state.inputValues.여행스타일 === "nomatter" ? "상관없음" : state.inputValues.여행스타일}이며, 이동 수단은 ${state.inputValues.이동수단}이야. 여행계획 짜줄래?.`
+//         const initMessages = `${state.inputValues.인원}인원이 여행을 가려고 하는데, 선호하는 장소는 ${state.inputValues.placeOption}. 여행 스타일은 ${state.inputValues.여행스타일 === "nomatter" ? "상관없음" : state.inputValues.여행스타일}이며, 이동 수단은 ${state.inputValues.transportOption}이야. 여행계획 짜줄래?.`
 //         sendMessage(initMessages).then(console.log(initMessages));
 //         }, []);
 //
@@ -155,19 +155,24 @@
 import React, {useState, useEffect, useRef} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import '../styles/ChatBot.css';
+import useStore from "../context/UseStore.jsx";
 
 const ChatBot = () => {
-    const [inputMessage, setInputMessage] = useState('');
-    const [messages, setMessages] = useState([]);
     const [showPlane, setShowPlane] = useState(false);
-    const [activeChat, setActiveChat] = useState(null);
+    const [activeChat, setActiveChat] = useState(false);
+    const [messages, setMessages] = useState([]);
     const [chats, setChats] = useState([]);
+    const {state, dispatch} = useStore();
     const inputRef = useRef(null);
 
+    const newChat = {
+        id: uuidv4(),
+        title: '새로운 정보대화',
+        messages: []
+    };
+
     useEffect(() => {
-        if (chats.length === 0) {
-            handleNewChat();
-        }
+       handleNewChat();
     }, []);
 
     useEffect(() => {
@@ -273,19 +278,6 @@ const ChatBot = () => {
             title: '새로운 정보대화',
             messages: []
         };
-
-        const initialBotMessage = {
-            id: uuidv4(),
-            type: 'response',
-            text: "어디로 가고 싶으세요?",
-            timestamp: new Date().toLocaleDateString('ko-KR')
-        };
-
-        newChat.messages = [initialBotMessage];
-
-        setChats([newChat, ...chats]);
-        setActiveChat(newChat);
-        setMessages(newChat.messages);
     };
 
     const handleDeleteChat = (chatId) => {
@@ -301,39 +293,38 @@ const ChatBot = () => {
 
     return (
         <div className="app-container">
-            <div className="chat-list">
-                <div className="chatbot-image">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2040/2040946.png" alt="Cute Robot" />
-                </div>
-                <button className="new-chat-button" onClick={handleNewChat}>
-                    <i className="bx bx-plus"></i>
-                    새로운 채팅
-                </button>
-                <div className="chat-list-items">
-                    {chats.map((chat) => (
-                        <div
-                            key={chat.id}
-                            className={`chat-list-item ${activeChat?.id === chat.id ? 'active' : ''}`}
-                        >
-                            <div className="chat-item-content" onClick={() => setActiveChat(chat)}>
-                                <i className="bx bx-message-square"></i>
-                                {chat.title}
-                            </div>
-                            <button
-                                className="delete-chat-button"
-                                onClick={() => handleDeleteChat(chat.id)}
-                            >
-                                <i className="bx bx-trash"></i>
-                            </button>
-                        </div>
-                    ))}
-                </div>
-            </div>
+            {/*<div className="chat-list">*/}
+            {/*    <div className="chatbot-image">*/}
+            {/*        <img src="https://cdn-icons-png.flaticon.com/512/2040/2040946.png" alt="Cute Robot" />*/}
+            {/*    </div>*/}
+            {/*    <button className="new-chat-button" onClick={handleNewChat}>*/}
+            {/*        <i className="bx bx-plus"></i>*/}
+            {/*        새로운 채팅*/}
+            {/*    </button>*/}
+            {/*    <div className="chat-list-items">*/}
+            {/*        {chats.map((chat) => (*/}
+            {/*            <div*/}
+            {/*                key={chat.id}*/}
+            {/*                className={`chat-list-item ${activeChat?.id === chat.id ? 'active' : ''}`}*/}
+            {/*            >*/}
+            {/*                <div className="chat-item-content" onClick={() => setActiveChat(chat)}>*/}
+            {/*                    <i className="bx bx-message-square"></i>*/}
+            {/*                    {chat.title}*/}
+            {/*                </div>*/}
+            {/*                <button*/}
+            {/*                    className="delete-chat-button"*/}
+            {/*                    onClick={() => handleDeleteChat(chat.id)}*/}
+            {/*                >*/}
+            {/*                    <i className="bx bx-trash"></i>*/}
+            {/*                </button>*/}
+            {/*            </div>*/}
+            {/*        ))}*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
             <div className="chatbot-container">
                 <div className="chatbot-header">
-                    <i className="bx bx-robot robot-icon"></i>
-                    <h3 className="chatbot-title">AI 챗봇</h3>
+                    <div className="logo"><img width="70px" alt="" src="/src/assets/logo_wheretogo.png"/></div>
                 </div>
 
                 <div className="chat-messages">

@@ -5,10 +5,14 @@
 
 /* 전체 배경 */
 .app-container {
-  width: 780px;
-  height: 600px;
+  width: 800px;
+  height: 900px;
   display: flex;
-  background: linear-gradient(to bottom, #87CEFA, #FFFFFF); /* 하늘색 그라디언트 */
+  /*background: linear-gradient(to bottom, #87CEFA, #FFFFFF); !* 하늘색 그라디언트 *!*/
+  /*background-image: url("../assets/islandBackground.jfif");*/
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* 채팅 리스트 패널 */
@@ -71,10 +75,10 @@
 
 /* 채팅 화면 */
 .chatbot-container {
-  width: 600px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(230, 250, 270, 0.6);
   border-radius: 15px;
   padding: 15px;
   box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
@@ -84,12 +88,8 @@
 .chatbot-header {
   display: flex;
   align-items: center;
-  background: #4A90E2;
-  color: white;
   padding: 12px;
   border-radius: 10px;
-  font-size: 18px;
-  font-weight: bold;
 }
 
 .robot-icon {
@@ -134,6 +134,7 @@
   padding: 10px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .chat-input {
