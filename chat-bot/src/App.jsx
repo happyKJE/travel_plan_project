@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route, Outlet} from 'react-router-dom';
 import { ChatProvider } from './context/UseContext.jsx';
@@ -10,7 +11,8 @@ import RandomPlanStep from './pages/RandomPlanStep';
 import CustomizedPlanStep from './pages/CustomizedPlanStep';
 import ChatScreen from './pages/ChatScreen';
 import PlanSelection from "./pages/PlanSelection.jsx";
-import ChatBot from './Components/chatBot' // 챗봇  import 추가 
+import RegionSelection from "./pages/RegionSelection"; // 추가
+
 
 const App = () => {
     const ModalRoute = () => {
@@ -34,6 +36,7 @@ const App = () => {
                         <Route path="plan-selection" element={<PlanSelection />} />
                         <Route path="" element={<ModalRoute />}>
                             <Route path="people-count" element={<PeopleCount />} />
+                            <Route path="region-selection" element={<RegionSelection />} />
                             <Route path="plan-details/random" element={<RandomPlanStep />} />
                             <Route path="plan-details/custom" element={<CustomizedPlanStep />} />
                             <Route path="chat" element={<ChatScreen />} />
@@ -48,4 +51,3 @@ const App = () => {
 };
 
 export default App;
-
