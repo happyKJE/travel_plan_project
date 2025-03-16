@@ -12,7 +12,7 @@ import CustomizedPlanStep from './pages/CustomizedPlanStep';
 import ChatScreen from './pages/ChatScreen';
 import PlanSelection from "./pages/PlanSelection.jsx";
 import RegionSelection from "./pages/RegionSelection"; // 추가
-import DatesSelection from "./pages/DatesSelection"
+import DatesSelection from "./pages/DatesSelection";
 
 
 const App = () => {

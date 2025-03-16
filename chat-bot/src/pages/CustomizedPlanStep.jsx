@@ -27,6 +27,7 @@ const CustomizedPlanStep = () => {
       transition={{ duration: 0.5 }}
     >
       <h2>아래 내용에서 골라주세요</h2>
+
       <OptionSelector
           label={"여행스타일"}
           type={"travelSpeedOption"}
@@ -45,6 +46,7 @@ const CustomizedPlanStep = () => {
           options={transportOptions}
           selected={state.inputValues.transport}
       />
+
       <NavigationButtons
           onBack={()=>navigate('/region-selection')}
           onNext={()=>navigate('/chat')}
