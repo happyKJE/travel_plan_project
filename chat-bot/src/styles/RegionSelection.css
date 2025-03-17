@@ -1,6 +1,3 @@
-svg {
-    transform: scale(0.9);
-}
 
 .name_box {
     background-color: rgba(0, 0, 0, 0.7);
@@ -12,6 +9,12 @@ svg {
     white-space: nowrap;
     transform: translate(10px, 10px); 
     z-index: 10;
+}
+
+.map_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 path {

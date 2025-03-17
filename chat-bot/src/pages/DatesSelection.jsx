@@ -8,19 +8,17 @@
  */
 
 
-
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import useStore from '../context/UseStore.jsx';
 import NavigationButtons from "../components/NavigationButtons.jsx";
-import SouthKoreaMap from "../components/SouthKoreaMap";
+import { Calendar, DateObject } from "react-multi-date-picker";
 
 
-const RegionSelection = () => {
+
+const DatesSelection = () => {
   const navigate = useNavigate();
-  const { state, dispatch } = useStore();
-
+  const [values, setValues] = useState([]);
 
   return (
     <motion.div 
@@ -29,15 +27,20 @@ const RegionSelection = () => {
       animate={{ y: 0, opacity: 1 }} 
       transition={{ duration: 1 }}
     >
-      <h2>원하는 지역이 있으세요?</h2>
-      <SouthKoreaMap />
-
+        <h2>기간을 선택하세요</h2>
+        <Calendar
+            value={values}
+            onChange={setValues}
+            range
+            numberOfMonths={2}
+            showOtherDays
+        /> 
         <NavigationButtons
-            onBack={() => navigate('/dates-selection')}
-            onNext={() => navigate(`/plan-details/${state.planType}`)}
+            onBack={() => navigate('/people-count')}
+            onNext={() => navigate('/Region-Selection')}
         />
     </motion.div>
   );
 };
 
-export default RegionSelection;
+export default DatesSelection;

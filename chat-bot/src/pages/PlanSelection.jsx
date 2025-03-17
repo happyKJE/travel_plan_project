@@ -10,7 +10,7 @@
 import React, {useCallback, useEffect} from 'react';
 import { motion } from 'framer-motion';
 import useStore from "../context/UseStore.jsx";
-import '../styles/introButton.css';
+import '../styles/IntroButton.css';
 import {useNavigate} from "react-router-dom";
 
 const Button = ({ type, text, onClick, animationDelay }) => {
