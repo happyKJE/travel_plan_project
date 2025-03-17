@@ -11,40 +11,39 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useStore from '../context/UseStore.jsx';
-import {personnelOptions} from "../data/OptionsData.jsx";
+import { personnelOptions } from "../data/OptionsData.jsx";
 import OptionSelector from "../components/OptionSelector.jsx";
 import '../styles/PeopleCount.css';
 import NavigationButtons from "../components/NavigationButtons.jsx";
 
 const PeopleCount = () => {
-  const navigate = useNavigate();
-  const { state, dispatch } = useStore();
+    const navigate = useNavigate();
+    const { state, dispatch } = useStore();
 
+    return (
+        <motion.div 
+            className="next-screen" 
+            initial={{ y: 50, opacity: 0 }} 
+            animate={{ y: 0, opacity: 1 }} 
+            transition={{ duration: 1 }}
+        >
+            <h2>몇 명이서 가시나요?</h2>
 
-  return (
-    <motion.div 
-      className="next-screen" 
-      initial={{ y: 50, opacity: 0 }} 
-      animate={{ y: 0, opacity: 1 }} 
-      transition={{ duration: 1 }}
-    >
-      <h2>몇 명이서 가시나요?</h2>
+            <OptionSelector
+                label={"인원"}
+                type = 'personnelOption'
+                options={personnelOptions}
+            />
 
-      <OptionSelector
-          label={"인원"}
-          type = 'personnelOption'
-          options={personnelOptions}
-      />
-
-      <NavigationButtons
-        onBack={()=> {
-          dispatch({ type: 'SELECT_PLAN', payload: null });
-          navigate('/plan-selection')
-        }}
-        onNext={()=>navigate(`/region-selection`)}
-      />
-    </motion.div>
-  );
+            <NavigationButtons
+                onBack={()=> {
+                  dispatch({ type: 'SELECT_PLAN', payload: null });
+                  navigate('/plan-selection')
+                }}
+                onNext={()=>navigate('/dates-selection')}
+            />
+        </motion.div>
+    );
 };
 
 export default PeopleCount;

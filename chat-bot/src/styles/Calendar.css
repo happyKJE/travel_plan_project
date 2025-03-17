@@ -1,0 +1,15 @@
+/* 요일 스타일 지정 */
+.rmdp-week-day { 
+    color: rgb(82, 82, 82) !important; /* 일요일 빨간색 */
+    font-weight: bold;
+}
+
+.rmdp-week-day:nth-child(1) { 
+    color: red !important; /* 일요일 빨간색 */
+    font-weight: bold;
+}
+
+.rmdp-week-day:nth-child(7) { 
+    color: blue !important; /* 토요일 파란색 */
+    font-weight: bold;
+}

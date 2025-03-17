@@ -10,15 +10,25 @@
 
 import React from 'react';
 import '../styles/Modal.css';
+import ToFirstPageButton from './ToFirstPageButton';
+import { useNavigate } from 'react-router-dom';
+import useStore from '../context/UseStore.jsx'; // 추가
 
 const Modal = ({ children }) => {
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        {children}
-      </div>
-    </div>
-  );
+    const navigate = useNavigate();
+    const { dispatch } = useStore(); // 추가
+
+    return (
+        <div className="modal-overlay">
+            <div className="modal-content">
+                <ToFirstPageButton onFirstPage={() => {
+                    dispatch({ type: 'SELECT_PLAN', payload: null }); // 오류 해결
+                    navigate('/plan-selection'); // 첫 페이지로 이동
+                }} />
+                {children}
+            </div>
+        </div>
+    );
 };
 
 export default Modal;

@@ -16,41 +16,43 @@ import {placeOptions,travelSpeedOptions,transportOptions} from '../data/OptionsD
 import NavigationButtons from "../components/NavigationButtons.jsx";
 
 const CustomizedPlanStep = () => {
-  const navigate = useNavigate();
-  const { state } = useStore();
+    const navigate = useNavigate();
+    const { state } = useStore();
 
-  return (
-    <motion.div 
-      className="next-screen" 
-      initial={{ y: 50, opacity: 0 }} 
-      animate={{ y: 0, opacity: 1 }} 
-      transition={{ duration: 0.5 }}
-    >
-      <h2>아래 내용에서 골라주세요</h2>
-      <OptionSelector
-          label={"여행스타일"}
-          type={"travelSpeedOption"}
-          options={travelSpeedOptions}
-          selected={state.inputValues.speed}
-      />
-      <OptionSelector
-          label={"선호하는 장소"}
-          type={"placeOption"}
-          options={placeOptions}
-          selected={state.inputValues.place}
-      />
-      <OptionSelector
-          label={"이동 수단"}
-          type={"transportOption"}
-          options={transportOptions}
-          selected={state.inputValues.transport}
-      />
-      <NavigationButtons
-          onBack={()=>navigate('/region-selection')}
-          onNext={()=>navigate('/chat')}
-      />
-    </motion.div>
-  );
+    return (
+        <motion.div 
+          className="next-screen" 
+          initial={{ y: 50, opacity: 0 }} 
+          animate={{ y: 0, opacity: 1 }} 
+          transition={{ duration: 0.5 }}
+        >
+            <h2>아래 내용에서 골라주세요</h2>
+
+            <OptionSelector
+                label={"여행스타일"}
+                type={"travelSpeedOption"}
+                options={travelSpeedOptions}
+                selected={state.inputValues.speed}
+            />
+            <OptionSelector
+                label={"선호하는 장소"}
+                type={"placeOption"}
+                options={placeOptions}
+                selected={state.inputValues.place}
+            />
+            <OptionSelector
+                label={"이동 수단"}
+                type={"transportOption"}
+                options={transportOptions}
+                selected={state.inputValues.transport}
+            />
+
+            <NavigationButtons
+                onBack={()=>navigate('/region-selection')}
+                onNext={()=>navigate('/chat')}
+            />
+        </motion.div>
+    );
 };
 
 export default CustomizedPlanStep;
