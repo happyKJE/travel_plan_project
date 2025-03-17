@@ -13,6 +13,7 @@ import { motion } from 'framer-motion';
 import NavigationButtons from "../components/NavigationButtons.jsx";
 import { Calendar } from "react-multi-date-picker";
 import "../styles/Calendar.css"; // 추가한 CSS 파일을 불러오기
+import moment from "moment"; // 날짜 처리를 위한 moment 라이브러리 추가
 
 const DatesSelection = () => {
     const navigate = useNavigate();
@@ -47,6 +48,7 @@ const DatesSelection = () => {
                   "1월", "2월", "3월", "4월", "5월", "6월",
                   "7월", "8월", "9월", "10월", "11월", "12월"
                 ]} // 월 한글 적용
+                minDate={moment().format("YYYY-MM-DD")} // 오늘 날짜부터 선택 가능하게 설정
             /> 
             <NavigationButtons
                 onBack={() => navigate('/people-count')}
