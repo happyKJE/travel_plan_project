@@ -18,6 +18,14 @@ const DatesSelection = () => {
     const navigate = useNavigate();
     const [values, setValues] = useState([]);
 
+    const handleDateChange = (dates) => {
+        // 날짜를 문자열로 변환
+        const formattedDates = dates.map(date => date.format("YYYY-MM-DD"));
+        setValues(formattedDates);
+    };
+
+    console.log("values : ", values)
+
     return (
         <motion.div 
             className="next-screen" 
@@ -28,7 +36,7 @@ const DatesSelection = () => {
             <h2>기간을 선택하세요</h2>
             <Calendar
                 value={values}
-                onChange={setValues}
+                onChange={handleDateChange}
                 range
                 numberOfMonths={2}
                 showOtherDays

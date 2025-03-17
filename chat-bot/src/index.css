@@ -19,46 +19,7 @@
   box-sizing: border-box;
 }
 
-.plan-buttons {
-  margin: 20px 0;
-  text-align: center;
-}
-
-
-/* Button 기본 스타일 */
-button {
-  font-family: 'Noto Sans KR', sans-serif;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.411);
-}
-
-button:hover {
-  opacity: 0.8;
-  box-shadow: none;
-}
-
-.plan-buttons button {
-  margin: 0 10px;
-}
-
-
 /* 각 버튼 타입 */
-.custom-plan {
-  padding: 15px 25px;
-  width: 250px;
-  background-color: lightblue;
-}
-
-.random-plan {
-  padding: 15px 25px;
-  width: 250px;
-  background-color: skyblue;
-}
-
 .navigation-buttons {
   width: 100%;
   display: flex;
@@ -71,10 +32,3 @@ button:hover {
   color: white;
   border: none;
 }
-
-.next-screen {
-  width: 70%;
-  margin: auto;
-  background-color: transparent;
-}
-

@@ -17,7 +17,7 @@ import useStore from '../context/UseStore.jsx'; // 추가
 const Modal = ({ children }) => {
     const navigate = useNavigate();
     const { dispatch } = useStore(); // 추가
-
+    
     return (
         <div className="modal-overlay">
             <div className="modal-content">

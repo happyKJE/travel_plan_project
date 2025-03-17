@@ -16,7 +16,7 @@ import SouthKoreaMap from "../components/SouthKoreaMap";
 
 const RegionSelection = () => {
     const navigate = useNavigate();
-    const { state, dispatch } = useStore();
+    const { state } = useStore();
 
     return (
         <motion.div 

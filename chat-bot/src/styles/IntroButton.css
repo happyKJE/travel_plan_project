@@ -1,7 +1,35 @@
-.buttons {
-  margin: 30px auto;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-direction: column;
-}
+button {
+    font-family: 'Noto Sans KR', sans-serif;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.411);
+  }
+
+  button:hover {
+    opacity: 0.8;
+    box-shadow: none;
+  }
+
+  .plan-buttons {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .plan-buttons button {
+    margin: 0 5px 5px 5px;
+  }
+
+  .custom-plan {
+    padding: 15px 25px;
+    width: 250px;
+    background-color: lightblue;
+  }
+  
+  .random-plan {
+    padding: 15px 25px;
+    width: 250px;
+    background-color: skyblue;
+  }

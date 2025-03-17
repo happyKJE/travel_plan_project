@@ -33,6 +33,8 @@ const initialState = {
 
 const chatReducer = (state, action) => {
     switch (action.type) {
+        case "RESET_STATE":
+            return { ...initialState }; // 초기 상태로 리셋
         case "SELECT_PLAN":
             return {...state, planType: action.payload};
         case "SET_OPTION":
