@@ -1,0 +1,6 @@
+.to-first-page {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1001; /* 다른 요소들 위에 표시 */
+}
