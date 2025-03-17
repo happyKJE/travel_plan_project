@@ -16,16 +16,16 @@ import PlanSelection from "./pages/PlanSelection.jsx";
     const CustomizedPlanStep = lazy(() => import('./pages/CustomizedPlanStep'));
     const ChatScreen = lazy(() => import('./pages/ChatScreen'));
 
-    const App = () => {
-        const ModalRoute = () => {
-            return (
-                <div>
-                    <Modal>
-                        <Outlet />
-                    </Modal>
-                </div>
-            );
-        };
+const App = () => {
+    const ModalRoute = () => {
+        return (
+            <div>
+                <Modal>
+                    <Outlet /> {/* 여기서 선택페이지 렌더링 */}
+                </Modal>
+            </div>
+        );
+    };
 
     return (
         <ChatProvider>

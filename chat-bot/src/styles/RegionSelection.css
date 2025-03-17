@@ -1,24 +1,3 @@
-
-/*path {*/
-/*    fill: #87CEEB; !* 기본 하늘색 *!*/
-/*    stroke: #A9A9A9; !* 경계선 회색 *!*/
-/*    stroke-width: 2;*/
-/*    transition: transform 0.3s ease, fill 0.3s ease;*/
-/*    transform-origin: center;*/
-/*}*/
-
-/*path:hover {*/
-/*    cursor: pointer;*/
-/*    transform: scale(1.01);*/
-/*    box-shadow: 0 0 1px black;*/
-/*    fill: #1E90FF; !* 호버 시 좀 더 진한 하늘색 *!*/
-/*}*/
-
-/*path.selected {*/
-/*    transform: scale(1.01);*/
-/*    fill: #4682B4; !* 클릭 시 더 진한 파란색 *!*/
-/*}*/
-
 .modal-content {
     max-width: 700px;
 }
