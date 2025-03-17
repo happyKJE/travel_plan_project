@@ -8,13 +8,12 @@
  */
 
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // 📌 React Router의 Link 추가
 import "../styles/Header.css";
 import logoImg from "../assets/logo_wheretogo.png";
-import TravelReviews from "../pages/TravelReviews"; // 📌 오버레이할 컴포넌트 추가
+import TravelReviews from "../pages/TravelReviews"; //  오버레이할 컴포넌트 추가
 
 const Header = () => {
-  const [showReviews, setShowReviews] = useState(false); // 📌 모달 상태 추가
+  const [showReviews, setShowReviews] = useState(false); //  모달 상태 추가
 
   return (
     <header className="header">
@@ -27,17 +26,24 @@ const Header = () => {
             <a href="/">홈</a>
           </li>
           <li>
-            <button className="review-btn" onClick={() => setShowReviews(true)}>
+            <a
+              href="#"
+              className="review-link"
+              onClick={(e) => {
+                e.preventDefault(); //  기본 링크 동작 방지
+                setShowReviews(true); // 오버레이 창 열기
+              }}
+            >
               여행 후기
-            </button>
-          </li>{" "}
+            </a>
+          </li>
           <li>
             <a href="#">2조화이팅</a>
           </li>
         </ul>
       </nav>
 
-      {/* 📌 여행 후기 모달 (오버레이) */}
+      {/*  여행 후기 모달 (오버레이) */}
       {showReviews && <TravelReviews onClose={() => setShowReviews(false)} />}
     </header>
   );
