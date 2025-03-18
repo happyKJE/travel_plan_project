@@ -17,14 +17,17 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin: 5px;
     padding: 10px 15px;
 }
+
 /* ✅ 버튼 내부 이미지 크기 제한 */
 .review-area-title button img {
     max-width: 60%; /* ✅ 버튼 크기의 70%로 제한 */
     max-height: 60%; /* ✅ 버튼 높이의 70%로 제한 */
     object-fit: contain; /* ✅ 비율 유지하며 크기 조정 */
 }
+
 /*  제목 입력 필드 크기 조정 */
 .title {
     width: 100%;
