@@ -1,21 +1,21 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: rgb(255, 255, 255);
-  margin-right: 20px;
-  font-family: 'Gowun Batang', serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    margin-right: 20px;
+    font-family: 'Gowun Batang', serif;
+}
+
+.mainmenus {
+    list-style: none;
+    display: flex;
+    gap: 25px;
 }
 
 .mainmenu {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-}
-
-.mainmenu li a {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
 }

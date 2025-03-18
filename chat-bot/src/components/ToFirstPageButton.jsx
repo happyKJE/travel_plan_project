@@ -10,14 +10,22 @@
 
 import React from 'react';
 import '../styles/ToFirstPageButton.css'
+import useStore from '../context/UseStore.jsx'; // 추가
 
 const ToFirstPageButton = ({ onFirstPage }) => {
+    const { dispatch } = useStore(); // 추가
+    const handleReset = () => {
+        dispatch({ type: "RESET_STATE" }); // 상태 초기화 액션 디스패치
+    };
+
     return (
         <div className='to-first-page'>
-            <button className="to-first-page-button" onClick={()=>{
-                console.log("첫페이지 이동"); 
-                onFirstPage();}}>
-                    <i className='bx bx-x' ></i>
+            <button className="to-first-page-button" onClick={() => {
+                console.log("첫페이지 이동");
+                handleReset();
+                onFirstPage();
+            }}>
+                <i className='bx bx-x' ></i>
             </button>
         </div>
     )

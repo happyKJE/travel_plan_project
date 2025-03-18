@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useStore from '../context/UseStore.jsx';
 import OptionSelector from "../components/OptionSelector.jsx";
-import {placeOptions,travelSpeedOptions,transportOptions} from '../data/OptionsData'
+import { placeOptions, travelSpeedOptions, transportOptions } from '../data/OptionsData'
 import NavigationButtons from "../components/NavigationButtons.jsx";
 
 const CustomizedPlanStep = () => {
@@ -20,11 +20,11 @@ const CustomizedPlanStep = () => {
     const { state } = useStore();
 
     return (
-        <motion.div 
-          className="next-screen" 
-          initial={{ y: 50, opacity: 0 }} 
-          animate={{ y: 0, opacity: 1 }} 
-          transition={{ duration: 0.5 }}
+        <motion.div
+            className="next-screen"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
         >
             <h2>아래 내용에서 골라주세요</h2>
 
@@ -48,8 +48,8 @@ const CustomizedPlanStep = () => {
             />
 
             <NavigationButtons
-                onBack={()=>navigate('/region-selection')}
-                onNext={()=>navigate('/chat')}
+                onBack={() => navigate('/region-selection')}
+                onNext={() => navigate('/chat')}
             />
         </motion.div>
     );

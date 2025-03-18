@@ -143,64 +143,64 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="app-container">
-      <div className="chat-list">
-        <div className="chatbot-image">
-          <img src="https://cdn-icons-png.flaticon.com/512/2040/2040946.png" alt="Cute Robot" />
+    <div className = "app-container">
+      <div className = "chat-list">
+        <div className = "chatbot-image">
+          <img src = "https://cdn-icons-png.flaticon.com/512/2040/2040946.png" alt = "Cute Robot" />
         </div>
-        <button className="new-chat-button" onClick={handleNewChat}>
-          <i className="bx bx-plus"></i>
+        <button className = "new-chat-button" onClick = {handleNewChat}>
+          <i className = "bx bx-plus"></i>
           새로운 채팅
         </button>
-        <div className="chat-list-items">
+        <div className = "chat-list-items">
           {chats.map((chat) => (
             <div
-              key={chat.id}
-              className={`chat-list-item ${activeChat?.id === chat.id ? 'active' : ''}`}
+              key = {chat.id}
+              className = {`chat-list-item ${activeChat?.id === chat.id ? 'active' : ''}`}
             >
-              <div className="chat-item-content" onClick={() => setActiveChat(chat)}>
-                <i className="bx bx-message-square"></i>
+              <div className = "chat-item-content" onClick = {() => setActiveChat(chat)}>
+                <i className = "bx bx-message-square"></i>
                 {chat.title}
               </div>
               <button 
-                className="delete-chat-button"
-                onClick={() => handleDeleteChat(chat.id)}
+                className = "delete-chat-button"
+                onClick = {() => handleDeleteChat(chat.id)}
               >
-                <i className="bx bx-trash"></i>
+                <i className = "bx bx-trash"></i>
               </button>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="chatbot-container">
-        <div className="chatbot-header">
-          <i className="bx bx-robot robot-icon"></i>
-          <h3 className="chatbot-title">AI 챗봇</h3>
+      <div className = "chatbot-container">
+        <div className = "chatbot-header">
+          <i className = "bx bx-robot robot-icon"></i>
+          <h3 className = "chatbot-title">AI 챗봇</h3>
         </div>
         
-        <div className="chat-messages">
-          {showPlane && <div className="flying-plane"><i className='bx bxs-plane-alt'></i></div>}
+        <div className = "chat-messages">
+          {showPlane && <div className = "flying-plane"><i className = 'bx bxs-plane-alt'></i></div>}
           {messages.map((message) => (
             <div
-              key={message.id}
-              className={`message ${message.type === 'prompt' ? 'user-message' : 'bot-message'}`}
+              key = {message.id}
+              className = {`message ${message.type === 'prompt' ? 'user-message' : 'bot-message'}`}
             >
               {message.text}
             </div>
           ))}
         </div>
 
-        <div className="chat-input-container">
+        <div className = "chat-input-container">
           <input
-            type="text"
-            className="chat-input"
-            ref={inputRef}
-            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage(e)}
-            placeholder="입력해 주세요"
+            type = "text"
+            className = "chat-input"
+            ref = {inputRef}
+            onKeyPress = {(e) => e.key === 'Enter' && handleSendMessage(e)}
+            placeholder = "입력해 주세요"
           />
-          <button className="send-button" onClick={handleSendMessage}>
-            <i className="bx bx-send"></i>
+          <button className = "send-button" onClick = {handleSendMessage}>
+            <i className = "bx bx-send"></i>
           </button>
         </div>
       </div>
