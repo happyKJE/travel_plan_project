@@ -1,142 +1,162 @@
-import React, { useState, useRef, useEffect } from 'react';
-import '../styles/reviewArea.css';
+import React, { useState, useRef, useEffect } from "react";
+import "../styles/reviewArea.css";
+import addImageIcon from "../assets/addImage.png";
+import submitIcon from "../assets/submit.png";
 
 const ReviewArea = () => {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const contentRef = useRef(null); // contenteditable에 접근하기 위한 ref
-    const fileInputRef = useRef(null); // 이미지 파일 input을 위한 ref
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const contentRef = useRef(null);
+  const fileInputRef = useRef(null);
+  const titleRef = useRef(null);  // 제목 입력 필드 참조
+  const submitButtonRef = useRef(null); // 제출 버튼 참조
+  const imgButtonRef = useRef(null);  // 이미지 추가 버튼 참조
 
-    // 제목 변경 처리
-    const handleTitleChange = (e) => {
-        setTitle(e.target.value);
-    };
+  // 제목 입력 핸들링
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
 
-    // 내용 변경 처리
-    const handleContentChange = () => {
-        let contentHTML = contentRef.current.innerHTML;
+  // 내용 입력 핸들링 (줄바꿈을 <p> 태그로 변환)
+  const handleContentChange = () => {
+    let contentHTML = contentRef.current.innerHTML;
+
+    contentHTML = contentHTML
+      .split("<br>")
+      .map((line) => (line.trim() !== "" ? `<p>${line}</p>` : ""))
+      .join("");
+
+    setContent(contentHTML);
+  };
+
+  // 제출 처리
+  const handleSubmit = () => {
+    const reviewArray = [
+      `<h2>${title}</h2>`, // 제목을 <h2>로 변환
+      content, // 내용은 이미 <p> 태그로 변환된 상태
+    ];
+
+    if (reviewArray[0] === "<h2></h2>") {
+      alert("제목을 입력해주세요.");
+      return;
+    }
+
+    console.log(reviewArray);
+    alert("제출이 완료되었습니다.");
+    window.location.href = "/lists"; // 페이지 이동
+  };
+
+  // 이미지 추가 핸들링
+  const handleImageAdd = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const imageUrl = reader.result;
+        const imgTag = `<img src="${imageUrl}" alt="Uploaded Image" style="max-width: 100%; height: auto;" />`;
+        contentRef.current.innerHTML += imgTag;
+        setContent(contentRef.current.innerHTML);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // 플레이스홀더 관리
+  const handleFocus = () => {
+    if (contentRef.current.innerHTML === "") {
+      contentRef.current.innerText = "";
+    }
+  };
+
+  const handleBlur = () => {
+    if (contentRef.current.innerHTML === "<br>") {
+      contentRef.current.innerText = "";
+      contentRef.current.setAttribute("data-placeholder", "내용");
+    }
+  };
+
+  useEffect(() => {
+    if (contentRef.current.innerText.trim() !== "") {
+      contentRef.current.removeAttribute("data-placeholder");
+    }
+  }, [content]);
+
+  // input-review 영역 클릭 시 contentRef 포커스
+  const handleContainerClick = (e) => {
+    // 제목, 이미지 추가 버튼, 제출 버튼을 클릭했을 때는 포커스를 설정하지 않음
+    if (
+      contentRef.current.contains(e.target) ||
+      e.target === contentRef.current ||
+      (titleRef.current && titleRef.current.contains(e.target)) ||
+      (submitButtonRef.current && submitButtonRef.current.contains(e.target)) ||
+      (imgButtonRef.current && imgButtonRef.current.contains(e.target))
+    ) {
+      return;
+    }
     
-        // 내용에서 이미지 태그는 그대로 두고, 텍스트 부분만 <p> 태그로 감싸기
-        contentHTML = contentHTML
-            .split('<br>') // <br> 태그를 기준으로 나눔
-            .map(line => {
-                // 빈 줄은 그대로 두고, 텍스트가 있는 줄만 <p> 태그로 감쌈
-                if (line.trim() !== '') {
-                    return `<p>${line}</p>`; // 각 줄을 <p>로 감쌈
-                }
-                return ''; // 빈 줄은 그대로 둠
-            })
-            .join(''); // 다시 합침
-    
-        setContent(contentHTML); // 상태를 업데이트
-    };
+    // 그 외의 빈 공간을 클릭하면 content에 포커스를 설정
+    contentRef.current.focus();
+  };
 
-    // 제출 처리 함수
-    const handleSubmit = () => {
-        const reviewArray = [
-            `<h2>${title}</h2>`, // 제목에 <h2> 태그 추가
-            content, // 내용은 이미 <p> 태그로 처리된 상태
-        ];
-
-        if (reviewArray[0] === '<h2></h2>') { // 제목이 비어있는 경우
-            alert('제목을 입력해주세요.');
-            return;
-        }
-
-        console.log(reviewArray); // 배열을 콘솔에 출력 (임시 작성)
-        alert('제출이 완료되었습니다.');
-        window.location.href = '/lists'; // 페이지 이동
-    };
-
-    // 이미지 추가 처리 함수
-    const handleImageAdd = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const imageUrl = reader.result;
-                const imgTag = `<img src="${imageUrl}" alt="Uploaded Image" style="max-width: 100%; height: auto;" />`;
-                contentRef.current.innerHTML += imgTag; // 이미지 태그를 contenteditable 영역에 추가
-                setContent(contentRef.current.innerHTML); // 상태를 업데이트
-            };
-            reader.readAsDataURL(file); // 이미지를 Base64로 읽기
-        }
-    };
-
-    // 내용 입력 여부에 따른 placeholder 관리
-    const handleFocus = () => {
-        const contentValue = contentRef.current.innerHTML;
-
-        if (contentValue === '') {
-            contentRef.current.innerText = ''; // 입력이 없을 때 초기화
-        }
-    };
-
-    const handleBlur = () => {
-        const contentValue = contentRef.current.innerHTML;
-
-        if (contentValue === '<br>') {
-            contentRef.current.innerText = ''; // 블러시 되었을 때 내용이 없으면 placeholder 적용
-            contentRef.current.setAttribute('data-placeholder', '내용'); // 내용이 없을 때 placeholder 설정
-        }
-    };
-
-    // `contenteditable`에 내용이 있는지 체크하여 placeholder 표시 여부 결정
-    useEffect(() => {
-        const contentValue = contentRef.current.innerText.trim();
-
-        if (contentValue !== '') {
-            contentRef.current.removeAttribute('data-placeholder'); // 내용이 있으면 placeholder 제거
-        }
-    }, [content]);
-
-    return (
-        <div className='input-review'>
-            <div className='review-area-title'>
-                <input
-                    type="text"
-                    className='title'
-                    placeholder='제목'
-                    value={title}
-                    onChange={handleTitleChange}
-                />
-                <button
-                    type='button'
-                    className='imgButton'
-                    onClick={() => fileInputRef.current.click()}
-                >
-                    <img src='/addImage.png' alt='이미지 추가' className='addNewImage' title="이미지 추가" />
-                </button>
-                <input
-                    type="file"
-                    ref={fileInputRef}
-                    style={{ display: 'none' }} // 파일 입력을 숨김
-                    onChange={handleImageAdd} // 이미지가 추가되면 처리
-                    accept="image/*" // 이미지 파일만 선택 가능
-                />
-                <button
-                    type='submit'
-                    className='sendButton'
-                    onClick={handleSubmit}
-                >
-                    <img src='/submit.png' alt='제출' className='submitImage' title="제출" />
-                </button>
-            </div>
-            <hr />
-            <div className='review-area-content'>
-                <div
-                    className="content"
-                    contentEditable="true"
-                    ref={contentRef} // ref 연결
-                    onInput={handleContentChange}
-                    onFocus={handleFocus} // focus 시 초기화
-                    onBlur={handleBlur} // blur 시 placeholder 관리
-                    data-placeholder="내용" // 초기 placeholder 텍스트 설정
-                >
-                </div>
-            </div>
-        </div>
-    );
+  return (
+    <div className="input-review" onClick={handleContainerClick}>
+      <div className="review-area-title">
+        <input
+          type="text"
+          className="title"
+          placeholder="제목"
+          value={title}
+          onChange={handleTitleChange}
+          ref={titleRef} // 제목 ref 추가
+        />
+        <button
+          type="button"
+          className="imgButton"
+          onClick={() => fileInputRef.current.click()}
+          ref={imgButtonRef} // 이미지 추가 버튼 ref 추가
+        >
+          <img
+            src={addImageIcon}
+            alt="이미지 추가"
+            className="addNewImage"
+            title="이미지 추가"
+          />
+        </button>
+        <input
+          type="file"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          accept="image/*"
+          onChange={handleImageAdd}
+        />
+        <button
+          type="submit"
+          className="sendButton"
+          onClick={handleSubmit}
+          ref={submitButtonRef} // 제출 버튼 ref 추가
+        >
+          <img
+            src={submitIcon}
+            alt="제출용"
+            className="submitImage"
+            title="제출"
+          />
+        </button>
+      </div>
+      <hr />
+      <div className="review-area-content">
+        <div
+          className="content"
+          contentEditable="true"
+          ref={contentRef}
+          data-placeholder="내용"
+          onInput={handleContentChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        ></div>
+      </div>
+    </div>
+  );
 };
 
 export default ReviewArea;

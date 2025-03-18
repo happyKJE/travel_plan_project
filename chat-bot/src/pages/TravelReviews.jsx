@@ -19,6 +19,7 @@ const TravelReviews = ({ onClose }) => {
           <TravelReviewDetail
             review={selectedReview}
             onBack={() => setSelectedReview(null)}
+            onClose={onClose}
           />
         ) : (
           /*  후기 목록 표시 */
