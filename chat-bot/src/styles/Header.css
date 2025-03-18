@@ -5,17 +5,18 @@
     padding: 20px;
     background-color: rgb(255, 255, 255);
     margin-right: 20px;
-    font-family: 'Gowun Batang', serif;
-  }
-  
-  .mainmenu {
+    font-family: "Gowun Batang", serif;
+}
+
+.mainmenu {
     list-style: none;
     display: flex;
     gap: 25px;
-  }
-  
-  .mainmenu li a {
+}
+
+.mainmenu li {
     text-decoration: none;
     color: black;
     font-weight: bold;
-  }
+    cursor: pointer;
+}

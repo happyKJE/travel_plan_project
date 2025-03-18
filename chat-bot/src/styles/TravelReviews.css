@@ -1,27 +1,7 @@
-/* 전체 오버레이 */
-.travel-reviews-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-/*  전체 모달 */
+/*!*  전체 모달 *!*/
 .travel-reviews {
-    width: 70%;
-    max-width: 800px;
-    background: white;
+    width: 800px;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    text-align: left;
-    position: relative;
     height: 80vh; /*  최대 높이로 고정 */
     display: flex;
     flex-direction: column; /*  내부 요소 정렬 */
@@ -30,6 +10,7 @@
 /* 리스트 스타일 */
 .review-list {
     list-style: none;
+    overflow: auto;
     padding: 0;
     margin: 0;
 }

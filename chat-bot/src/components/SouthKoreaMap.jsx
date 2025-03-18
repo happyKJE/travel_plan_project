@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import '../styles/RegionSelection.css';
 
 const SouthKoreaMap = () => {
     const [hoveredRegion, setHoveredRegion] = useState(null);

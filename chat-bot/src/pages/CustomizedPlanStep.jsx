@@ -17,7 +17,7 @@ import NavigationButtons from "../components/NavigationButtons.jsx";
 
 const CustomizedPlanStep = () => {
     const navigate = useNavigate();
-    const { state } = useStore();
+    const { state, dispatch } = useStore();
 
     return (
         <motion.div
@@ -48,8 +48,14 @@ const CustomizedPlanStep = () => {
             />
 
             <NavigationButtons
-                onBack={() => navigate('/region-selection')}
-                onNext={() => navigate('/chat')}
+                onBack={()=> {
+                    dispatch({
+                        type: "SET_OPTION",
+                        payload: { type: "region", value: null },
+                    });
+                    navigate('/region-selection')
+                }}
+                onNext={()=>navigate('/chat')}
             />
         </motion.div>
     );
