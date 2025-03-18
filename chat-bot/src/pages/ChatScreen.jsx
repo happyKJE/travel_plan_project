@@ -10,13 +10,15 @@ const ChatBot = () => {
     const [messages, setMessages] = useState([]);
     const {state} = useStore();
     const inputRef = useRef(null);
-
-    const backgroundImage = `/assets/${state.inputValues.placeOption || "nomatter"}Background.jfif`;
+    const placeOption = placeOptions.find(option => option.label === state.inputValues.placeOption).value;
+    const backgroundImage = `/assets/${placeOption}Background.jfif`;
     const initMessage = `2025년 03월 07일부터 2025년 03월 09일까지 ${state.inputValues.personnelOption}명이  ${state.inputValues.region}를 여행을 가.
 선호하는 지형은 ${state.inputValues.placeOption}이고, 이동수단은 ${state.inputValues.transportOption}이야.
 여행 스타일은 ${state.inputValues.travelSpeedOption === "nomatter" ? "상관없음" : state.inputValues.travelSpeedOption}이야.
 일정 추천해줘.`;
-    let executed = false; // ✅ 실행 여부를 추적하는 변수 추가
+
+    //실행 여부를 추적하는 변수
+    let executed = false;
 
     useEffect(() => {
         if (!executed) {
@@ -26,7 +28,7 @@ const ChatBot = () => {
     }, []);
 
 
-  // ✅ 메시지 전송 함수
+  // 메시지 전송 함수
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (!inputRef.current.value.trim()) return;
@@ -34,7 +36,7 @@ const ChatBot = () => {
     inputRef.current.value = "";
   };
 
-  // ✅ OpenAI API에 메시지 전송
+  // OpenAI API에 메시지 전송
   const sendMessage = async (userMessage, showUserMessage) => {
     if (!userMessage) return;
 
@@ -42,7 +44,7 @@ const ChatBot = () => {
     setShowPlane(true);
     setTimeout(() => setShowPlane(false), 3000);
 
-    // ✅ 사용자의 입력 메시지를 채팅창에 추가 (초기 메시지는 추가 X)
+    // 사용자의 입력 메시지를 채팅창에 추가 (초기 메시지는 추가 X)
     if (showUserMessage) {
       const newMessage = {
         id: uuidv4(),
@@ -100,35 +102,6 @@ const ChatBot = () => {
 
     return (
         <div className="app-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-        {/*<div className="chat-list">*/}
-            {/*    <div className="chatbot-image">*/}
-            {/*        <img src="https://cdn-icons-png.flaticon.com/512/2040/2040946.png" alt="Cute Robot" />*/}
-            {/*    </div>*/}
-            {/*    <button className="new-chat-button" onClick={handleNewChat}>*/}
-            {/*        <i className="bx bx-plus"></i>*/}
-            {/*        새로운 채팅*/}
-            {/*    </button>*/}
-            {/*    <div className="chat-list-items">*/}
-            {/*        {chats.map((chat) => (*/}
-            {/*            <div*/}
-            {/*                key={chat.id}*/}
-            {/*                className={`chat-list-item ${activeChat?.id === chat.id ? 'active' : ''}`}*/}
-            {/*            >*/}
-            {/*                <div className="chat-item-content" onClick={() => setActiveChat(chat)}>*/}
-            {/*                    <i className="bx bx-message-square"></i>*/}
-            {/*                    {chat.title}*/}
-            {/*                </div>*/}
-            {/*                <button*/}
-            {/*                    className="delete-chat-button"*/}
-            {/*                    onClick={() => handleDeleteChat(chat.id)}*/}
-            {/*                >*/}
-            {/*                    <i className="bx bx-trash"></i>*/}
-            {/*                </button>*/}
-            {/*            </div>*/}
-            {/*        ))}*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-
             <div className="chatbot-container">
                 <div className="chatbot-header">
                     <div className="logo"><img width="70px" alt="" src="/src/assets/logo_wheretogo.png"/></div>
