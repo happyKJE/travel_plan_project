@@ -137,7 +137,7 @@ const ReviewArea = () => {
         >
           <img
             src={submitIcon}
-            alt="제출"
+            alt="제출용"
             className="submitImage"
             title="제출"
           />
