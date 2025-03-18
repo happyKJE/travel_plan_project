@@ -1,18 +1,40 @@
-.modal-content {
-    max-width: 700px;
+
+.name_box {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    pointer-events: none;
+    font-size: 14px;
+    white-space: nowrap;
+    transform: translate(10px, 10px);
+    z-index: 10;
+
 }
 
-.map_holder {
-    width: 700PX;
+.map_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#map_zoom, #map_outer {
-    top: 50px;
-    left: 20px;
+.korea_map {
+    fill: #87CEEB; /* 기본 하늘색 */
+    stroke: #A9A9A9; /* 경계선 회색 */
+    stroke-width: 2;
+    transition: transform 0.3s ease, fill 0.3s ease;
+    transform-origin: center;
 }
 
-svg {
-    overflow: visible;
-    display: block;
-    width: 500px;
+.korea_map:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+    box-shadow: 0 0 1px black;
+    fill: #1E90FF; /* 호버 시 좀 더 진한 하늘색 */
 }
+
+.korea_map.selected {
+    transform: scale(1.01);
+    fill: #4682B4; /* 클릭 시 더 진한 파란색 */
+}
+  

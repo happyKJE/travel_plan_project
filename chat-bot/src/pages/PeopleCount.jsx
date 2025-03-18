@@ -18,29 +18,29 @@ import NavigationButtons from "../components/NavigationButtons.jsx";
 
 const PeopleCount = () => {
     const navigate = useNavigate();
-    const { state, dispatch } = useStore();
+    const { dispatch } = useStore();
 
     return (
-        <motion.div 
-            className="next-screen" 
-            initial={{ y: 50, opacity: 0 }} 
-            animate={{ y: 0, opacity: 1 }} 
+        <motion.div
+            className="next-screen"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
         >
             <h2>몇 명이서 가시나요?</h2>
 
             <OptionSelector
                 label={"인원"}
-                type = 'personnelOption'
+                type='personnelOption'
                 options={personnelOptions}
             />
 
             <NavigationButtons
-                onBack={()=> {
-                  dispatch({ type: 'SELECT_PLAN', payload: null });
-                  navigate('/plan-selection')
+                onBack={() => {
+                    dispatch({ type: 'SELECT_PLAN', payload: null });
+                    navigate('/plan-selection')
                 }}
-                onNext={()=>navigate('/dates-selection')}
+                onNext={() => navigate('/dates-selection')}
             />
         </motion.div>
     );
