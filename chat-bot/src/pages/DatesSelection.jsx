@@ -18,8 +18,9 @@ import "../styles/DatesSelection.css"; // 추가한 CSS 파일을 불러오기
 
 const DatesSelection = () => {
     const navigate = useNavigate();
-    const [values, setValues] = useState([]);
     const { state, dispatch } = useStore();
+    const [values, setValues] = useState(state.inputValues?.selectedDates || []);
+    const isDisabled = values.length === 0;
 
     // 날짜 변경 이벤트 핸들러
     const handleDateChange = (dates) => {
@@ -55,7 +56,6 @@ const DatesSelection = () => {
                 range
                 numberOfMonths={2}
                 showOtherDays
-                locale="ko" // 한글 로케일 적용
                 format="YYYY-MM-DD" // 날짜 형식도 한글 적용
                 weekDays={["일", "월", "화", "수", "목", "금", "토"]} // 요일 한글 적용
                 months={[
@@ -67,6 +67,7 @@ const DatesSelection = () => {
             <NavigationButtons
                 onBack={() => navigate('/people-count')}
                 onNext={() => navigate('/Region-Selection')}
+                onDisabled={isDisabled}
             />
         </motion.div>
     );

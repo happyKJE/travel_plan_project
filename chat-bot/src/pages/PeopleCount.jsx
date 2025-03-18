@@ -18,7 +18,10 @@ import NavigationButtons from "../components/NavigationButtons.jsx";
 
 const PeopleCount = () => {
     const navigate = useNavigate();
-    const { dispatch } = useStore();
+    const { state, dispatch } = useStore();
+    const isDisabled = !state.inputValues.personnelOption;
+
+    console.log("isDisabled:", Boolean(isDisabled));
 
     return (
         <motion.div
@@ -41,6 +44,7 @@ const PeopleCount = () => {
                     navigate('/plan-selection')
                 }}
                 onNext={() => navigate('/dates-selection')}
+                onDisabled={isDisabled}
             />
         </motion.div>
     );
