@@ -1,176 +1,176 @@
 .modal-content {
-  max-width: fit-content;
-  padding: 0 ;
+    max-width: fit-content;
+    padding: 0 ;
 }
 
 /* 전체 배경 */
 .app-container {
-  width: 800px;
-  height: 900px;
-  display: flex;
-  /*background: linear-gradient(to bottom, #87CEFA, #FFFFFF); !* 하늘색 그라디언트 *!*/
-  /*background-image: url("../assets/islandBackground.jfif");*/
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+    width: 800px;
+    height: 900px;
+    display: flex;
+    /*background: linear-gradient(to bottom, #87CEFA, #FFFFFF); !* 하늘색 그라디언트 *!*/
+    /*background-image: url("../assets/islandBackground.jfif");*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /* 채팅 리스트 패널 */
 .chat-list {
-  width: 260px;
-  background: rgba(255, 255, 255, 0.8); /* 반투명 효과 */
-  padding: 15px;
-  border-radius: 15px;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
+    width: 260px;
+    background: rgba(255, 255, 255, 0.8); /* 반투명 효과 */
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 /* 챗봇 아이콘 */
 .chatbot-image img {
-  width: 100px;
-  display: block;
-  margin: 0 auto;
+    width: 100px;
+    display: block;
+    margin: 0 auto;
 }
 
 /* 새 채팅 버튼 */
 .new-chat-button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  background: #4A90E2; /* 파란색 버튼 */
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #4A90E2; /* 파란색 버튼 */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .new-chat-button:hover {
-  background: #357ABD;
+    background: #357ABD;
 }
 
 /* 채팅 리스트 아이템 */
 .chat-list-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 10px;
-  margin-top: 8px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .chat-list-item:hover {
-  background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.9);
 }
 
 /* 활성화된 채팅 */
 .chat-list-item.active {
-  background: #4A90E2;
-  color: white;
+    background: #4A90E2;
+    color: white;
 }
 
 /* 채팅 화면 */
 .chatbot-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  background: rgba(230, 250, 270, 0.6);
-  border-radius: 15px;
-  padding: 15px;
-  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: rgba(230, 250, 270, 0.6);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* 채팅 헤더 */
 .chatbot-header {
-  display: flex;
-  align-items: center;
-  padding: 12px;
-  border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 10px;
 }
 
 .robot-icon {
-  font-size: 24px;
-  margin-right: 8px;
+    font-size: 24px;
+    margin-right: 8px;
 }
 
 /* 채팅 메시지 창 */
 .chat-messages {
-  flex: 1;
-  padding: 15px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 /* 유저 메시지 */
 .user-message {
-  align-self: flex-end;
-  background: #FFD700; /* 노란색 말풍선 */
-  color: #333;
-  padding: 12px;
-  border-radius: 18px;
-  margin: 5px;
-  max-width: 70%;
+    align-self: flex-end;
+    background: #FFD700; /* 노란색 말풍선 */
+    color: #333;
+    padding: 12px;
+    border-radius: 18px;
+    margin: 5px;
+    max-width: 70%;
 }
 
 /* 챗봇 메시지 */
 .bot-message {
-  align-self: flex-start;
-  background: #FFFFFF;
-  padding: 12px;
-  border-radius: 18px;
-  margin: 5px;
-  max-width: 70%;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    align-self: flex-start;
+    background: #FFFFFF;
+    padding: 12px;
+    border-radius: 18px;
+    margin: 5px;
+    max-width: 70%;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* 입력창 */
 .chat-input-container {
-  display: flex;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .chat-input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  outline: none;
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
 }
 
 /* 전송 버튼 */
 .send-button {
-  background: #4A90E2;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
+    background: #4A90E2;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .send-button:hover {
-  background: #357ABD;
+    background: #357ABD;
 }
 
 /* 비행기 애니메이션 */
 .flying-plane {
-  font-size: 30px;
-  animation: fly 2s linear infinite;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+    font-size: 30px;
+    animation: fly 2s linear infinite;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 @keyframes fly {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(20px); }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(20px); }
 }
