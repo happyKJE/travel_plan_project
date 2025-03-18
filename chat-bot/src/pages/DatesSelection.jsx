@@ -14,7 +14,7 @@ import { Calendar } from "react-multi-date-picker";
 import moment from "moment"; // 날짜 처리를 위한 moment 라이브러리 추가
 import useStore from "../context/UseStore.jsx";
 import NavigationButtons from "../components/NavigationButtons.jsx";
-import "../styles/Calendar.css"; // 추가한 CSS 파일을 불러오기
+import "../styles/DatesSelection.css"; // 추가한 CSS 파일을 불러오기
 
 const DatesSelection = () => {
     const navigate = useNavigate();
