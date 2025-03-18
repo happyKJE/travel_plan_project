@@ -32,3 +32,15 @@
     color: white;
     border: none;
 }
+
+.to-back, .to-next:hover {
+    opacity: 0.8;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.to-next:disabled {
+    opacity: 0.4;
+    box-shadow: none;
+    cursor: auto;
+}

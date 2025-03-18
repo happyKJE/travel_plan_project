@@ -26,7 +26,7 @@ const SouthKoreaMap = () => {
     const handleMouseLeave = () => {
         timeoutRef.current = setTimeout(() => {
             setHoveredRegion(null); // 마우스가 떠난 후 일정 시간 후에 `null`로 변경
-        }, 100); // 100ms 정도 딜레이
+        }, 100); // 100ms 정도 딜레이 
     };
 
     return (
