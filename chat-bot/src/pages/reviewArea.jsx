@@ -8,6 +8,9 @@ const ReviewArea = () => {
   const [content, setContent] = useState("");
   const contentRef = useRef(null);
   const fileInputRef = useRef(null);
+  const titleRef = useRef(null);  // 제목 입력 필드 참조
+  const submitButtonRef = useRef(null); // 제출 버튼 참조
+  const imgButtonRef = useRef(null);  // 이미지 추가 버튼 참조
 
   // 제목 입력 핸들링
   const handleTitleChange = (e) => {
@@ -78,8 +81,25 @@ const ReviewArea = () => {
     }
   }, [content]);
 
+  // input-review 영역 클릭 시 contentRef 포커스
+  const handleContainerClick = (e) => {
+    // 제목, 이미지 추가 버튼, 제출 버튼을 클릭했을 때는 포커스를 설정하지 않음
+    if (
+      contentRef.current.contains(e.target) ||
+      e.target === contentRef.current ||
+      (titleRef.current && titleRef.current.contains(e.target)) ||
+      (submitButtonRef.current && submitButtonRef.current.contains(e.target)) ||
+      (imgButtonRef.current && imgButtonRef.current.contains(e.target))
+    ) {
+      return;
+    }
+    
+    // 그 외의 빈 공간을 클릭하면 content에 포커스를 설정
+    contentRef.current.focus();
+  };
+
   return (
-    <div className="input-review">
+    <div className="input-review" onClick={handleContainerClick}>
       <div className="review-area-title">
         <input
           type="text"
@@ -87,11 +107,13 @@ const ReviewArea = () => {
           placeholder="제목"
           value={title}
           onChange={handleTitleChange}
+          ref={titleRef} // 제목 ref 추가
         />
         <button
           type="button"
           className="imgButton"
           onClick={() => fileInputRef.current.click()}
+          ref={imgButtonRef} // 이미지 추가 버튼 ref 추가
         >
           <img
             src={addImageIcon}
@@ -107,7 +129,12 @@ const ReviewArea = () => {
           accept="image/*"
           onChange={handleImageAdd}
         />
-        <button type="submit" className="sendButton" onClick={handleSubmit}>
+        <button
+          type="submit"
+          className="sendButton"
+          onClick={handleSubmit}
+          ref={submitButtonRef} // 제출 버튼 ref 추가
+        >
           <img
             src={submitIcon}
             alt="제출"
