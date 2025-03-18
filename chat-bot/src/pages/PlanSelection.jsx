@@ -7,11 +7,11 @@
  * @lastModifiedDate 2025-03-12
  */
 
-import React, {useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import useStore from "../context/UseStore.jsx";
 import '../styles/IntroButton.css';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Button = ({ type, text, onClick, animationDelay }) => {
     return (
@@ -29,7 +29,7 @@ const Button = ({ type, text, onClick, animationDelay }) => {
 
 const PlanSelection = () => {
 
-    const { state,dispatch } = useStore();
+    const { state, dispatch } = useStore();
     const navigate = useNavigate();
 
     const handlePlanSelect = useCallback((planType) => {
@@ -37,7 +37,7 @@ const PlanSelection = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if(state.planType)
+        if (state.planType)
             navigate('/people-count')
     }, [state.planType]);
 
@@ -47,14 +47,14 @@ const PlanSelection = () => {
                 type="random-plan"
                 text="Random PLAN ▶"
                 animationDelay={1.2}
-                onClick={() => {handlePlanSelect('random')} }
+                onClick={() => { handlePlanSelect('random') }}
             />
 
             <Button
                 type="custom-plan"
                 text="Customized Travel PLAN ▶"
                 animationDelay={1.6}
-                onClick={() => handlePlanSelect('custom') }
+                onClick={() => handlePlanSelect('custom')}
             />
         </div>
     );

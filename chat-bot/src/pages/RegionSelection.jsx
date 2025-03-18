@@ -19,10 +19,10 @@ const RegionSelection = () => {
     const { state } = useStore();
 
     return (
-        <motion.div 
-            className="next-screen" 
-            initial={{ y: 50, opacity: 0 }} 
-            animate={{ y: 0, opacity: 1 }} 
+        <motion.div
+            className="next-screen"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
         >
             <h2>어디로 가볼까요?</h2>
@@ -31,7 +31,7 @@ const RegionSelection = () => {
             <NavigationButtons
                 onBack={() => navigate('/dates-selection')}
                 onNext={() => navigate(`/plan-details/${state.planType}`)}
-              />
+            />
         </motion.div>
     );
 };

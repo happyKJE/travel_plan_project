@@ -26,7 +26,7 @@ const OptionSelector = ({ label, type, options }) => {
 
         if (value === "direct") {
             setInputValue("");
-            value='';
+            value = '';
         }
         dispatch({ type: "SET_OPTION", payload: { type, value } });
 
@@ -44,6 +44,7 @@ const OptionSelector = ({ label, type, options }) => {
 
     useEffect(() => {
         //선택 옵션 확인
+        console.log(state);
         console.log(state.inputValues);
         console.log(state.inputValues[type]);
     }, [state.inputValues, type]);

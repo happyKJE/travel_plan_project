@@ -17,8 +17,8 @@
  *    createContext :컴포넌트 간 props 없이 상태 공유 가능.
  */
 
-import {createContext, useReducer} from "react";
-import {v4 as uuidv4} from "uuid";
+import { createContext, useReducer } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 //상태를 전역적으로 관리하기 위한 context 생성
 const UseContext = createContext({});
@@ -36,7 +36,7 @@ const chatReducer = (state, action) => {
         case "RESET_STATE":
             return { ...initialState }; // 초기 상태로 리셋
         case "SELECT_PLAN":
-            return {...state, planType: action.payload};
+            return { ...state, planType: action.payload };
         case "SET_OPTION":
             return {
                 ...state,
@@ -58,12 +58,12 @@ const chatReducer = (state, action) => {
             };
         }
         case "ADD_MESSAGE": {
-            const {chatId, message} = action.payload;
+            const { chatId, message } = action.payload;
             return {
                 ...state,
                 chats: state.chats.map((chat) =>
                     chat.id === chatId
-                        ? {...chat, messages: [...chat.messages, message]}
+                        ? { ...chat, messages: [...chat.messages, message] }
                         : chat
                 ),
             };
@@ -77,15 +77,15 @@ const chatReducer = (state, action) => {
             };
         }
         case "SET_ACTIVE_CHAT":
-            return {...state, activeChatId: action.payload};
+            return { ...state, activeChatId: action.payload };
         default:
             return state;
     }
 };
 
-export const ChatProvider = ({children}) => {
+export const ChatProvider = ({ children }) => {
     const [state, dispatch] = useReducer(chatReducer, initialState);
-    return <UseContext.Provider value={{state, dispatch}}>{children}</UseContext.Provider>;
+    return <UseContext.Provider value={{ state, dispatch }}>{children}</UseContext.Provider>;
 };
 
 export default UseContext;

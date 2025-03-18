@@ -1,34 +1,34 @@
 *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .next-screen {
-  position: relative;  /* 상황에 따라 fixed나 relative로 조정 */
-  top: 30%;
-  left: 0;
-  width: 100%;
-  height: 70%;
-  background-color: rgba(255, 255, 255, 0.8); /* 반투명 배경 예시 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
+    position: relative;  /* 상황에 따라 fixed나 relative로 조정 */
+    top: 30%;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background-color: rgba(255, 255, 255, 0.8); /* 반투명 배경 예시 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 /* 각 버튼 타입 */
 .navigation-buttons {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .to-back, .to-next {
-  background-color: rgb(82, 209, 255);
-  font-family: 'Gowun Batang', serif;
-  color: white;
-  border: none;
+    background-color: rgb(82, 209, 255);
+    font-family: 'Gowun Batang', serif;
+    color: white;
+    border: none;
 }

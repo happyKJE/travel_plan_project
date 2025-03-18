@@ -16,11 +16,11 @@ const Header = () => {
     <header className="header">
       <div className="logo"><img src={logoImg} width="100px" alt="" /></div>
       <nav>
-        <ul className="mainmenu">
-          <li><a href="#">홈</a></li>
-          <li><a href="#">게시판</a></li>
-          <li><a href="#">여행후기</a></li>
-          <li><a href="#">2조화이팅</a></li>
+        <ul className="mainmenus">
+          <li><a href="#" className="mainmenu">홈</a></li>
+          <li><a href="#" className="mainmenu">게시판</a></li>
+          <li><a href="#" className="mainmenu">여행후기</a></li>
+          <li><a href="#" className="mainmenu">2조화이팅</a></li>
         </ul>
       </nav>
     </header>

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route, Outlet} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import { ChatProvider } from './context/UseContext.jsx';
 import Header from './components/Header';
 import IntroSection from './components/IntroSection';

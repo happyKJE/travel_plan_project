@@ -20,8 +20,8 @@ const ToFirstPageButton = ({ onFirstPage }) => {
 
     return (
         <div className='to-first-page'>
-            <button className="to-first-page-button" onClick={()=>{
-                console.log("첫페이지 이동"); 
+            <button className="to-first-page-button" onClick={() => {
+                console.log("첫페이지 이동");
                 handleReset();
                 onFirstPage();
             }}>
