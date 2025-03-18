@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import { ChatProvider } from './context/UseContext.jsx';
 import Header from './components/Header';
@@ -11,11 +10,14 @@ import RandomPlanStep from './pages/RandomPlanStep';
 import CustomizedPlanStep from './pages/CustomizedPlanStep';
 import ChatScreen from './pages/ChatScreen';
 import PlanSelection from "./pages/PlanSelection.jsx";
-import RegionSelection from "./pages/RegionSelection"; // 추가
+import RegionSelection from "./pages/RegionSelection";
 import DatesSelection from "./pages/DatesSelection";
-
+import TravelReviews from "./pages/TravelReviews";
+import TravelReviewDetail from "./pages/TravelReviewDetail";
 
 const App = () => {
+    const [showReviews, setShowReviews] = useState(false); // 여행 후기 모달 상태
+    
     const ModalRoute = () => {
         return (
             <div>
@@ -29,7 +31,7 @@ const App = () => {
     return (
         <ChatProvider>
             <Router>
-                <Header />
+                <Header onShowReviews={() => setShowReviews(true)} />
                 <main>
                     <IntroSection />
                     <Routes>
@@ -43,8 +45,14 @@ const App = () => {
                             <Route path="plan-details/custom" element={<CustomizedPlanStep />} />
                             <Route path="chat" element={<ChatScreen />} />
                         </Route>
+                        {/*  여행 후기 상세 라우트 */}
+                        <Route path="board/review/:reviewId" element={<TravelReviewDetail />} />
                     </Routes>
                     <Background />
+                    {/*  여행 후기 모달 (오버레이) */}
+                    {showReviews && (
+                        <TravelReviews onClose={() => setShowReviews(false)} />
+                    )}
                 </main>
                 <footer></footer>
             </Router>
@@ -53,3 +61,4 @@ const App = () => {
 };
 
 export default App;
+
