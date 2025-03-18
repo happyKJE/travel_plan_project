@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../styles/reviewArea.css";
+import "../styles/TravelReviews.css"; // 스타일 파일
 import addImageIcon from "../assets/addImage.png";
 import submitIcon from "../assets/submit.png";
 
@@ -99,63 +100,67 @@ const ReviewArea = () => {
   };
 
   return (
-    <div className="input-review" onClick={handleContainerClick}>
-      <div className="review-area-title">
-        <input
-          type="text"
-          className="title"
-          placeholder="제목"
-          value={title}
-          onChange={handleTitleChange}
-          ref={titleRef} // 제목 ref 추가
-        />
-        <button
-          type="button"
-          className="imgButton"
-          onClick={() => fileInputRef.current.click()}
-          ref={imgButtonRef} // 이미지 추가 버튼 ref 추가
-        >
-          <img
-            src={addImageIcon}
-            alt="이미지 추가"
-            className="addNewImage"
-            title="이미지 추가"
-          />
-        </button>
-        <input
-          type="file"
-          ref={fileInputRef}
-          style={{ display: "none" }}
-          accept="image/*"
-          onChange={handleImageAdd}
-        />
-        <button
-          type="submit"
-          className="sendButton"
-          onClick={handleSubmit}
-          ref={submitButtonRef} // 제출 버튼 ref 추가
-        >
-          <img
-            src={submitIcon}
-            alt="제출용"
-            className="submitImage"
-            title="제출"
-          />
-        </button>
+      <div className="travel-reviews-overlay">
+        <div className="travel-reviews">
+          <div className="input-review" onClick={handleContainerClick}>
+            <div className="review-area-title">
+              <input
+                type="text"
+                className="title"
+                placeholder="제목"
+                value={title}
+                onChange={handleTitleChange}
+                ref={titleRef} // 제목 ref 추가
+              />
+              <button
+                type="button"
+                className="imgButton"
+                onClick={() => fileInputRef.current.click()}
+                ref={imgButtonRef} // 이미지 추가 버튼 ref 추가
+              >
+                <img
+                  src={addImageIcon}
+                  alt="이미지 추가"
+                  className="addNewImage"
+                  title="이미지 추가"
+                />
+              </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                style={{ display: "none" }}
+                accept="image/*"
+                onChange={handleImageAdd}
+              />
+              <button
+                type="submit"
+                className="sendButton"
+                onClick={handleSubmit}
+                ref={submitButtonRef} // 제출 버튼 ref 추가
+              >
+                <img
+                  src={submitIcon}
+                  alt="제출용"
+                  className="submitImage"
+                  title="제출"
+                />
+              </button>
+            </div>
+            <hr />
+            <div className="review-area-content">
+              <div
+                className="content"
+                contentEditable="true"
+                ref={contentRef}
+                data-placeholder="내용"
+                onInput={handleContentChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+              ></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <hr />
-      <div className="review-area-content">
-        <div
-          className="content"
-          contentEditable="true"
-          ref={contentRef}
-          data-placeholder="내용"
-          onInput={handleContentChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        ></div>
-      </div>
-    </div>
   );
 };
 

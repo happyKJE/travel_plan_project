@@ -10,6 +10,7 @@
 import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import useStore from "../context/UseStore.jsx";
+import '../styles/OptionSelector.css'
 
 const OptionSelector = ({ label, type, options }) => {
     const { state, dispatch } = useStore();
@@ -44,7 +45,6 @@ const OptionSelector = ({ label, type, options }) => {
 
     useEffect(() => {
         //선택 옵션 확인
-        console.log(state);
         console.log(state.inputValues);
         console.log(state.inputValues[type]);
     }, [state.inputValues, type]);
@@ -56,8 +56,8 @@ const OptionSelector = ({ label, type, options }) => {
                 {options.map((option) => (
                     <button
                         key={option.value}
-                        className={`circle-button ${selected === option.value ? "selected" : ""}`}
-                        onClick={() => handleOptionSelect(option.value)}
+                        className={`circle-button ${selected === option.label ? "selected" : ""}`}
+                        onClick={() => handleOptionSelect(option.label)}
                     >
                         {option.label}
                     </button>

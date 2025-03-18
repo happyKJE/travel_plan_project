@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import '../styles/RegionSelection.css';
 
 const SouthKoreaMap = () => {
     const [hoveredRegion, setHoveredRegion] = useState(null);
@@ -34,11 +33,11 @@ const SouthKoreaMap = () => {
             {/* 지역명 표시 (마우스 포인터 옆에 따라다님) */}
             {hoveredRegion && (
                 <div className="name_box"
-                    style={{
-                        position: "absolute",
-                        top: `${position.y}px`,
-                        left: `${position.x}px`,
-                    }}
+                     style={{
+                         position: "absolute",
+                         top: `${position.y}px`,
+                         left: `${position.x}px`,
+                     }}
                 >
                     {hoveredRegion}
                 </div>

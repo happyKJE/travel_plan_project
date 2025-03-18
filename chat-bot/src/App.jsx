@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
-import { ChatProvider } from './context/UseContext.jsx';
-import Header from './components/Header';
-import IntroSection from './components/IntroSection';
-import Background from './components/Background';
+import React, { lazy, Suspense, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
+import { ChatProvider } from "./context/UseContext.jsx";
+import Header from "./components/Header";
+import IntroSection from "./components/IntroSection";
+import Background from "./components/Background";
 import Modal from "./components/Modal.jsx";
-import PeopleCount from './pages/PeopleCount';
-import RandomPlanStep from './pages/RandomPlanStep';
-import CustomizedPlanStep from './pages/CustomizedPlanStep';
-import ChatScreen from './pages/ChatScreen';
 import PlanSelection from "./pages/PlanSelection.jsx";
-import RegionSelection from "./pages/RegionSelection";
-import DatesSelection from "./pages/DatesSelection";
-import TravelReviews from "./pages/TravelReviews";
-import TravelReviewDetail from "./pages/TravelReviewDetail";
+
+//laze : 컴포넌트를 동적으로 로드 => 필요할때만 호출. Suspense로 감싸지않으면 오류
+const PeopleCount = lazy(() => import("./pages/PeopleCount"));
+const DatesSelection = lazy(() => import("./pages/DatesSelection.jsx"));
+const RegionSelection = lazy(() => import("./pages/RegionSelection"));
+const RandomPlanStep = lazy(() => import("./pages/RandomPlanStep"));
+const CustomizedPlanStep = lazy(() => import("./pages/CustomizedPlanStep"));
+const ChatScreen = lazy(() => import("./pages/ChatScreen"));
+const TravelReviews = lazy(() => import("./pages/TravelReviews"));
+const TravelReviewDetail = lazy(() => import("./pages/TravelReviewDetail"));
+const ReviewArea = lazy(() => import("./pages/reviewArea"));
 
 const App = () => {
-    const [showReviews, setShowReviews] = useState(false); // 여행 후기 모달 상태
-    
     const ModalRoute = () => {
         return (
             <div>
@@ -31,28 +32,28 @@ const App = () => {
     return (
         <ChatProvider>
             <Router>
-                <Header onShowReviews={() => setShowReviews(true)} />
+                <Header/>
                 <main>
                     <IntroSection />
-                    <Routes>
-                        <Route path="/" element={<PlanSelection />} />
-                        <Route path="plan-selection" element={<PlanSelection />} />
-                        <Route path="" element={<ModalRoute />}>
-                            <Route path="people-count" element={<PeopleCount />} />
-                            <Route path="dates-selection" element={<DatesSelection />} />
-                            <Route path="region-selection" element={<RegionSelection />} />
-                            <Route path="plan-details/random" element={<RandomPlanStep />} />
-                            <Route path="plan-details/custom" element={<CustomizedPlanStep />} />
-                            <Route path="chat" element={<ChatScreen />} />
-                        </Route>
-                        {/*  여행 후기 상세 라우트 */}
-                        <Route path="board/review/:reviewId" element={<TravelReviewDetail />} />
-                    </Routes>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Routes>
+                            <Route path="/" element={<PlanSelection />} />
+                            <Route path="plan-selection" element={<PlanSelection />} />
+
+                            <Route path="" element={<ModalRoute />}>
+                                <Route path="people-count" element={<PeopleCount />} />
+                                <Route path="dates-selection" element={<DatesSelection />} />
+                                <Route path="region-selection" element={<RegionSelection />} />
+                                <Route path="plan-details/random" element={<RandomPlanStep />} />
+                                <Route path="plan-details/custom" element={<CustomizedPlanStep />} />
+                                <Route path="chat" element={<ChatScreen />} />
+                                <Route path="travelReviews" element={<TravelReviews />} />
+                                <Route path="review/:reviewId" element={<TravelReviewDetail />} />
+                                <Route path="reviewArea" element={<ReviewArea />} />
+                            </Route>
+                        </Routes>
+                    </Suspense>
                     <Background />
-                    {/*  여행 후기 모달 (오버레이) */}
-                    {showReviews && (
-                        <TravelReviews onClose={() => setShowReviews(false)} />
-                    )}
                 </main>
                 <footer></footer>
             </Router>

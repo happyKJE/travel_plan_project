@@ -1,12 +1,11 @@
 .modal-content {
-    max-width: fit-content;
+    max-width: 800px;
     padding: 0 ;
 }
 
 /* 전체 배경 */
 .app-container {
-    width: 800px;
-    height: 900px;
+    height: 700px;
     display: flex;
     /*background: linear-gradient(to bottom, #87CEFA, #FFFFFF); !* 하늘색 그라디언트 *!*/
     /*background-image: url("../assets/islandBackground.jfif");*/

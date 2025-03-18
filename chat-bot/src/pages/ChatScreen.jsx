@@ -1,299 +1,106 @@
-// /**
-//  * @file ChatScreen.jsx
-//  * @description chat bot 컨포넌트
-//  * @author jungeun
-//  * @created 2025-03-12
-//  * @lastModifiedBy jungeun
-//  * @lastModifiedDate 2025-03-12
-//  */
-//
-// import React, {useState, useEffect, useRef} from 'react';
-// import "../styles/ChatBotApp.css";
-// import { v4 as uuidv4 } from 'uuid';
-// import useStore from '../context/UseStore.jsx';
-// import { useNavigate } from 'react-router-dom';
-//
-// const ChatScreen = () => {
-//     const navigate = useNavigate();
-//     const { state, dispatch } = useStore();
-//     const [messages, setMessages] = useState('');
-//     const activeChat = state.chats.find(chat => chat.id === state.activeChatId);
-//     const inputRef = useRef(null);
-//
-//     // useEffect(() => {
-//     //     if (state.chats.length === 0) {
-//     //         dispatch({ type: 'CREATE_CHAT' });
-//     //     }
-//         // const activeChatObj = state.chats.find((chat) => chat.id === state.activeChatId);
-//         // setMessages(activeChatObj ? activeChatObj.messages : []);
-//     // }, [dispatch,state.chats.length, state.activeChatId, state.chats]);
-//
-//     useEffect(() => {
-//         if (state.chats.length === 0) {
-//             dispatch({ type: 'CREATE_CHAT' });
-//         }
-//         const initMessages = `${state.inputValues.인원}인원이 여행을 가려고 하는데, 선호하는 장소는 ${state.inputValues.placeOption}. 여행 스타일은 ${state.inputValues.여행스타일 === "nomatter" ? "상관없음" : state.inputValues.여행스타일}이며, 이동 수단은 ${state.inputValues.transportOption}이야. 여행계획 짜줄래?.`
-//         sendMessage(initMessages).then(console.log(initMessages));
-//         }, []);
-//
-//     const sendMessage = async (inputValue) => {
-//         if (!inputValue.trim()) return;
-//
-//         const newMessage = {
-//             type: "prompt",
-//             text: inputValue,
-//             timeStamp: new Date().toLocaleDateString()
-//         }
-//
-//         let chatId = state.activeChatId;
-//
-//         if (!chatId) {
-//             dispatch({ type: "CREATE_CHAT" });
-//             chatId = state.chats[0]?.id;
-//         }
-//
-//         dispatch({
-//             type: "ADD_MESSAGE",
-//             payload: { chatId: chatId, message: newMessage },
-//         });
-//
-//         console.log(chatId);
-//         console.log(state.messages);
-//         console.log(newMessage);
-//         try {
-//             console.log('sending message');
-//             const response = await fetch('https://api.openai.com/v1/chat/completions',
-//                 {
-//                     method: 'POST',
-//                     headers: {
-//                         'Accept': 'application/json',
-//                         'Content-Type': 'application/json',
-//                         Authorization: `Bearer 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`
-//                     },
-//                     body: JSON.stringify({
-//                         model: 'gpt-3.5-turbo',
-//                         messages: [{role: 'user', content: inputValue}],
-//                         max_tokens: 500,
-//                     }),
-//                 });
-//
-//             const data = await response.json();
-//             const chatResponse = data.choices[0]?.message.content.trim() || "No response";
-//
-//             dispatch({
-//                 type: "ADD_MESSAGE",
-//                 payload: {
-//                     chatId,
-//                     message: { type: "response", text: chatResponse, timeStamp: new Date().toLocaleString("ko-KR") },
-//                 },
-//             });
-//
-//         } catch (error) {
-//             console.error("API 호출 실패:", error);
-//         }
-//     };
-//
-//     const handleSelectChat = (id) => dispatch({ type: "SET_ACTIVE_CHAT", payload: id });
-//
-//     const handleDeleteChat = (id) => dispatch({ type: "DELETE_CHAT", payload: id });
-//
-//     return (
-//         <div className='chat-app'>
-//             <div className='chat-list'>
-//                 <div className='chat-list-header'>
-//                     <h4>Plan List</h4>
-//                     <i className='bx bx-edit-alt new-chat' onClick={() => dispatch({ type: 'CREATE_CHAT' })}></i>
-//                 </div>
-//                 {state.chats.map((chat) => (
-//                     <div
-//                         key={chat.id}
-//                         className={`chat-list-item ${chat.id === state.activeChatId ? 'active' : ''}`}
-//                         onClick={() => handleSelectChat(chat.id)}
-//                     >
-//                         <h4>{chat.displayId}</h4>
-//                         <i className='bx bx-x-circle' onClick={(e) => {
-//                             e.stopPropagation();
-//                             handleDeleteChat(chat.id);
-//                         }}></i>
-//                     </div>
-//                 ))}
-//             </div>
-//             <div className='chat-window'>
-//                 <div className='chat-title'>
-//                     <h3>Chat with AI</h3>
-//                     <i onClick={() => navigate('/plan-selection')} className='bx bx-arrow-back arrow'></i>
-//                 </div>
-//                 <div className='chat'>
-//                     {activeChat?.messages.map((msg, index) => (
-//                         <div
-//                             key={index}
-//                             className={msg.type === "prompt" ? 'prompt' : 'response'}>
-//                             {msg.text}
-//                             <span>{msg.timeStamp}</span>
-//                         </div>
-//                     ))}
-//                 </div>
-//                 <form className='msg-form' onSubmit={(e) => e.preventDefault()}>
-//                     <i className='fa-solid fa-face-smile emoji'></i>
-//                     <input
-//                         type="text"
-//                         className='msg-input'
-//                         placeholder='Type a message...'
-//                         ref={inputRef}
-//                         onKeyDown={(e) => e.key === "Enter" && sendMessage(inputRef)}
-//                     />
-//                     <i className="fa-solid fa-paper-plane" onClick={()=>sendMessage(inputRef)}></i>
-//                 </form>
-//             </div>
-//         </div>
-//     )
-// }
-//
-// export default ChatScreen;
-
-
 import React, {useState, useEffect, useRef} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import '../styles/ChatBot.css';
 import useStore from "../context/UseStore.jsx";
+import {placeOptions, transportOptions} from "../data/OptionsData.jsx";
 
 const ChatBot = () => {
     const [showPlane, setShowPlane] = useState(false);
     const [activeChat, setActiveChat] = useState(false);
     const [messages, setMessages] = useState([]);
-    const [chats, setChats] = useState([]);
-    const {state, dispatch} = useStore();
+    const {state} = useStore();
     const inputRef = useRef(null);
 
-    const newChat = {
-        id: uuidv4(),
-        title: '새로운 정보대화',
-        messages: []
-    };
+    const backgroundImage = `/assets/${state.inputValues.placeOption || "nomatter"}Background.jfif`;
+    const initMessage = `2025년 03월 07일부터 2025년 03월 09일까지 ${state.inputValues.personnelOption}명이  ${state.inputValues.region}를 여행을 가.
+선호하는 지형은 ${state.inputValues.placeOption}이고, 이동수단은 ${state.inputValues.transportOption}이야.
+여행 스타일은 ${state.inputValues.travelSpeedOption === "nomatter" ? "상관없음" : state.inputValues.travelSpeedOption}이야.
+일정 추천해줘.`;
+    let executed = false; // ✅ 실행 여부를 추적하는 변수 추가
 
     useEffect(() => {
-       handleNewChat();
+        if (!executed) {
+            sendMessage(initMessage, false);
+            executed = true;
+        }
     }, []);
 
-    useEffect(() => {
-        const activeChatObject = chats.find((chat) => chat.id === activeChat?.id);
-        if (activeChatObject) {
-            setMessages(activeChatObject.messages);
-        }
-    }, [activeChat, chats]);
 
+  // ✅ 메시지 전송 함수
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    if (!inputRef.current.value.trim()) return;
+    sendMessage(inputRef.current.value, true);
+    inputRef.current.value = "";
+  };
 
+  // ✅ OpenAI API에 메시지 전송
+  const sendMessage = async (userMessage, showUserMessage) => {
+    if (!userMessage) return;
 
-    const handleSendMessage = (e) => {
-        e.preventDefault();
-        sendMessage();
-    };
+    // ✈️ 비행기 애니메이션 시작
+    setShowPlane(true);
+    setTimeout(() => setShowPlane(false), 3000);
 
-    const sendMessage = async () => {
-        if (inputMessage.trim() === '') return;
+    // ✅ 사용자의 입력 메시지를 채팅창에 추가 (초기 메시지는 추가 X)
+    if (showUserMessage) {
+      const newMessage = {
+        id: uuidv4(),
+        type: "prompt",
+        text: userMessage,
+        timestamp: new Date().toLocaleDateString("ko-KR"),
+      };
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+    }
 
-        // 비행기 애니메이션 시작
-        setShowPlane(true);
-        setTimeout(() => setShowPlane(false), 3000);
+    try {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_REACT_APP_CLIENT_ID}`,
+        },
+        body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+          messages: [
+             { role: "system", content: "너는 여행 플래너야. 반드시 ✅1일차 (날짜 요일) 형식으로 오전, 오후, 저녁, 숙박 계획을 작성해. ✅를 기준으로 줄바꿈 해줘" },
+             { role: "user", content: userMessage }
+         ],
+          max_tokens: 1000,
+          temperature: 0.7,
+        }),
+      });
 
-        const newMessage = {
-            id: uuidv4(),
-            type: 'prompt',
-            text: inputMessage,
-            timestamp: new Date().toLocaleDateString('ko-KR')
-        };
+      const chatResponse = await response.json();
+      const botMessage = {
+        id: uuidv4(),
+        type: "response",
+        text: chatResponse.choices[0].message.content,
+        timestamp: new Date().toLocaleDateString("ko-KR"),
+      };
 
-        const updatedMessages = [...messages, newMessage];
-        const updatedChats = chats.map((chat) => {
-            if (chat.id === activeChat?.id) {
-                return { ...chat, messages: updatedMessages };
-            }
-            return chat;
-        });
+      // ✅ 새로운 응답 메시지를 추가
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
 
-        setChats(updatedChats);
-        setMessages(updatedMessages);
-        setInputMessage('');
+    } catch (error) {
+      console.error("Error:", error);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          id: uuidv4(),
+          type: "response",
+          text: "죄송합니다. 잠시 후 다시 시도해주세요.",
+          timestamp: new Date().toLocaleDateString("ko-KR"),
+        },
+      ]);
+    }
+  };
 
-        try {
-            const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${process.env.REACT_APP_CLIENT_ID}`
-                },
-                body: JSON.stringify({
-                    model: 'gpt-3.5-turbo',
-                    messages: [{ role: 'user', content: inputMessage }],
-                    max_tokens: 500,
-                })
-            });
-
-            const chatResponse = await response.json();
-
-            const botMessage = {
-                id: uuidv4(),
-                type: 'response',
-                text: chatResponse.choices[0].message.content,
-                timestamp: new Date().toLocaleDateString('ko-KR')
-            };
-
-            const newUpdatedMessages = [...updatedMessages, botMessage];
-            const newUpdatedChats = chats.map((chat) => {
-                if (chat.id === activeChat?.id) {
-                    return { ...chat, messages: newUpdatedMessages };
-                }
-                return chat;
-            });
-
-            setChats(newUpdatedChats);
-            setMessages(newUpdatedMessages);
-            setCurrentStep(currentStep + 1);
-        } catch (error) {
-            console.error('Error:', error);
-            const botMessage = {
-                id: uuidv4(),
-                type: 'response',
-                text: "죄송합니다. 잠시 후 다시 시도해주세요.",
-                timestamp: new Date().toLocaleDateString('ko-KR')
-            };
-
-            const newUpdatedMessages = [...updatedMessages, botMessage];
-            const newUpdatedChats = chats.map((chat) => {
-                if (chat.id === activeChat?.id) {
-                    return { ...chat, messages: newUpdatedMessages };
-                }
-                return chat;
-            });
-
-            setChats(newUpdatedChats);
-            setMessages(newUpdatedMessages);
-        }
-    };
-
-    const handleNewChat = () => {
-        const newChat = {
-            id: uuidv4(),
-            title: '새로운 정보대화',
-            messages: []
-        };
-    };
-
-    const handleDeleteChat = (chatId) => {
-        const updatedChats = chats.filter(chat => chat.id !== chatId);
-        setChats(updatedChats);
-
-        if (activeChat?.id === chatId) {
-            const nextChat = updatedChats[0];
-            setActiveChat(nextChat || null);
-            setMessages(nextChat?.messages || []);
-        }
-    };
 
     return (
-        <div className="app-container">
-            {/*<div className="chat-list">*/}
+        <div className="app-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        {/*<div className="chat-list">*/}
             {/*    <div className="chatbot-image">*/}
             {/*        <img src="https://cdn-icons-png.flaticon.com/512/2040/2040946.png" alt="Cute Robot" />*/}
             {/*    </div>*/}
@@ -334,7 +141,12 @@ const ChatBot = () => {
                             key={message.id}
                             className={`message ${message.type === 'prompt' ? 'user-message' : 'bot-message'}`}
                         >
-                            {message.text}
+                            {message.text.split('\n').map((line, index) => (
+                                <React.Fragment key={index}>
+                                  {line}
+                                  <br />
+                                </React.Fragment>
+                              ))}
                         </div>
                     ))}
                 </div>
