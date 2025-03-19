@@ -28,6 +28,10 @@ const DatesSelection = () => {
         setValues(formattedDates); // 상태 업데이트
     };
 
+    const handleOnNext = () => {
+        state.planType === 'custom'?navigate('/region-selection'):navigate('/plan-details/random')
+    }
+
     // values가 변경될 때마다 최신 값을 dispatch에 반영
     useEffect(() => {
         if (values.length > 0) {
@@ -66,7 +70,7 @@ const DatesSelection = () => {
             />
             <NavigationButtons
                 onBack={() => navigate('/people-count')}
-                onNext={() => navigate('/Region-Selection')}
+                onNext={handleOnNext}
                 onDisabled={isDisabled}
             />
         </motion.div>

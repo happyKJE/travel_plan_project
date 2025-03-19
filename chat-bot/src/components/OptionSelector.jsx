@@ -10,27 +10,27 @@
 import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import useStore from "../context/UseStore.jsx";
-import '../styles/OptionSelector.css'
+import '../styles/OptionSelector.css';
 
 const OptionSelector = ({ label, type, options }) => {
     const { state, dispatch } = useStore();
 
+    const initialSelected = state.inputValues[type] || "";
     // 선택된 옵션
-    const [selected, setSelected] = useState(state.inputValues[type] || null);
+    const [selected, setSelected] = useState(initialSelected);
     // 직접 입력한 값
-    const [inputValue, setInputValue] = useState(
-        state.inputValues[type] === "direct" ? state.inputValues[type] : ""
-    );
+    const [inputValue, setInputValue] = useState(initialSelected === "direct" ? "" : initialSelected);
 
     const handleOptionSelect = (value) => {
+        const selectedOption = options.find(option=>option.value===value).label;
         setSelected(value);
 
-        if (value === "direct") {
+        if (value !== "direct") {
+            dispatch({ type: "SET_OPTION", payload: { type, value:selectedOption } });
+        }else {
             setInputValue("");
-            value = '';
+            dispatch({ type: "SET_OPTION", payload: { type, value: "" } });
         }
-        dispatch({ type: "SET_OPTION", payload: { type, value } });
-
     };
 
     const handleInputChange = (e) => {
@@ -38,8 +38,9 @@ const OptionSelector = ({ label, type, options }) => {
     };
 
     const handleInputBlur = () => {
-        if (inputValue.trim() !== "") {
-            dispatch({ type: "SET_OPTION", payload: { type, value: inputValue } });
+        const trimmedValue = inputValue.trim();
+        if (trimmedValue) {
+            dispatch({ type: "SET_OPTION", payload: { type, value: trimmedValue } });
         }
     };
 
@@ -47,7 +48,7 @@ const OptionSelector = ({ label, type, options }) => {
         //선택 옵션 확인
         console.log(state.inputValues);
         console.log(state.inputValues[type]);
-    }, [state.inputValues, type]);
+    }, [state.inputValues]);
 
     return (
         <>
@@ -56,8 +57,8 @@ const OptionSelector = ({ label, type, options }) => {
                 {options.map((option) => (
                     <button
                         key={option.value}
-                        className={`circle-button ${selected === option.label ? "selected" : ""}`}
-                        onClick={() => handleOptionSelect(option.label)}
+                        className={`circle-button ${selected === option.value ? "selected" : ""}`}
+                        onClick={() => handleOptionSelect(option.value)}
                     >
                         {option.label}
                     </button>
