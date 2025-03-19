@@ -1,30 +1,31 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import '../styles/ChatBot.css';
 import useStore from "../context/UseStore.jsx";
-import {placeOptions, transportOptions} from "../data/OptionsData.jsx";
+import { placeOptions } from "../data/OptionsData.jsx";
 
 const ChatBot = () => {
     const [showPlane, setShowPlane] = useState(false);
-    const [activeChat, setActiveChat] = useState(false);
     const [messages, setMessages] = useState([]);
-    const {state} = useStore();
+    const [loading, setLoading] = useState(false); // 로딩 상태 추가
+    const { state } = useStore();
     const inputRef = useRef(null);
-    const placeOption = placeOptions.find(option => option.label === state.inputValues.placeOption).value;
+    const placeOption = placeOptions.find(option => option.label === state.inputValues.placeOption)?.value || 'nomatter';
     const backgroundImage = `/assets/${placeOption}Background.jfif`;
-    const initMessage = `2025년 03월 07일부터 2025년 03월 09일까지 ${state.inputValues.personnelOption}명이  ${state.inputValues.region}를 여행을 가.
-선호하는 지형은 ${state.inputValues.placeOption}이고, 이동수단은 ${state.inputValues.transportOption}이야.
-여행 스타일은 ${state.inputValues.travelSpeedOption === "nomatter" ? "상관없음" : state.inputValues.travelSpeedOption}이야.
-일정 추천해줘.`;
+    const initMessage = `${state.inputValues.selectedDates[0]}부터 ${state.inputValues.selectedDates[1]}까지 
+                                ${state.inputValues.personnelOption}명이  ${state.inputValues.region}를 여행을 가.
+                                선호하는 지형은 ${state.inputValues.placeOption}이고, 이동수단은 ${state.inputValues.transportOption}이야.
+                                여행 스타일은 ${state.inputValues.travelSpeedOption === "nomatter" ? "상관없음" : state.inputValues.travelSpeedOption}이야.
+                                일정 추천해줘.`;
 
     //실행 여부를 추적하는 변수
     let executed = false;
-
     useEffect(() => {
         if (!executed) {
             sendMessage(initMessage, false);
             executed = true;
         }
+
     }, []);
 
 
@@ -42,6 +43,8 @@ const ChatBot = () => {
 
     // ✈️ 비행기 애니메이션 시작
     setShowPlane(true);
+      setLoading(true); // 로딩 시작
+
     setTimeout(() => setShowPlane(false), 3000);
 
     // 사용자의 입력 메시지를 채팅창에 추가 (초기 메시지는 추가 X)
@@ -52,7 +55,7 @@ const ChatBot = () => {
         text: userMessage,
         timestamp: new Date().toLocaleDateString("ko-KR"),
       };
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      setMessages(prevMessages => [...prevMessages, newMessage]);
     }
 
     try {
@@ -64,7 +67,7 @@ const ChatBot = () => {
           Authorization: `Bearer ${import.meta.env.VITE_REACT_APP_CLIENT_ID}`,
         },
         body: JSON.stringify({
-            model: "gpt-3.5-turbo",
+          model: "gpt-3.5-turbo",
           messages: [
              { role: "system", content: "너는 여행 플래너야. 반드시 ✅1일차 (날짜 요일) 형식으로 오전, 오후, 저녁, 숙박 계획을 작성해. ✅를 기준으로 줄바꿈 해줘" },
              { role: "user", content: userMessage }
@@ -82,12 +85,12 @@ const ChatBot = () => {
         timestamp: new Date().toLocaleDateString("ko-KR"),
       };
 
-      // ✅ 새로운 응답 메시지를 추가
+      //새로운 응답 메시지를 추가
       setMessages((prevMessages) => [...prevMessages, botMessage]);
 
     } catch (error) {
       console.error("Error:", error);
-      setMessages((prevMessages) => [
+      setMessages(prevMessages => [
         ...prevMessages,
         {
           id: uuidv4(),
@@ -96,6 +99,8 @@ const ChatBot = () => {
           timestamp: new Date().toLocaleDateString("ko-KR"),
         },
       ]);
+    } finally {
+      setLoading(false); // 로딩 종료
     }
   };
 
@@ -115,13 +120,11 @@ const ChatBot = () => {
                             className={`message ${message.type === 'prompt' ? 'user-message' : 'bot-message'}`}
                         >
                             {message.text.split('\n').map((line, index) => (
-                                <React.Fragment key={index}>
-                                  {line}
-                                  <br />
-                                </React.Fragment>
+                                <React.Fragment key={index}>{line}<br /></React.Fragment>
                               ))}
                         </div>
                     ))}
+                    {loading && <div className="loading-indicator"></div>} {/* 로딩 인디케이터 추가 */}
                 </div>
 
                 <div className="chat-input-container">
