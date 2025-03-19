@@ -37,6 +37,27 @@
     margin-right: 7.5px;
 }
 
+.review-area-nickname {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.review-area-nickname h4{
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.nickname-field {
+    width: 89%;
+    margin: 5px;
+    padding: 7.5px;
+    font-size: 18px;
+    border-radius: 2rem;
+    border: none;
+}
+
 
 /*  내용 입력 영역 조정 */
 .review-area-content .content {

@@ -6,10 +6,13 @@ import submitIcon from "../assets/submit.png";
 
 const ReviewArea = () => {
   const [title, setTitle] = useState("");
+  const [nickname, setNickname] = useState("");
   const [content, setContent] = useState("");
+
   const contentRef = useRef(null);
   const fileInputRef = useRef(null);
   const titleRef = useRef(null);  // 제목 입력 필드 참조
+  const nicknameRef = useRef(null);  // 닉네임 입력 필드 참조
   const submitButtonRef = useRef(null); // 제출 버튼 참조
   const imgButtonRef = useRef(null);  // 이미지 추가 버튼 참조
 
@@ -17,6 +20,11 @@ const ReviewArea = () => {
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
+
+  // 닉네임 입력 핸들링
+  const handleNicknameChange = (e) => {
+    setNickname(e.target.value);
+  }
 
   // 내용 입력 핸들링 (줄바꿈을 <p> 태그로 변환)
   const handleContentChange = () => {
@@ -34,11 +42,17 @@ const ReviewArea = () => {
   const handleSubmit = () => {
     const reviewArray = [
       `<h2>${title}</h2>`, // 제목을 <h2>로 변환
+      `<h4>${nickname}</h4>`, // 닉네임을 <h4>로 변환
       content, // 내용은 이미 <p> 태그로 변환된 상태
     ];
 
     if (reviewArray[0] === "<h2></h2>") {
       alert("제목을 입력해주세요.");
+      return;
+    }
+
+    if (reviewArray[1] === "<h4></h4>"){
+      alert("닉네임을 입력해주세요.");
       return;
     }
 
@@ -84,11 +98,12 @@ const ReviewArea = () => {
 
   // input-review 영역 클릭 시 contentRef 포커스
   const handleContainerClick = (e) => {
-    // 제목, 이미지 추가 버튼, 제출 버튼을 클릭했을 때는 포커스를 설정하지 않음
+    // 제목, 닉네임, 이미지 추가 버튼, 제출 버튼을 클릭했을 때는 포커스를 설정하지 않음
     if (
       contentRef.current.contains(e.target) ||
       e.target === contentRef.current ||
       (titleRef.current && titleRef.current.contains(e.target)) ||
+      (nicknameRef.current && nicknameRef.current.contains(e.target)) ||
       (submitButtonRef.current && submitButtonRef.current.contains(e.target)) ||
       (imgButtonRef.current && imgButtonRef.current.contains(e.target))
     ) {
@@ -145,6 +160,18 @@ const ReviewArea = () => {
                   title="제출"
                 />
               </button>
+            </div>
+            <hr />
+            <div className="review-area-nickname">
+              <h4>닉네임: </h4>
+              <input 
+                type="text"
+                placeholder="닉네임을 입력해주세요." 
+                className="nickname-field"
+                value={nickname}
+                onChange={handleNicknameChange}
+                ref={nicknameRef} // 닉네임 ref 추가
+              />
             </div>
             <hr />
             <div className="review-area-content">
