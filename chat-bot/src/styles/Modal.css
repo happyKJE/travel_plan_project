@@ -21,11 +21,78 @@
     min-width: 700px;
     height: auto; /* 내용에 따라 자동 조정 */
     max-height: none; /* 최대 높이 제한 없음 */
-    overflow-y: hidden; /* 스크롤 숨김 */
-    background-color: #fff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     position: relative;
 }
 
+.modal-body {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    overflow-y: hidden; /* 스크롤 숨김 */
+
+}
+
+.modal-header {
+    display: flex;
+    background-color: transparent;
+
+}
+
+/* index-number 위치 조정 */
+.index-number {
+    top: 250px; /* 🔹 Modal 위쪽에 붙도록 조정 */
+    left: 0;  /* 🔹 Modal의 왼쪽 끝에 정렬 */
+    display: flex;
+    gap: 10px;
+    padding: 0px 10px;
+    background: transparent;
+    box-shadow: 0 - 8px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+}
+
+
+.index-number ul{
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tab {
+    color: white;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    padding: 10px;
+    transform-origin: bottom center; /* 🔹 아래쪽을 기준으로 변형 */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.active {
+    font-weight: bold;
+    color: white; /* 강조 색상 */
+    opacity: 1;
+    transform: scale(1.1); /* 🔹 위로만 확대 */
+    background-color: #1982c4;
+
+}
+
+.inactive {
+    opacity: 0.8; /* 투명도 조절 */
+    background-color: transparent;
+    color: gray;
+    background-color: white;
+
+}
+
+.to-first-page {
+    position: absolute;
+    right: 1.5rem;
+    padding: 5px;
+}
+
+.to-first-page-button {
+    padding: 4px;
+    background-color: white;
+    border: none;
+    font-size: 1rem;
+}

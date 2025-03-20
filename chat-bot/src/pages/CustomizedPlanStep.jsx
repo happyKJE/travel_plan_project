@@ -18,6 +18,8 @@ import NavigationButtons from "../components/NavigationButtons.jsx";
 const CustomizedPlanStep = () => {
     const navigate = useNavigate();
     const { state, dispatch } = useStore();
+    const isDisabled = !state.inputValues.placeOption
+    || !state.inputValues.transportOption || !state.inputValues.travelSpeedOption;
 
     return (
         <motion.div
@@ -56,6 +58,7 @@ const CustomizedPlanStep = () => {
                     navigate('/region-selection')
                 }}
                 onNext={()=>navigate('/chat')}
+                onDisabled={isDisabled}
             />
         </motion.div>
     );
