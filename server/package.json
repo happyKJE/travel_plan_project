@@ -1,0 +1,9 @@
+{
+  "name": "travel-planner-server",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@hono/node-server": "^1.13.8",
+    "hono": "^4.7.4"
+  }
+}
