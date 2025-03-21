@@ -37,24 +37,26 @@ const PlanSelection = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (state.planType)
-            navigate('/people-count')
+        if (state.planType === 'custom'){
+            navigate('/people-count')}
+        else if (state.planType === 'random'){
+            navigate('/dates-selection')}
     }, [state.planType]);
 
     return (
         <div className="plan-buttons">
             <Button
                 type="random-plan"
-                text="Random PLAN ▶"
+                text="여행지역 랜덤뽑기 ▶"
                 animationDelay={1.2}
                 onClick={() => { handlePlanSelect('random') }}
             />
 
             <Button
                 type="custom-plan"
-                text="Customized Travel PLAN ▶"
+                text="나만의 여행 꾸미기 ▶"
                 animationDelay={1.6}
-                onClick={() => handlePlanSelect('custom')}
+                onClick={() => { handlePlanSelect('custom') }}
             />
         </div>
     );

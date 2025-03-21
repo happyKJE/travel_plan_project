@@ -29,7 +29,7 @@ const DatesSelection = () => {
     };
 
     const handleOnNext = () => {
-        state.planType === 'custom'?navigate('/region-selection'):navigate('/plan-details/random')
+        state.planType === 'custom' ? navigate('/region-selection') : navigate('/plan-details/random')
     }
 
     // values가 변경될 때마다 최신 값을 dispatch에 반영

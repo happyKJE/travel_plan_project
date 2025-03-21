@@ -21,9 +21,6 @@ const PeopleCount = () => {
     const { state, dispatch } = useStore();
     const isDisabled = !state.inputValues.personnelOption;
 
-    console.log("isDisabled:", Boolean(isDisabled));
-
-
   return (
     <motion.div
       className="next-screen peopleCount"

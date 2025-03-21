@@ -9,7 +9,6 @@
 
 
 import React from 'react';
-import '../styles/ToFirstPageButton.css'
 import useStore from '../context/UseStore.jsx'; // 추가
 
 const ToFirstPageButton = ({ onFirstPage }) => {
