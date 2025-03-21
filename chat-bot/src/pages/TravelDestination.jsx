@@ -1,5 +1,5 @@
 /**
- * @file travelDestination.jsx
+ * @file TravelDestination.jsx
  * @description 맞춤형 여행을 위한 질문 옵션 표출 컨포넌트
  * @author jungeun
  * @created 2025-03-20
@@ -10,7 +10,7 @@
 import React from 'react';
 import '../styles/TravelDestination.css'
 
-const travelDestination = () => {
+const TravelDestination = () => {
 
     return (
         <section className="content-section">
@@ -20,4 +20,4 @@ const travelDestination = () => {
     );
 };
 
-export default travelDestination;
+export default TravelDestination;
