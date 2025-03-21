@@ -1,3 +1,12 @@
+/**
+ * @file RandomPlanStep.jsx
+ * @description chatbot 대화창
+ * @author jungeun
+ * @created 2025-03-21
+ * @lastModifiedBy jungeun
+ * @lastModifiedDate 2025-03-21
+ */
+
 import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import '../styles/ChatBot.css';
