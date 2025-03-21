@@ -17,7 +17,7 @@
  *    createContext :컴포넌트 간 props 없이 상태 공유 가능.
  */
 
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 //상태를 전역적으로 관리하기 위한 context 생성
@@ -30,6 +30,8 @@ const initialState = {
     chats: [],
     activeChatId: null,
 };
+
+const STORAGE_KEY = "travelAppState";
 
 const chatReducer = (state, action) => {
     switch (action.type) {

@@ -1,5 +1,5 @@
 .modal-content {
-    max-width: 800px;
+    max-width: 700px;
     padding: 0 ;
 }
 
@@ -7,8 +7,6 @@
 .app-container {
     height: 700px;
     display: flex;
-    /*background: linear-gradient(to bottom, #87CEFA, #FFFFFF); !* 하늘색 그라디언트 *!*/
-    /*background-image: url("../assets/islandBackground.jfif");*/
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

@@ -17,7 +17,7 @@ const OptionSelector = ({ label, type, options }) => {
 
     const initialSelected = state.inputValues[type] || "";
     // 선택된 옵션
-    const [selected, setSelected] = useState(initialSelected);
+    const [selected, setSelected] = useState(state.inputValues[type] || []);
     // 직접 입력한 값
     const [inputValue, setInputValue] = useState(initialSelected === "direct" ? "" : initialSelected);
 
@@ -52,7 +52,7 @@ const OptionSelector = ({ label, type, options }) => {
 
     return (
         <>
-            <h2>{label}을 선택하세요.</h2>
+            <h3 className='options-header'>{label}을 선택하세요.</h3>
             <div className="options-container">
                 {options.map((option) => (
                     <button
@@ -74,14 +74,22 @@ const OptionSelector = ({ label, type, options }) => {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
                     >
+                        <button className="number-btn" onClick={() => setInputValue(prev => Math.max(1, Number(prev) - 1))}>
+                            <img src='/assets/minus.png' alt='-' width={'10px'}/>
+                        </button>
                         <input
-                            type="number"
-                            placeholder={`${label}을 입력해주세요.`}
-                            className="custom-input"
-                            value={inputValue}
-                            onChange={handleInputChange}
-                            onBlur={handleInputBlur}
+                          type="number"
+                          className="custom-input"
+                          value={inputValue}
+                          onChange={handleInputChange}
+                          onBlur={handleInputBlur}
+                          placeholder={`${label} 수`}
+                          min={1}
                         />
+
+                        <button className="number-btn" onClick={() => setInputValue(prev => Number(prev) + 1)}>
+                            <img src='/assets/add.png' alt='+' width={'10px'}/>
+                        </button>
                     </motion.div>
                 )}
             </AnimatePresence>

@@ -1,11 +1,13 @@
-import React, { lazy, Suspense, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
+import React, {lazy, Suspense} from "react";
+import {BrowserRouter as Router, Routes, Route, Outlet, useNavigate} from "react-router-dom";
 import { ChatProvider } from "./context/UseContext.jsx";
 import Header from "./components/Header";
 import IntroSection from "./components/IntroSection";
 import Background from "./components/Background";
+import TravelDestination from "./pages/travelDestination";
 import Modal from "./components/Modal.jsx";
 import PlanSelection from "./pages/PlanSelection.jsx";
+import ReloadHandler from "./components/ReloadHandler.jsx";
 
 //laze : 컴포넌트를 동적으로 로드 => 필요할때만 호출. Suspense로 감싸지않으면 오류
 const PeopleCount = lazy(() => import("./pages/PeopleCount"));
@@ -32,6 +34,7 @@ const App = () => {
     return (
         <ChatProvider>
             <Router>
+                <ReloadHandler />
                 <Header/>
                 <main>
                     <IntroSection />
@@ -54,6 +57,7 @@ const App = () => {
                         </Routes>
                     </Suspense>
                     <Background />
+                    <TravelDestination />
                 </main>
                 <footer></footer>
             </Router>

@@ -10,13 +10,17 @@ const ChatBot = () => {
     const [loading, setLoading] = useState(false); // 로딩 상태 추가
     const { state } = useStore();
     const inputRef = useRef(null);
-    const placeOption = placeOptions.find(option => option.label === state.inputValues.placeOption)?.value || 'nomatter';
-    const backgroundImage = `/assets/${placeOption}Background.jfif`;
-    const initMessage = `${state.inputValues.selectedDates[0]}부터 ${state.inputValues.selectedDates[1]}까지 
-                                ${state.inputValues.personnelOption}명이  ${state.inputValues.region}를 여행을 가.
-                                선호하는 지형은 ${state.inputValues.placeOption}이고, 이동수단은 ${state.inputValues.transportOption}이야.
-                                여행 스타일은 ${state.inputValues.travelSpeedOption === "nomatter" ? "상관없음" : state.inputValues.travelSpeedOption}이야.
+    const placeData = placeOptions.find(option => option.label === state.inputValues.placeOption)?.value || 'nomatter';
+    const backgroundImage = `/assets/${placeData}Background.jfif`;
+    const { selectedDates, personnelOption, region, placeOption, transportOption, travelSpeedOption } = state.inputValues;
+
+    const initMessage = `${selectedDates[0]}${selectedDates[1] ? `부터 ${selectedDates[1]}까지` : ''}
+                                ${personnelOption}명이 ${region}를 여행을 가.
+                                선호하는 지형은 ${placeOption}이고, 이동수단은 ${transportOption}이야.
+                                여행 스타일은 ${travelSpeedOption === "nomatter" ? "상관없음" : travelSpeedOption}이야.
                                 일정 추천해줘.`;
+
+
 
     //실행 여부를 추적하는 변수
     let executed = false;
@@ -69,7 +73,7 @@ const ChatBot = () => {
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
           messages: [
-             { role: "system", content: "너는 여행 플래너야. 반드시 ✅1일차 (날짜 요일) 형식으로 오전, 오후, 저녁, 숙박 계획을 작성해. ✅를 기준으로 줄바꿈 해줘" },
+             { role: "system", content: "너는 여행 플래너야. 반드시 ✅1일차 (날짜, 차수) 형식으로 오전, 오후, 저녁, 숙박 계획을 작성해. ✅를 기준으로 줄바꿈 해줘" },
              { role: "user", content: userMessage }
          ],
           max_tokens: 1000,
@@ -124,7 +128,7 @@ const ChatBot = () => {
                               ))}
                         </div>
                     ))}
-                    {loading && <div className="loading-indicator"></div>} {/* 로딩 인디케이터 추가 */}
+                    {loading && <div className="loading-indicator"><i className='bx bxs-plane-alt'></i></div>} {/* 로딩 인디케이터 추가 */}
                 </div>
 
                 <div className="chat-input-container">

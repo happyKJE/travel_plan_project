@@ -4,12 +4,12 @@ var simplemaps_countrymap_mapdata={
     width: "responsive", //'700' or 'responsive'
     background_color: "#FFFFFF",
     background_transparent: "no",
-    border_color: "#A9A9A9",
+    border_color: "#5B8FD8",
     
     //State defaults
     state_description: "State description",
-    state_color: "#87CEEB",
-    state_hover_color: "#1E90FF",
+    state_color: "#A9D3F5",
+    state_hover_color: "#3A82E1",
     state_url: "",
     border_size: 1,
     all_states_inactive: "no",

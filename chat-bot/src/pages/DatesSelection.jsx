@@ -3,49 +3,80 @@
  * @description 지도 기능 추가
  * @author jaeyeol
  * @created 2025-03-13
- * @lastModifiedBy jaeyeol
- * @lastModifiedDate 2025-03-14
+ * @lastModifiedBy jungeun
+ * @lastModifiedDate 2025-03-20
  */
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calendar } from "react-multi-date-picker";
-import moment from "moment"; // 날짜 처리를 위한 moment 라이브러리 추가
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/style.css';
 import useStore from "../context/UseStore.jsx";
 import NavigationButtons from "../components/NavigationButtons.jsx";
-import "../styles/DatesSelection.css"; // 추가한 CSS 파일을 불러오기
+import "../styles/DatesSelection.css";
 
 const DatesSelection = () => {
-    const navigate = useNavigate();
     const { state, dispatch } = useStore();
-    const [values, setValues] = useState(state.inputValues?.selectedDates || []);
-    const isDisabled = values.length === 0;
+    const navigate = useNavigate();
 
-    // 날짜 변경 이벤트 핸들러
-    const handleDateChange = (dates) => {
-        const formattedDates = dates.map(date => date.format("YYYY-MM-DD"));
-        setValues(formattedDates); // 상태 업데이트
-    };
+    const [values, setValues] = useState(() => {
+        const savedDates = state.inputValues?.selectedDates;
+        return savedDates && savedDates.length === 2
+            ? { from: new Date(savedDates[0]), to: new Date(savedDates[1]) }
+            : { from: undefined, to: undefined };
+    });
 
-    const handleOnNext = () => {
-        state.planType === 'custom' ? navigate('/region-selection') : navigate('/plan-details/random')
-    }
+    const isDisabled = !(values.from && values.to);
 
-    // values가 변경될 때마다 최신 값을 dispatch에 반영
+    //날짜 저장
     useEffect(() => {
-        if (values.length > 0) {
-            dispatch({
-                type: "SET_OPTION",
-                payload: { type: "selectedDates", value: values }
-            });
+    if (!state.inputValues.selectedDate && values.from && values.to) {
+      dispatch({
+        type: "SET_OPTION",
+        payload: {
+          type: "selectedDates",
+          value: [
+            values.from.toISOString(),
+            values.to.toISOString()
+          ]
         }
-    }, [values]); // values가 변경될 때 실행
+      });
+    }
+    }, [values]);
 
     useEffect(() => {
         console.log("Global state updated:", state);
     }, [state]);
 
+    //날짜 선택 범위 제한
+    const handleSelect = (range) => {
+        if (!range) return;
+
+        // 같은 날짜 두 번 클릭 시 range.to 초기화 (or 단일 선택 처리)
+        if (range.from && range.to && range.from.getTime() === range.to.getTime()) {
+            setValues({ from: range.from, to: range.from });  // 같은 날짜 두 번 클릭해도 유지
+            return;
+        }
+
+        // 최대 10일 제한
+        if (range?.from && range?.to) {
+            const diff = (range.to - range.from) / (1000 * 60 * 60 * 24);
+            if (diff > 10) {
+                setShowAlert(true);
+                return;
+            }
+        }
+        setValues(range);
+    };
+
+    const handleOnNext = () => {
+        navigate(state.planType === 'custom' ? '/region-selection' : '/plan-details/random');
+      };
+
+    const footer = values?.from && values?.to
+        ? `여행 기간: ${values.from.toLocaleDateString('ko-KR')} ~ ${values.to.toLocaleDateString('ko-KR')}`
+        : '여행 시작일과 종료일을 선택하세요.';
     return (
         <motion.div
             className="next-screen"
@@ -53,21 +84,27 @@ const DatesSelection = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
         >
-            <h2>기간을 선택하세요</h2>
-            <Calendar
-                value={values}
-                onChange={handleDateChange}
-                range
-                numberOfMonths={2}
-                showOtherDays
-                format="YYYY-MM-DD" // 날짜 형식도 한글 적용
-                weekDays={["일", "월", "화", "수", "목", "금", "토"]} // 요일 한글 적용
-                months={[
-                    "1월", "2월", "3월", "4월", "5월", "6월",
-                    "7월", "8월", "9월", "10월", "11월", "12월"
-                ]} // 월 한글 적용
-                minDate={moment().format("YYYY-MM-DD")} // 오늘 날짜부터 선택 가능하게 설정
-            />
+            <h2 className='option-header'>기간은 어떻게 되시나요?</h2>
+            <div className="calendar-container">
+                <DayPicker
+                    mode="range"
+                    selected={values}
+                    onSelect={handleSelect}
+                    numberOfMonths={2}
+                    pagedNavigation
+                    weekStartsOn={0} // 일요일 시작
+                     modifiersClassNames={{
+                      selected: 'my-selected',
+                      today: 'my-today',
+                      range_middle: 'my-range-middle'
+                    }}
+                     formatters={{
+                      formatCaption: (date) => `${date.getFullYear()}년 ${date.getMonth() + 1}월`,
+                      formatWeekdayName: (day) => ['일', '월', '화', '수', '목', '금', '토'][day.getDay()],
+                    }}
+                    footer={footer}
+                />
+            </div>
             <NavigationButtons
                 onBack={() => navigate('/people-count')}
                 onNext={handleOnNext}

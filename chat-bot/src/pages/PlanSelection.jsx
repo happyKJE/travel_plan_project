@@ -56,7 +56,7 @@ const PlanSelection = () => {
                 type="custom-plan"
                 text="나만의 여행 꾸미기 ▶"
                 animationDelay={1.6}
-                onClick={() => { handlePlanSelect('custom') }}
+                onClick={() => handlePlanSelect('custom')}
             />
         </div>
     );
