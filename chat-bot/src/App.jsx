@@ -1,10 +1,10 @@
 import React, {lazy, Suspense} from "react";
-import {BrowserRouter as Router, Routes, Route, Outlet, useNavigate} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Outlet} from "react-router-dom";
 import { ChatProvider } from "./context/UseContext.jsx";
 import Header from "./components/Header";
 import IntroSection from "./components/IntroSection";
 import Background from "./components/Background";
-import TravelDestination from "./pages/travelDestination";
+import TravelDestination from "./pages/TravelDestination";
 import Modal from "./components/Modal.jsx";
 import PlanSelection from "./pages/PlanSelection.jsx";
 import ReloadHandler from "./components/ReloadHandler.jsx";
