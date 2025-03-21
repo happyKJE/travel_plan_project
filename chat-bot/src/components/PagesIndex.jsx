@@ -1,69 +1,49 @@
-/**
- * @file IntroSection.jsx
- * @description 공통 메인화면 인트로 문구
- * @author jaeyeol
- * @created 2025-03-11
- * @lastModifiedBy jaeyeol
- * @lastModifiedDate 2025-03-11
- */
-
-import React from 'react'
+// PagesIndex.jsx
+import React from 'react';
 import useStore from '../context/UseStore.jsx';
 import { motion } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const PagesIndex = () => {
     const { state } = useStore();
-    const navigate = useNavigate();
-    const location = useLocation(); // 현재 라우트 정보 가져오기
+    const location = useLocation();
 
     return (
-        <motion.div 
-            key={location.pathname} // 🔹 라우트 변경 시 새로운 요소로 인식되도록 설정
-            className='index-number'
+        <motion.div
+            key={location.pathname}
+            className='steps-container'
             initial={{ y: 0, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.8 }}
         >
-            {state.planType === 'custom' ? (
-                <ul>
-                    <li 
-                        className={`tab ${location.pathname === '/people-count' ? 'active' : 'inactive'}`} 
-                    >
-                        1. 인원
-                    </li>
-                    <li 
-                        className={`tab ${location.pathname === '/dates-selection' ? 'active' : 'inactive'}`} 
-                    >
-                        2. 일정
-                    </li>
-                    <li 
-                        className={`tab ${location.pathname === '/region-selection' ? 'active' : 'inactive'}`} 
-                    >
-                        3. 지역
-                    </li>
-                    <li 
-                        className={`tab ${location.pathname === '/plan-details/custom' ? 'active' : 'inactive'}`} 
-                    >
-                        4. 여행스타일
-                    </li>
-                </ul>
-            ) : state.planType === 'random' ? (
-                <ul>
-                    <li 
-                        className={`tab ${location.pathname === '/dates-selection' ? 'active' : 'inactive'}`} 
-                    >
-                        1. 일정
-                    </li>
-                    <li 
-                        className={`tab ${location.pathname === '/plan-details/random' ? 'active' : 'inactive'}`} 
-                    >
-                        2. 돌림판
-                    </li>
-                </ul>
-            ) : null}
+            <ul className="index-number">
+                {state.planType === 'custom' && (
+                    <>
+                        <StepItem step="1" label="인원" path="/people-count" currentPath={location.pathname} />
+                        <StepItem step="2" label="일정" path="/dates-selection" currentPath={location.pathname} />
+                        <StepItem step="3" label="지역" path="/region-selection" currentPath={location.pathname} />
+                        <StepItem step="4" label="여행스타일" path="/plan-details/custom" currentPath={location.pathname} />
+                    </>
+                )}
+                {state.planType === 'random' && (
+                    <>
+                        <StepItem step="1" label="일정" path="/dates-selection" currentPath={location.pathname} />
+                        <StepItem step="2" label="돌림판" path="/plan-details/random" currentPath={location.pathname} />
+                    </>
+                )}
+            </ul>
         </motion.div>
-    )
-}
+    );
+};
+
+const StepItem = ({ step, label, path, currentPath }) => {
+    const isActive = currentPath === path;
+    return (
+        <li className={`tab ${isActive ? 'active' : ''}`}>
+            <div className="step-circle">{step}</div>
+            <span className="step-label">{label}</span>
+        </li>
+    );
+};
 
 export default PagesIndex;

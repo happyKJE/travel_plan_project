@@ -61,7 +61,7 @@ const RandomPlanStep = () => {
     useEffect(() => {
         console.log("Global state updated:", state);
     }, [state]);
-    
+
 
     return (
         <motion.div
@@ -72,14 +72,14 @@ const RandomPlanStep = () => {
         >
             <h2>나오는대로 가실꺼죠?</h2>
             {rouletteOptions.length > 0 && (
-                <Wheel 
+                <Wheel
                     mustStartSpinning={mustSpin}
                     prizeNumber={prizeNumber}
                     data={rouletteOptions}
                     onStopSpinning={handleStopSpinning}
                 />
                 )}
-            <button 
+            <button
                 onClick={handleSpinClick}
                 disabled={mustSpin}
             >

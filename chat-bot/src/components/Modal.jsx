@@ -14,22 +14,24 @@ import ToFirstPageButton from './ToFirstPageButton';
 import { useNavigate } from 'react-router-dom';
 import useStore from '../context/UseStore.jsx';
 import PagesIndex from './PagesIndex.jsx';
+import { motion } from 'framer-motion';
 
 const Modal = ({ children }) => {
     const navigate = useNavigate();
     const { dispatch } = useStore(); // 추가
 
     return (
+
         <div className="modal-overlay">
             <div className="modal-content">
                 <div className='modal-header'>
                     <PagesIndex/>
+                </div>
+                <div className='modal-body'>
                     <ToFirstPageButton onFirstPage={() => {
                         dispatch({ type: 'SELECT_PLAN', payload: null }); // 오류 해결
                         navigate('/plan-selection'); // 첫 페이지로 이동
                     }} />
-                </div>
-                <div className='modal-body'>
                     {children}
                 </div>
             </div>

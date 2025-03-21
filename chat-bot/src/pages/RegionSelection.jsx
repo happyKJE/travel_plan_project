@@ -81,8 +81,8 @@ const RegionSelection = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1 }}
       >
-        <h2>어디로 가볼까요?</h2>
-        <p>(최대 3개 지역 선택 가능)</p>
+        <h2 className='option-header'>어디로 가볼까요?</h2>
+        <p style={{color:"gray",textDecorationLine:"underline"}}>(최대 3개 지역 선택 가능)</p>
         <div id="map"></div>
         <NavigationButtons onBack={() => navigate('/dates-selection')} onNext={handleOnNext} />
       </motion.div>

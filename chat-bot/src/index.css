@@ -3,6 +3,29 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* 전체 스크롤바 디자인 */
+::-webkit-scrollbar {
+    width: 10px;   /* 세로 스크롤바 */
+    height: 8px;   /* 가로 스크롤바 */
+}
+
+/* 스크롤바 트랙 (배경) */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+/* 스크롤바 핸들 (움직이는 부분) */
+::-webkit-scrollbar-thumb {
+    background-color: rgba(202, 216, 234, 0.74);
+    border-radius: 10px;
+    border: 2px solid #f1f1f1;  /* 핸들 외곽선 효과 */
+}
+
+/* 스크롤바 핸들 hover 효과 */
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(183, 213, 255, 0.79);
+}
 
 .next-screen {
   position: relative;  /* 상황에 따라 fixed나 relative로 조정 */
@@ -20,6 +43,11 @@
   gap: 1rem;
 }
 
+.option-header {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+}
+
 /* 각 버튼 타입 */
 .navigation-buttons {
     width: 100%;
@@ -28,21 +56,41 @@
 }
 
 .to-back, .to-next {
-    background-color: rgb(82, 209, 255);
     font-family: 'Gowun Batang', serif;
-    color: white;
+    background-color: #9ecfff;
+    color: #ffffff;
     border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(158, 207, 255, 0.5);
 }
 
-.to-back, .to-next:hover {
-    opacity: 0.8;
-    box-shadow: none;
-    cursor: pointer;
-
+.to-back:hover, .to-next:hover {
+    background-color: #6db4ff;
+    transform: translateY(1px);
+    box-shadow: 0 6px 12px rgba(109, 180, 255, 0.5);
 }
 
 .to-next:disabled {
     opacity: 0.4;
     box-shadow: none;
-    cursor: auto;
+    background-color: #cccccc;
+    cursor: default;
+    transform: none;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.to-back:active, .to-next:active {
+    transform: translateY(1px);
+    box-shadow: 0 6px 12px rgba(109, 180, 255, 0.5);
 }

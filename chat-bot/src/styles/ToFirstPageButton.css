@@ -1,0 +1,29 @@
+.to-first-page {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    z-index: 1001; /* 다른 요소들 위에 표시 */
+}
+.to-first-page-button{
+    background-color: #71b0ff85;
+    color: #333;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.to-first-page-button:hover {
+    background-color: #e74c3c;
+    color: #fff;
+    transform: rotate(90deg);
+    box-shadow: 0 3px 8px rgba(231, 76, 60, 0.4);
+}
