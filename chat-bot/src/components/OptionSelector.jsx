@@ -14,7 +14,6 @@ import '../styles/OptionSelector.css';
 
 const OptionSelector = ({ label, type, options }) => {
     const { state, dispatch } = useStore();
-
     const initialSelected = state.inputValues[type] || "";
     // 선택된 옵션
     const [selected, setSelected] = useState(state.inputValues[type] || []);

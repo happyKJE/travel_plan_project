@@ -37,10 +37,12 @@ const PlanSelection = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (state.planType === 'custom'){
-            navigate('/people-count')}
-        else if (state.planType === 'random'){
-            navigate('/dates-selection')}
+        if (state.planType === 'custom') {
+            navigate('/people-count')
+        }
+        else if (state.planType === 'random') {
+            navigate('/dates-selection')
+        }
     }, [state.planType]);
 
     return (

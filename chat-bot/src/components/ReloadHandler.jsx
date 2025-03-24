@@ -1,6 +1,6 @@
 // 새로고침 감지 컴포넌트 따로 분리
-import {useLocation, useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function ReloadHandler() {
     const navigate = useNavigate();

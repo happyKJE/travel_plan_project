@@ -19,7 +19,7 @@ const Background = () => {
       const scrollY = window.scrollY;
       if (bgRef.current) {
         // 0.5로 속도 조절
-        bgRef.current.style.transform = `translateY(${scrollY*0.5}px)`;
+        bgRef.current.style.transform = `translateY(${scrollY * 0.5}px)`;
       }
     };
 
@@ -32,13 +32,13 @@ const Background = () => {
   }, []);
 
   return (
-      <motion.div
-          initial={{ y: -100, opacity: 1 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1.5, ease: "easeInOut" }}
-          className="background-container"
-          id="background" ref={bgRef}
-      />
+    <motion.div
+      initial={{ y: -150, opacity: 1 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 0.5, duration: 1.5, ease: "easeInOut" }}
+      className="background-container"
+      id="background" ref={bgRef}
+    />
   );
 };
 

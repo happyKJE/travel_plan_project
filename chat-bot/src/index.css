@@ -1,12 +1,15 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 /* 전체 스크롤바 디자인 */
 ::-webkit-scrollbar {
-    width: 10px;   /* 세로 스크롤바 */
-    height: 8px;   /* 가로 스크롤바 */
+    width: 10px;
+    /* 세로 스크롤바 */
+    height: 8px;
+    /* 가로 스크롤바 */
 }
 
 /* 스크롤바 트랙 (배경) */
@@ -19,7 +22,8 @@
 ::-webkit-scrollbar-thumb {
     background-color: rgba(202, 216, 234, 0.74);
     border-radius: 10px;
-    border: 2px solid #f1f1f1;  /* 핸들 외곽선 효과 */
+    border: 2px solid #f1f1f1;
+    /* 핸들 외곽선 효과 */
 }
 
 /* 스크롤바 핸들 hover 효과 */
@@ -28,19 +32,21 @@
 }
 
 .next-screen {
-  position: relative;  /* 상황에 따라 fixed나 relative로 조정 */
-  top: 30%;
-  left: 0;
-  width: 100%;
-  height: 70%;
-  background-color: rgba(255, 255, 255, 0.8); /* 반투명 배경 예시 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
-  gap: 1rem;
+    position: relative;
+    /* 상황에 따라 fixed나 relative로 조정 */
+    top: 30%;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* 반투명 배경 예시 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 1rem;
 }
 
 .option-header {
@@ -55,7 +61,8 @@
     justify-content: space-between;
 }
 
-.to-back, .to-next {
+.to-back,
+.to-next {
     font-family: 'Gowun Batang', serif;
     background-color: #9ecfff;
     color: #ffffff;
@@ -68,7 +75,8 @@
     box-shadow: 0 4px 8px rgba(158, 207, 255, 0.5);
 }
 
-.to-back:hover, .to-next:hover {
+.to-back:hover,
+.to-next:hover {
     background-color: #6db4ff;
     transform: translateY(1px);
     box-shadow: 0 6px 12px rgba(109, 180, 255, 0.5);
@@ -90,7 +98,8 @@
     margin-top: 20px;
 }
 
-.to-back:active, .to-next:active {
+.to-back:active,
+.to-next:active {
     transform: translateY(1px);
     box-shadow: 0 6px 12px rgba(109, 180, 255, 0.5);
 }

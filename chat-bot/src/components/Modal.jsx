@@ -25,12 +25,12 @@ const Modal = ({ children }) => {
         <div className="modal-overlay">
             <div className="modal-content">
                 <div className='modal-header'>
-                    <PagesIndex/>
+                    {<PagesIndex />}
                 </div>
                 <div className='modal-body'>
                     <ToFirstPageButton onFirstPage={() => {
                         dispatch({ type: 'SELECT_PLAN', payload: null }); // 오류 해결
-                        navigate('/plan-selection'); // 첫 페이지로 이동
+                        navigate('/plan-selection', { state: { fromModal: true } });
                     }} />
                     {children}
                 </div>

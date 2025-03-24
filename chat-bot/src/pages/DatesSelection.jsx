@@ -31,18 +31,18 @@ const DatesSelection = () => {
 
     //날짜 저장
     useEffect(() => {
-    if (!state.inputValues.selectedDate && values.from && values.to) {
-      dispatch({
-        type: "SET_OPTION",
-        payload: {
-          type: "selectedDates",
-          value: [
-            values.from.toISOString(),
-            values.to.toISOString()
-          ]
+        if (!state.inputValues.selectedDate && values.from && values.to) {
+            dispatch({
+                type: "SET_OPTION",
+                payload: {
+                    type: "selectedDates",
+                    value: [
+                        values.from.toISOString(),
+                        values.to.toISOString()
+                    ]
+                }
+            });
         }
-      });
-    }
     }, [values]);
 
     useEffect(() => {
@@ -72,7 +72,7 @@ const DatesSelection = () => {
 
     const handleOnNext = () => {
         navigate(state.planType === 'custom' ? '/region-selection' : '/plan-details/random');
-      };
+    };
 
     const footer = values?.from && values?.to
         ? `여행 기간: ${values.from.toLocaleDateString('ko-KR')} ~ ${values.to.toLocaleDateString('ko-KR')}`
@@ -93,14 +93,15 @@ const DatesSelection = () => {
                     numberOfMonths={2}
                     pagedNavigation
                     weekStartsOn={0} // 일요일 시작
-                     modifiersClassNames={{
-                      selected: 'my-selected',
-                      today: 'my-today',
-                      range_middle: 'my-range-middle'
+                    disabled={{ before: new Date() }}
+                    modifiersClassNames={{
+                        selected: 'my-selected',
+                        today: 'my-today',
+                        range_middle: 'my-range-middle'
                     }}
-                     formatters={{
-                      formatCaption: (date) => `${date.getFullYear()}년 ${date.getMonth() + 1}월`,
-                      formatWeekdayName: (day) => ['일', '월', '화', '수', '목', '금', '토'][day.getDay()],
+                    formatters={{
+                        formatCaption: (date) => `${date.getFullYear()}년 ${date.getMonth() + 1}월`,
+                        formatWeekdayName: (day) => ['일', '월', '화', '수', '목', '금', '토'][day.getDay()],
                     }}
                     footer={footer}
                 />
