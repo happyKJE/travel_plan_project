@@ -12,14 +12,14 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useStore from '../context/UseStore.jsx';
 import OptionSelector from "../components/OptionSelector.jsx";
-import { placeOptions, travelSpeedOptions, transportOptions } from '../data/OptionsData'
+import { placeOptions, travelStyleOptions, transportOptions } from '../data/OptionsData'
 import NavigationButtons from "../components/NavigationButtons.jsx";
 
 const CustomizedPlanStep = () => {
     const navigate = useNavigate();
     const { state, dispatch } = useStore();
     const isDisabled = !state.inputValues.placeOption
-    || !state.inputValues.transportOption || !state.inputValues.travelSpeedOption;
+    || !state.inputValues.transportOption || !state.inputValues.travelStyleOptions;
 
     return (
         <motion.div
@@ -32,8 +32,8 @@ const CustomizedPlanStep = () => {
 
             <OptionSelector
                 label={"여행스타일"}
-                type={"travelSpeedOption"}
-                options={travelSpeedOptions}
+                type={"travelStyleOptions"}
+                options={travelStyleOptions}
                 selected={state.inputValues.speed}
             />
             <OptionSelector

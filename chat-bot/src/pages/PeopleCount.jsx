@@ -21,14 +21,14 @@ const PeopleCount = () => {
     const { state, dispatch } = useStore();
     const isDisabled = !state.inputValues.personnelOption;
 
-  return (
-    <motion.div
-      className="next-screen peopleCount"
-      initial={{ y: 50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      <h2 className='option-header'>몇 명이서 가시나요?</h2>
+    return (
+        <motion.div
+            className="next-screen peopleCount"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+        >
+            <h2>몇 명이서 가시나요?</h2>
 
             <OptionSelector
                 label={"인원"}

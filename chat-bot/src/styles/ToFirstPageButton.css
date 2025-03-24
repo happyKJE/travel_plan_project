@@ -2,9 +2,11 @@
     position: absolute;
     top: 0.5rem;
     right: 1rem;
-    z-index: 1001; /* 다른 요소들 위에 표시 */
+    z-index: 1001;
+    /* 다른 요소들 위에 표시 */
 }
-.to-first-page-button{
+
+.to-first-page-button {
     background-color: #71b0ff85;
     color: #333;
     border: none;
