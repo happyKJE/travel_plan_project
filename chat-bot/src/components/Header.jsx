@@ -25,36 +25,36 @@ const Header = () => {
     return (
         <header className="header">
             <div className="logo">
-                <img src={logoImg} width="100px" alt="로고" />
+                <img src={logoImg} width="100px" alt="로고" onClick={() => navigate("/")} />
             </div>
             <nav ref={navRef} onMouseLeave={handleMouseLeave}>
-                 <ul className="mainmenu">
-                      <li
+                <ul className="mainmenu">
+                    <li
                         onMouseEnter={handleMouseEnter}
                         onClick={() => navigate("/")}
-                      >홈</li>
+                    >홈</li>
 
-                      <li
+                    <li
                         onMouseEnter={handleMouseEnter}
                         onClick={() => navigate("/travelReviews")}
                         className="review-link"
-                      >여행 후기</li>
+                    >여행 후기</li>
 
-                      <li
+                    <li
                         onMouseEnter={handleMouseEnter}
                         onClick={() => navigate("/")}
-                      >2조화이팅</li>
+                    >2조화이팅</li>
                 </ul>
 
-                    {/* 움직이는 hover bar */}
-                    <div
-                      ref={hoverLineRef}
-                      className="hover-line"
-                      style={{
+                {/* 움직이는 hover bar */}
+                <div
+                    ref={hoverLineRef}
+                    className="hover-line"
+                    style={{
                         width: `${lineStyle.width}px`,
                         left: `${lineStyle.left}px`
-                      }}
-                    />
+                    }}
+                />
             </nav>
         </header>
     );

@@ -14,26 +14,35 @@ import '../styles/OptionSelector.css';
 
 const OptionSelector = ({ label, type, options }) => {
     const { state, dispatch } = useStore();
-
     const initialSelected = state.inputValues[type] || "";
     // 선택된 옵션
-    const [selected, setSelected] = useState(state.inputValues[type] || []);
+    const [selected, setSelected] = useState(initialSelected);
     // 직접 입력한 값
     const [inputValue, setInputValue] = useState(initialSelected === "direct" ? "" : initialSelected);
 
     const handleOptionSelect = (value) => {
-        const selectedOption = options.find(option=>option.value===value).label;
+        const selectedOption = options.find(option => option.value === value).label;
         setSelected(value);
 
         if (value !== "direct") {
-            dispatch({ type: "SET_OPTION", payload: { type, value:selectedOption } });
-        }else {
+            dispatch({ type: "SET_OPTION", payload: { type, value: selectedOption } });
+        } else {
             setInputValue("");
             dispatch({ type: "SET_OPTION", payload: { type, value: "" } });
         }
     };
 
     const handleInputChange = (e) => {
+        // const peopleCount = e.target.value
+        // console.log(peopleCount)
+        if (e.target.value > 20) {
+            alert("20명 이하로 입력해주세요.");
+            e.target.value = "";
+        }
+        else if (e.target.value < 0) {
+            alert("정확한 인원수를 입력해주세요.");
+            e.target.value = "";
+        }
         setInputValue(e.target.value);
     };
 
@@ -75,20 +84,19 @@ const OptionSelector = ({ label, type, options }) => {
                         transition={{ duration: 0.3 }}
                     >
                         <button className="number-btn" onClick={() => setInputValue(prev => Math.max(1, Number(prev) - 1))}>
-                            <img src='/assets/minus.png' alt='-' width={'10px'}/>
+                            <img src='/assets/minus.png' alt='-' width={'10px'} />
                         </button>
                         <input
-                          type="number"
-                          className="custom-input"
-                          value={inputValue}
-                          onChange={handleInputChange}
-                          onBlur={handleInputBlur}
-                          placeholder={`${label} 수`}
-                          min={1}
+                            type="number"
+                            placeholder={`${label}을 입력해주세요.`}
+                            className="custom-input"
+                            value={inputValue}
+                            onChange={handleInputChange}
+                            onBlur={handleInputBlur}
                         />
 
                         <button className="number-btn" onClick={() => setInputValue(prev => Number(prev) + 1)}>
-                            <img src='/assets/add.png' alt='+' width={'10px'}/>
+                            <img src='/assets/add.png' alt='+' width={'10px'} />
                         </button>
                     </motion.div>
                 )}

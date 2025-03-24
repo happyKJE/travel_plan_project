@@ -1,0 +1,26 @@
+/* Button 기본 스타일 */
+button {
+  padding: 15px 25px;
+  width: 250px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.411);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 각 버튼 타입 */
+.custom-plan {
+  background-color: lightblue;
+}
+
+.random-plan {
+  background-color: skyblue;
+}
+
+button:hover {
+  opacity: 0.8;
+  box-shadow: none;
+}

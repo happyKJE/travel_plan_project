@@ -1,8 +1,10 @@
 
-export const travelSpeedOptions = [
-    { label: "느릿느릿", value: "slowtravel" },
-    { label: "빨리빨리", value: "fasttravel" },
-    { label: "상관없음", value: "nomatter" },
+export const travelStyleOptions = [
+    { label: "여유롭게", value: "relaxed" },
+    { label: "부지런히", value: "active" },
+    { label: "식도락", value: "foodie" },
+    { label: "문화중심", value: "cultural" },
+    { label: "랜덤", value: "nomatter" },
 ];
 
 export const placeOptions = [
@@ -16,7 +18,6 @@ export const placeOptions = [
 export const transportOptions = [
     { label: "자동차", value: "car" },
     { label: "대중교통", value: "public" },
-    { label: "뚜벅이", value: "walk" },
     { label: "상관없음", value: "nomatter" },
 ];
 

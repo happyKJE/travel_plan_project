@@ -2,9 +2,11 @@
 .travel-reviews {
     width: 800px;
     padding: 20px;
-    height: 80vh; /*  최대 높이로 고정 */
+    height: 80vh;
+    /*  최대 높이로 고정 */
     display: flex;
-    flex-direction: column; /*  내부 요소 정렬 */
+    flex-direction: column;
+    /*  내부 요소 정렬 */
 }
 
 /* 리스트 스타일 */
@@ -58,10 +60,12 @@
     font-size: 20px;
     font-weight: bold;
 }
+
 .review-header-buttons {
     display: flex;
     gap: 10px;
 }
+
 /*  글쓰기 버튼 & 뒤로 가기 버튼 (공통 스타일) */
 .write-btn,
 .back-btn {

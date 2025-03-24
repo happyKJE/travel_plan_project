@@ -1,5 +1,6 @@
 import React, {lazy, Suspense} from "react";
 import {BrowserRouter as Router, Routes, Route, Outlet} from "react-router-dom";
+
 import { ChatProvider } from "./context/UseContext.jsx";
 import Header from "./components/Header";
 import IntroSection from "./components/IntroSection";
@@ -35,7 +36,7 @@ const App = () => {
         <ChatProvider>
             <Router>
                 <ReloadHandler />
-                <Header/>
+                <Header />
                 <main>
                     <IntroSection />
                     <Suspense fallback={<div>Loading...</div>}>

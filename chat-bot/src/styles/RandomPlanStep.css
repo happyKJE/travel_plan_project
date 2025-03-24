@@ -1,0 +1,12 @@
+.Roulette-box {
+    display: flex;
+}
+
+.roulette-type {
+    display: grid;
+    align-items: center;
+}
+
+.roulette-type button {
+    height: 150px;
+}

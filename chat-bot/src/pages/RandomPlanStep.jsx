@@ -7,46 +7,75 @@
  * @lastModifiedDate 2025-03-20
  */
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Wheel } from 'react-custom-roulette'
 import useStore from "../context/UseStore.jsx";
+import '../styles/RandomPlanStep.css'
 import NavigationButtons from "../components/NavigationButtons.jsx";
-import locations from '../data/locationsData.js';
+import { locations, islands, cultural } from '../data/randomLocations.js';
 
 const RandomPlanStep = () => {
     const navigate = useNavigate();
     const { state, dispatch } = useStore();
+
     const [mustSpin, setMustSpin] = useState(false);
     const [prizeNumber, setPrizeNumber] = useState(0);
     const [rouletteOptions, setRouletteOptions] = useState([]);
+    const [mode, setMode] = useState("location");
+
     const isDisabled = !state.inputValues.region;
 
-    const getRandomLocations = () => {
-        const shuffled = [...locations].sort(() => 0.5 - Math.random());
-        return shuffled.slice(0, 10).map(location => ({ option: location }));
+    const getFontSize = (text) => {
+        if (text.length > 12) return 12;
+        if (text.length > 8) return 15;
+        return 18;
+    }
+
+    function fisherYatesShuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // swap
+        }
+        return array;
+    }
+
+    const getRandomOptions = (dataArray) => {
+        const shuffled = fisherYatesShuffle([...dataArray]);
+        return shuffled.slice(0, 10).map(item => ({
+            option: item,
+            style: { fontSize: getFontSize(item) }
+        }));
+    };
+
+    const loadOptions = () => {
+        let data;
+        if (mode === 'location') data = locations;
+        else if (mode === 'island') data = islands;
+        else if (mode === 'cultural') data = cultural;
+    
+        if (Array.isArray(data) && data.length > 0) {
+            const randomOptions = getRandomOptions(data);
+            setRouletteOptions(randomOptions);
+        } else {
+            console.error("❌ 데이터 배열이 비어 있거나 undefined입니다.");
+        }
     };
 
     useEffect(() => {
-        if (Array.isArray(locations) && locations.length > 0) {
-            const randomLocations = getRandomLocations();
-            console.log("랜덤으로 선택된 장소 목록: ", randomLocations);
-            setRouletteOptions(randomLocations);
-        } else {
-            console.error("❌ locations 배열이 비어 있거나 undefined입니다.");
-        }
-    }, []);
+        loadOptions();
+    }, [mode]);
 
     const handleSpinClick = () => {
-        const newPrizeNumber = Math.floor(Math.random() * rouletteOptions.length);
-        setPrizeNumber(newPrizeNumber);
+        const newPrize = Math.floor(Math.random() * rouletteOptions.length);
+        setPrizeNumber(newPrize);
         setMustSpin(true);
     };
 
     const handleStopSpinning = () => {
         setMustSpin(false);
-        console.log("룰렛 결과 : ",rouletteOptions[prizeNumber].option)
+        console.log("룰렛 결과 : ", rouletteOptions[prizeNumber].option)
     };
 
     useEffect(() => {
@@ -71,14 +100,37 @@ const RandomPlanStep = () => {
             transition={{ duration: 0.5 }}
         >
             <h2>나오는대로 가실꺼죠?</h2>
-            {rouletteOptions.length > 0 && (
-                <Wheel
-                    mustStartSpinning={mustSpin}
-                    prizeNumber={prizeNumber}
-                    data={rouletteOptions}
-                    onStopSpinning={handleStopSpinning}
-                />
+            <div className='Roulette-box'>
+                {rouletteOptions.length > 0 && (
+                    <Wheel
+                        mustStartSpinning={mustSpin}
+                        prizeNumber={prizeNumber}
+                        data={rouletteOptions}
+                        onStopSpinning={handleStopSpinning}
+                    />
                 )}
+                <div className='roulette-type'>
+                    <button
+                        className={mode === 'location' ? 'selected' : ''}
+                        onClick={() => setMode('location')}
+                    >
+                        전국~~
+                    </button>
+                    <button
+                        className={mode === 'island' ? 'selected' : ''}
+                        onClick={() => setMode('island')}
+                    >
+                        섬도 가능?
+                    </button>
+                    <button
+                        className={mode === 'cultural' ? 'selected' : ''}
+                        onClick={() => setMode('cultural')}
+                    >
+                        나의문화유산답
+                    </button>
+                </div>
+            </div>
+
             <button
                 onClick={handleSpinClick}
                 disabled={mustSpin}
