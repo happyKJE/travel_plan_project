@@ -143,6 +143,20 @@
     outline: none;
 }
 
+.save-button{
+    background: #4A90E2;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.save-button-image{
+    height: 20px;
+}
+
 /* 전송 버튼 */
 .send-button {
     background: #4A90E2;
