@@ -18,7 +18,7 @@
 
 /* 모달 콘텐츠 박스 */
 .modal-content {
-    min-width: 700px;
+    min-width: 600px;
     height: auto; /* 내용에 따라 자동 조정 */
     max-height: none; /* 최대 높이 제한 없음 */
     padding: 20px;

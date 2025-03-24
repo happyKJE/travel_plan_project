@@ -1,160 +1,37 @@
 .roulette-container {
-  position: relative;
-  width: 400px;
-  margin: 0 auto;
-  margin-top: 10px;
-  padding-bottom: 50px;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-.roulette-wheel {
-  position: relative;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  background: #fff;
-  overflow: hidden;
-  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  aspect-ratio: 1;
-  margin-top: 10px;
-  margin-bottom: 60px;
-}
-
-.wheel-segment {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  transform-origin: 100% 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: 14px;
+  background: linear-gradient(145deg, #ffffff, #e6eef6);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.roulette-container button {
+  background: linear-gradient(135deg, #3fa9f5, #57c1ff);
+  color: #fff;
+  padding: 15px 40px;
+  font-size: 18px;
   font-weight: bold;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  box-sizing: border-box;
-  cursor: pointer;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-  overflow: hidden;
-  border: 1px solid #fff;
-}
-
-.wheel-segment span {
-  display: block;
-  transform-origin: center;
-  white-space: nowrap;
-  text-align: center;
-  width: 100%;
-  font-size: 11px;
-  font-weight: 900;
-  color: #cf2626;
-  text-shadow: 
-    -1px -1px 0 #91ace3,
-    1px -1px 0 #91ace3,
-    -1px 1px 0 #91ace3,
-    1px 1px 0 #91ace3,
-    0 0 3px #91ace3;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) rotate(-30deg); /* Adjust the rotation angle here */
-  padding-top: 20px;
-}
-
-.wheel-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50px;
-  height: 50px;
-  background: #fff;
-  border-radius: 50%;
-  z-index: 2;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.pointer {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 25px solid #ff4444;
-  z-index: 3;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-.spin-button {
-  position: absolute;
-  bottom: 100px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  font-size: 16px;
-  background: #2196F3;
-  color: white;
   border: none;
-  border-radius: 25px;
+  border-radius: 50px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  z-index: 3;
+  margin-top: 30px;
   transition: all 0.3s ease;
 }
 
-.spin-button:hover {
-  background: #1976D2;
-  transform: translateX(-50%) scale(1.1);
+.roulette-container button:hover {
+  background: linear-gradient(135deg, #57c1ff, #3fa9f5);
+  transform: translateY(-3px);
 }
 
-.spin-button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-.spin-button:active {
-  transform: translateX(-50%);
-}
-
-.selected-region {
-  position: absolute;
-  bottom: 50px;
-  left: 0;
-  right: 0;
-  margin-bottom: 10px;
-  font-size: 18px;
+.roulette-result {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #333;
   font-weight: bold;
-  text-align: center;
 }
-
-.navigation-buttons {
-  margin-top: -30px;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  z-index: 4;
-}
-
-/* 각 세그먼트의 색상 */
-.wheel-segment:nth-child(1) { background: #FF9800; }
-.wheel-segment:nth-child(2) { background: #4CAF50; }
-.wheel-segment:nth-child(3) { background: #2196F3; }
-.wheel-segment:nth-child(4) { background: #9C27B0; }
-.wheel-segment:nth-child(5) { background: #F44336; }
-.wheel-segment:nth-child(6) { background: #FF9800; }
-.wheel-segment:nth-child(7) { background: #4CAF50; }
-.wheel-segment:nth-child(8) { background: #2196F3; }
-.wheel-segment:nth-child(9) { background: #9C27B0; }
-.wheel-segment:nth-child(10) { background: #F44336; }
-.wheel-segment:nth-child(11) { background: #2196F3; }
-.wheel-segment:nth-child(12) { background: #9C27B0; }
-.wheel-segment:nth-child(13) { background: #FF9800; }
-.wheel-segment:nth-child(14) { background: #4CAF50; }
-.wheel-segment:nth-child(15) { background: #2196F3; }
-.wheel-segment:nth-child(16) { background: #9C27B0; }

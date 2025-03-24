@@ -1,13 +1,4 @@
-/**
- * @file RegionSelection.jsx
- * @description 지도 기능 추가
- * @author jaeyeol
- * @created 2025-03-13
- * @lastModifiedBy jaeyeol
- * @lastModifiedDate 2025-03-14
- */
-
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useStore from '../context/UseStore.jsx';
@@ -16,14 +7,19 @@ import NavigationButtons from "../components/NavigationButtons.jsx";
 const RegionSelection = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useStore();
+  const [scriptsLoaded, setScriptsLoaded] = useState(false);
 
   useEffect(() => {
-    // 스크립트를 동적으로 추가
+    requestAnimationFrame(() => {
+      if (window.simplemaps_countrymap && typeof window.simplemaps_countrymap.load === 'function') {
+        console.log('✅ Map loaded via requestAnimationFrame');
+        window.simplemaps_countrymap.load();
+      }
+    });
     const loadScript = (src) => {
       return new Promise((resolve, reject) => {
         if (document.querySelector(`script[src="${src}"]`)) {
-          window.simplemaps_countrymap.load();
-          window.simplemaps_select.deselect_all();
+          resolve();
           return;
         }
         const script = document.createElement("script");
@@ -35,32 +31,37 @@ const RegionSelection = () => {
       });
     };
 
-    async function loadMapScripts() {
+    const loadMapScripts = async () => {
       try {
         await loadScript("/src/map/mapdata.js");
         await loadScript("/src/map/countrymap.js");
+        window[simplemaps_countrymap];
+        window.simplemaps_countrymap.load();
         await loadScript("/src/map/select.js");
 
         window.simplemaps_select.map = window.simplemaps_countrymap;
         window.simplemaps_select.max = 3;
 
-        console.log("Scripts loaded successfully");
+        console.log("✅ Map scripts loaded and ready");
+        setScriptsLoaded(true); // ✅ 한 번만 로딩
       } catch (error) {
-        console.error("Failed to load scripts", error);
+        console.error("❌ Failed to load map scripts", error);
       }
-    }
+    };
 
-    loadMapScripts();
-  }, []);
+    if (!scriptsLoaded) {
+      loadMapScripts();
+    }
+  }, [scriptsLoaded]);
 
   // 다음 버튼 클릭 시 선택된 지역 상태 업데이트
   const handleOnNext = () => {
     if (window.simplemaps_select) {
       const data = window.simplemaps_select.selected.map((region) => {
-        return simplemaps_countrymap_mapdata.data.data[region] || "Unknown";
+        return simplemaps_countrymap_mapdata?.data?.data[region] || "Unknown";
       });
 
-      console.log(data);
+      console.log("Selected Regions:", data);
       dispatch({
         type: "SET_OPTION",
         payload: { type: "region", value: data },
@@ -82,7 +83,7 @@ const RegionSelection = () => {
           transition={{ duration: 1 }}
       >
         <h2 className='option-header'>어디로 가볼까요?</h2>
-        <p style={{color:"gray",textDecorationLine:"underline"}}>(최대 3개 지역 선택 가능)</p>
+        <p style={{ color: "gray", textDecorationLine: "underline" }}>(최대 3개 지역 선택 가능)</p>
         <div id="map"></div>
         <NavigationButtons onBack={() => navigate('/dates-selection')} onNext={handleOnNext} />
       </motion.div>
