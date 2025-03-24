@@ -3,8 +3,8 @@
  * @description 맞춤형 여행을 위한 질문 옵션 표출 컨포넌트
  * @author jungeun
  * @created 2025-03-20
- * @lastModifiedBy jungeun
- * @lastModifiedDate 2025-03-20
+ * @lastModifiedBy sunny
+ * @lastModifiedDate 2025-03-24
  */
 
 import React, { useState } from 'react';
