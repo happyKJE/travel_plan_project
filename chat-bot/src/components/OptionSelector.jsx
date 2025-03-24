@@ -21,13 +21,13 @@ const OptionSelector = ({ label, type, options }) => {
     // 직접 입력한 값
     const [inputValue, setInputValue] = useState(initialSelected === "direct" ? "" : initialSelected);
 
-    const handleOptionSelect = (value) => {
-        const selectedOption = options.find(option=>option.value===value).label;
-        setSelected(value);
-
+    const handleOptionSelect = (label,value) => {
+        setSelected(label);
         if (value !== "direct") {
-            dispatch({ type: "SET_OPTION", payload: { type, value:selectedOption } });
+            dispatch({ type: "SET_OPTION", payload: { type, value:label } });
         }else {
+            setSelected("direct")
+
             setInputValue("");
             dispatch({ type: "SET_OPTION", payload: { type, value: "" } });
         }
@@ -57,8 +57,8 @@ const OptionSelector = ({ label, type, options }) => {
                 {options.map((option) => (
                     <button
                         key={option.value}
-                        className={`circle-button ${selected === option.value ? "selected" : ""}`}
-                        onClick={() => handleOptionSelect(option.value)}
+                        className={`circle-button ${selected === option.label ? "selected" : ""} ${option.value === "direct" && selected === "direct" ? "selected" : ""}`}
+                        onClick={() => handleOptionSelect(option.label,option.value)}
                     >
                         {option.label}
                     </button>

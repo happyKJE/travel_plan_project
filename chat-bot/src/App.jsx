@@ -1,10 +1,10 @@
-import React, {lazy, Suspense} from "react";
+import React, {lazy, Suspense, useEffect, useState} from "react";
 import {BrowserRouter as Router, Routes, Route, Outlet} from "react-router-dom";
 import { ChatProvider } from "./context/UseContext.jsx";
 import Header from "./components/Header";
-import IntroSection from "./components/IntroSection";
+import IntroSection from "./components/IntroSection.jsx";
 import Background from "./components/Background";
-import TravelDestination from "./pages/TravelDestination";
+import TravelDestination from "./pages/TravelDestination.jsx";
 import Modal from "./components/Modal.jsx";
 import PlanSelection from "./pages/PlanSelection.jsx";
 import ReloadHandler from "./components/ReloadHandler.jsx";
@@ -21,6 +21,7 @@ const TravelReviewDetail = lazy(() => import("./pages/TravelReviewDetail"));
 const ReviewArea = lazy(() => import("./pages/reviewArea"));
 
 const App = () => {
+
     const ModalRoute = () => {
         return (
             <div>

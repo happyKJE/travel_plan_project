@@ -127,7 +127,19 @@
       }
     }
     
-    map.plugin_hooks.click_state.push(upon_click);   
+    map.plugin_hooks.click_state.push(upon_click);
+
+    // Object.keys(map.states).forEach((stateKey) => {
+    //   const stateObj = map.states[stateKey];
+    //   if (stateObj && stateObj.shape) {
+    //     stateObj.shape.onclick = null; // 중복 방지
+    //     stateObj.shape.addEventListener('click', (event) => {
+    //       event.preventDefault();
+    //       event.stopPropagation();
+    //       upon_click(stateKey, event);
+    //     });
+    //   }
+    // });
     
     window[plugin]=function(){
       return {

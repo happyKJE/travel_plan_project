@@ -6,7 +6,6 @@
 
 .card-container {
     display: grid;
-<<<<<<< Updated upstream
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     padding: 20px;
@@ -27,7 +26,6 @@
     background: white;
     display: flex;
     flex-direction: column;
-=======
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
@@ -41,15 +39,11 @@
     overflow: hidden;
     transition: transform 0.3s ease;
     cursor: pointer;
->>>>>>> Stashed changes
 }
 
 .card:hover {
     transform: translateY(-5px);
-<<<<<<< Updated upstream
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-=======
->>>>>>> Stashed changes
 }
 
 .card img {
@@ -59,7 +53,6 @@
 }
 
 .card .info {
-<<<<<<< Updated upstream
     padding: 20px;
     text-align: center;
     display: flex;
@@ -72,7 +65,6 @@
     margin: 0;
     font-size: 1.8rem;
     font-weight: bold;
-=======
     padding: 1.2rem;
     text-align: center;
 }
@@ -81,17 +73,12 @@
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
->>>>>>> Stashed changes
     color: #333;
 }
 
 .card .info p:last-child {
     color: #666;
-<<<<<<< Updated upstream
     font-size: 1.2rem;
-=======
-    font-size: 0.9rem;
->>>>>>> Stashed changes
     line-height: 1.5;
     text-align: left;
 }
@@ -112,7 +99,7 @@
     background: #0056b3;
 }
 
-.modal-overlay {
+.travel-destination-modal{
     position: fixed;
     top: 0;
     left: 0;
@@ -125,8 +112,7 @@
     z-index: 1000;
 }
 
-.modal-content {
-<<<<<<< Updated upstream
+.travel-destination-modal .modal-content {
     position: relative;
     background: white;
     padding: 30px;
@@ -138,10 +124,8 @@
     flex-direction: row;
 }
 
-.modal-info {
+.travel-destination-modal .modal-info {
     flex: 1;
-    max-width: 60%;
-=======
     background: white;
     width: 95%;
     max-width: 1200px;
@@ -151,49 +135,39 @@
     position: relative;
     overflow-y: auto;
     padding: 40px;
-    display: flex;
+    display: grid;
     gap: 40px;
->>>>>>> Stashed changes
 }
 
-.modal-image {
+.travel-destination-modal .modal-image {
     flex: 1;
-<<<<<<< Updated upstream
     max-width: 40%;
-=======
     min-width: 0;
     display: flex;
     align-items: center;
->>>>>>> Stashed changes
 }
 
-.modal-image img {
+.travel-destination-modal .modal-image img {
     width: 100%;
-<<<<<<< Updated upstream
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-=======
     height: 500px;
     object-fit: cover;
     border-radius: 15px;
 }
 
-.modal-info {
+.travel-destination-modal .modal-info {
     flex: 1.2;
     min-width: 0;
     padding: 20px;
->>>>>>> Stashed changes
 }
 
-.modal-info h3 {
+.travel-destination-modal .modal-info h3 {
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 25px;
     color: #333;
 }
 
-.modal-info .description {
+.travel-destination-modal .modal-info .description {
     font-size: 17px;
     line-height: 1.7;
     color: #666;
@@ -202,7 +176,7 @@
 }
 
 .travel-details {
-<<<<<<< Updated upstream
+    display: flex;
     margin-top: 20px;
     padding: 20px;
     background-color: #f8f9fa;
@@ -217,19 +191,16 @@
 
 .detail-row:last-child {
     margin-bottom: 0;
-=======
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
     margin-top: 60px;
     padding-top: 30px;
     border-top: 1px solid #eee;
->>>>>>> Stashed changes
 }
 
 .detail-item {
     display: flex;
-<<<<<<< Updated upstream
     flex-direction: column;
     align-items: center;
     width: 45%;
@@ -245,7 +216,6 @@
 .detail-item .value {
     font-size: 1rem;
     color: #666;
-=======
     align-items: center;
     gap: 12px;
     background-color: #f8f9fa;
@@ -263,7 +233,6 @@
 .detail-item span:last-child {
     color: #666;
     font-size: 16px;
->>>>>>> Stashed changes
 }
 
 .close-btn {
@@ -278,7 +247,6 @@
     z-index: 1;
 }
 
-<<<<<<< Updated upstream
 .search-container {
     display: flex;
     justify-content: center;
@@ -306,8 +274,6 @@
     color: #999;
 }
 
-=======
->>>>>>> Stashed changes
 @media (max-width: 768px) {
     .modal-content {
         flex-direction: column;

@@ -9,7 +9,7 @@
 
 import React, { useState } from 'react';
 import '../styles/TravelDestination.css';
-import destinations from '../data/travelDestination';
+import destinations from '../data/TravelDestination.js';
 
 const TravelDestination = () => {
     const [selectedDestination, setSelectedDestination] = useState(null);
@@ -26,19 +26,19 @@ const TravelDestination = () => {
         <section className="content-section">
             <h2>어디로 여행을 떠나시겠어요?</h2>
             <p>도시를 검색해 보세요.</p>
-            <div className="card-container">
+            <ul className="card-container">
                 {destinations.map(destination => (
-                    <div key={destination.id} className="card" onClick={() => openModal(destination)}>
+                    <li key={destination.id} className="card" onClick={() => openModal(destination)}>
                         <img src={destination.image} alt={destination.name} />
                         <div className="info">
                             <p>{destination.name}</p>
                         </div>
-                    </div>
+                    </li>
                 ))}
-            </div>
+            </ul>
 
             {selectedDestination && (
-                <div className="modal-overlay" onClick={closeModal}>
+                <div className="travel-destination-modal" onClick={closeModal}>
                     <div className="modal-content" onClick={e => e.stopPropagation()}>
                         <button className="close-btn" onClick={closeModal}>&times;</button>
                         <div className="modal-info">

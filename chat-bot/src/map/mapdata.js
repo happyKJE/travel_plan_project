@@ -63,6 +63,7 @@ var simplemaps_countrymap_mapdata={
     //Advanced settings
     div: "map",
     auto_load: "yes",
+    "auto_labels": "no",
     url_new_tab: "no",
     images_directory: "default",
     fade_time: 0.1,
