@@ -28,7 +28,7 @@ const PeopleCount = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
         >
-            <h2>몇 명이서 가시나요?</h2>
+            <h2 className='option-header'>몇 명이서 가시나요?</h2>
 
             <OptionSelector
                 label={"인원"}

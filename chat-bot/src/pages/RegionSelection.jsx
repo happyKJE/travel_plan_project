@@ -12,9 +12,16 @@ const RegionSelection = () => {
     useEffect(() => {
         requestAnimationFrame(() => {
             if (window.simplemaps_countrymap && typeof window.simplemaps_countrymap.load === 'function') {
-                console.log('✅ Map loaded via requestAnimationFrame');
                 window.simplemaps_countrymap.load();
+                if(state.inputValues.region_code) {
+                    state.inputValues.region_code.forEach((region) => {
+                        window.simplemaps_select.select(region);
+                    })
+                }else{
+                    window.simplemaps_select.deselect_all();
+                }
             }
+
         });
         const loadScript = (src) => {
             return new Promise((resolve, reject) => {
@@ -35,7 +42,6 @@ const RegionSelection = () => {
             try {
                 await loadScript("/src/map/mapdata.js");
                 await loadScript("/src/map/countrymap.js");
-                window[simplemaps_countrymap];
                 window.simplemaps_countrymap.load();
                 await loadScript("/src/map/select.js");
 
@@ -60,11 +66,16 @@ const RegionSelection = () => {
             const data = window.simplemaps_select.selected.map((region) => {
                 return simplemaps_countrymap_mapdata?.data?.data[region] || "Unknown";
             });
+            console.log("3"+state);
 
             console.log("Selected Regions:", data);
             dispatch({
                 type: "SET_OPTION",
-                payload: { type: "region", value: data },
+                payload: { type: "region", value: data }
+            });
+            dispatch({
+                type: "SET_OPTION",
+                payload: { type: "region_code", value: window.simplemaps_select.selected }
             });
         }
     };
