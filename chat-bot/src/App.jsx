@@ -1,9 +1,8 @@
 import React, {lazy, Suspense} from "react";
 import {BrowserRouter as Router, Routes, Route, Outlet} from "react-router-dom";
-
 import { ChatProvider } from "./context/UseContext.jsx";
 import Header from "./components/Header";
-import IntroSection from "./components/IntroSection.jsx";
+import IntroSection from "./components/IntroSection";
 import Modal from "./components/Modal.jsx";
 import PlanSelection from "./pages/PlanSelection.jsx";
 import ReloadHandler from "./components/ReloadHandler.jsx";
@@ -17,6 +16,7 @@ const RegionSelection = lazy(() => import("./pages/RegionSelection"));
 const RandomPlanStep = lazy(() => import("./pages/RandomPlanStep"));
 const CustomizedPlanStep = lazy(() => import("./pages/CustomizedPlanStep"));
 const ChatScreen = lazy(() => import("./pages/ChatScreen"));
+const SavingChat = lazy(() => import("./pages/SavingChat"));
 const TravelReviews = lazy(() => import("./pages/TravelReviews"));
 const TravelReviewDetail = lazy(() => import("./pages/TravelReviewDetail"));
 const ReviewArea = lazy(() => import("./pages/reviewArea"));
@@ -27,7 +27,6 @@ const Join = lazy(() => import("./pages/Register.jsx"));
 const MyPage = lazy(() => import("./pages/MyPage.jsx"));
 
 const App = () => {
-
     const ModalRoute = () => {
         return (
             <div>
@@ -58,6 +57,7 @@ const App = () => {
                                             <Route path="plan-details/random" element={<RandomPlanStep />} />
                                             <Route path="plan-details/custom" element={<CustomizedPlanStep />} />
                                             <Route path="chat" element={<ChatScreen />} />
+                                            <Route path="saving" element={<SavingChat />} />
                                             <Route path="travelReviews" element={<TravelReviews />} />
                                             <Route path="review/:reviewId" element={<TravelReviewDetail />} />
                                             <Route path="reviewArea" element={<ReviewArea />} />
