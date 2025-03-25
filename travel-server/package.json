@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc",
+    "prebuild": "npm install",
+    "build": "npx tsc",
     "start": "node dist/server.js",
     "queries": "ts-node ./src/queries.ts",
     "caching": "ts-node ./src/caching.ts",
