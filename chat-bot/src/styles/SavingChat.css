@@ -26,18 +26,27 @@
     width: 80%;
 }
 
+.modal-actions{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
 .modal-actions button {
-    width: 10%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background: #4A90E2; /* 파란색 버튼 */
-    color: white;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #3fa9f5, #57c1ff);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 30px;
     cursor: pointer;
-    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
 }
 
 .modal-actions button:hover {
-    background: #357ABD;
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #57c1ff, #3fa9f5);
 }

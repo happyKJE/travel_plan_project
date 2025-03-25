@@ -9,18 +9,18 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../styles/ChatBot.css';
-import saveIcon from "../assets/saveImage.png";
 import useStore from "../context/UseStore.jsx";
+import saveIcon from "../assets/saveImage.png";
 import { placeOptions } from "../data/OptionsData.jsx";
 
 const ChatBot = () => {
     const [showPlane, setShowPlane] = useState(false);
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false); // 로딩 상태 추가
-    const { state } = useStore();
     const navigate = useNavigate();
+    const { state } = useStore();
     const inputRef = useRef(null);
     const placeData = placeOptions.find(option => option.label === state.inputValues.placeOption)?.value || 'nomatter';
     const backgroundImage = `/assets/${placeData}Background.jfif`;
@@ -43,27 +43,26 @@ const ChatBot = () => {
             일정 추천해줘.`;
 
 
-
     //실행 여부를 추적하는 변수
     let executed = false;
     useEffect(() => {
         if (!executed) {
             const formatDate = (dateStr) => dateStr?.split('T')[0];
-
+    
             const userInfoMessage = {
                 id: uuidv4(),
                 type: "response",
-                text: `📅 일정:${isOneDayTrip ? ` ${formatDate(selectedDates[0])} (당일 하루)` : `\n${formatDate(selectedDates[0])}부터 ${formatDate(selectedDates[1])}까지`}\n📍 목적지: ${region}`,
+                text: `📅 여행일정: ${formatDate(selectedDates[0])}${selectedDates[1] ? `부터 ${formatDate(selectedDates[1])}까지` : ' (당일 하루)'}\n📍 여행지역: ${region}`,
                 timestamp: new Date().toLocaleDateString("ko-KR"),
             };
-
+    
             setMessages([userInfoMessage]);
             sendMessage(initMessage, false, systemMessage);
             executed = true;
         }
     }, []);
-
-
+    
+    
 
     // 메시지 전송 함수
     const handleSendMessage = (e) => {
@@ -76,7 +75,7 @@ const ChatBot = () => {
     // 채팅 내용 저장 함수
     const handleSaveButtonClick = () => {
         console.log(messages);
-        navigate('/saving', { state: { messages } });  // 저장하기 버튼 클릭 시 /saving 경로로 이동
+        navigate('/saving', { state: { messages } });;  // 저장하기 버튼 클릭 시 /saving 경로로 이동
     };
 
     // OpenAI API에 메시지 전송
