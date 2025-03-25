@@ -1,0 +1,63 @@
+.peopleCount {
+    width: 100%;
+}
+
+.custom-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.custom-input {
+    font-family: 'Noto Sans KR', sans-serif;
+    border: 2px solid #9ecfff;
+    border-radius: 20px;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    font-size: 14px;
+    color: #444;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(158, 207, 255, 0.2);
+    -moz-appearance: textfield;
+}
+
+.custom-input::-webkit-inner-spin-button,
+.custom-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.button-container {
+    display: flex;
+}
+
+.number-btn {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #71b0ff85;
+    border: none;
+    color: #fff;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: 0 5px 0 #004187a3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.number-btn:hover {
+    background-color: #6db4ff;
+    /*transform: translateY(-2px);*/
+}
+
+.number-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 3px rgba(109, 180, 255, 0.3);
+}

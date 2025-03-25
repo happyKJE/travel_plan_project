@@ -1,0 +1,87 @@
+.content-section {
+    min-height: 300vh;
+    background-color: #fff;
+    padding: 2rem;
+}
+
+.roulette-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+}
+
+.roulette-content {
+    flex: 0 0 auto;
+}
+
+.roulette-type {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.roulette-type button {
+    height: 80px;
+    border: none;
+    border-radius: 12px;
+    background: #f8f9fa;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    padding: 1rem;
+}
+
+.roulette-type button:hover {
+    background: #e9ecef;
+    transform: translateY(-2px);
+}
+
+.roulette-type button.selected {
+    background: #339af0;
+    color: white;
+}
+
+.roulette-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.result-text {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.result-text span {
+    font-weight: bold;
+    color: #3498db;
+    margin-left: 0.5rem;
+}
+
+.spin-button {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    background: #339af0;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.spin-button:hover {
+    background: #228be6;
+    transform: translateY(-2px);
+}
+
+.spin-button:disabled {
+    background: #adb5bd;
+    cursor: not-allowed;
+    transform: none;
+}

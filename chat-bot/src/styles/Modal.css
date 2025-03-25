@@ -1,0 +1,83 @@
+/* 모달 백드롭(어두운 배경) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(142, 141, 141, 0.5);
+
+    /* 수직·수평 중앙 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 다른 요소보다 위에 표시 */
+    z-index: 1000;
+}
+
+/* 모달 콘텐츠 박스 */
+.modal-content {
+    min-width: 600px;
+    height: auto; /* 내용에 따라 자동 조정 */
+    max-height: none; /* 최대 높이 제한 없음 */
+    padding: 20px;
+    position: relative;
+}
+
+.modal-body {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    overflow-y: hidden; /* 스크롤 숨김 */
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    background-color: transparent;
+
+}
+
+/* index-number 위치 조정 */
+.index-number {
+    top: 250px; /* 🔹 Modal 위쪽에 붙도록 조정 */
+    left: 0;  /* 🔹 Modal의 왼쪽 끝에 정렬 */
+    display: flex;
+    gap: 10px;
+    padding: 0 10px;
+    background: transparent;
+    z-index: 1001;
+}
+
+
+.index-number li{
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tab {
+    border-radius: 8px 8px 0 0;
+    padding: 10px;
+    transform-origin: bottom center; /* 🔹 아래쪽을 기준으로 변형 */
+    transition: opacity 0.3s ease-in-out;
+    color: gray;
+    background-color: white;
+}
+
+.active {
+    font-weight: bold;
+    color: white; /* 강조 색상 */
+    opacity: 1;
+    transform: scale(1.1); /* 🔹 위로만 확대 */
+    background-color: #689de1;
+
+}
+
+.inactive {
+    opacity: 0.8; /* 투명도 조절 */
+    color: gray;
+    background-color: white;
+
+}

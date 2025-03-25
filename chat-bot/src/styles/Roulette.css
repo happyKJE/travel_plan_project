@@ -1,0 +1,37 @@
+.roulette-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(145deg, #ffffff, #e6eef6); /*연한 배경 그라데이션*/
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2); /*연한 배경 그라데이션*/
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.roulette-container button {
+    background: linear-gradient(135deg, #3fa9f5, #57c1ff); /*파란색 그라데이션 버튼*/
+    color: #fff;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /*퍼즐 모양 버튼*/
+    cursor: pointer;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+}
+
+.roulette-container button:hover {
+    background: linear-gradient(135deg, #57c1ff, #3fa9f5); /*색 반전*/
+    transform: translateY(-3px); /*살짝 위로 뜸*/
+}
+
+.roulette-result {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+}
