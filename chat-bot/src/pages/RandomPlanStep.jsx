@@ -132,18 +132,21 @@ const RandomPlanStep = () => {
                     )}
                 <div className='roulette-type'>
                     <button
+                        disabled={mustSpin}
                         className={mode === 'location' ? 'selected' : ''}
                         onClick={() => setMode('location')}
                     >
                         전국~~
                     </button>
                     <button
+                        disabled={mustSpin}
                         className={mode === 'island' ? 'selected' : ''}
                         onClick={() => setMode('island')}
                     >
                         섬도 가능?
                     </button>
                     <button
+                        disabled={mustSpin}
                         className={mode === 'cultural' ? 'selected' : ''}
                         onClick={() => setMode('cultural')}
                     >
@@ -162,7 +165,7 @@ const RandomPlanStep = () => {
             <NavigationButtons
                 onBack={() => navigate('/dates-selection')}
                 onNext={() => navigate('/chat')}
-                onDisabled={isDisabled}
+                onDisabled={isDisabled || mustSpin}
             />
 
         </motion.div>

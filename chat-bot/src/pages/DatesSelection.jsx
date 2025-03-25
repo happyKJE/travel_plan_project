@@ -85,6 +85,7 @@ const DatesSelection = () => {
             transition={{ duration: 1 }}
         >
             <h2 className='option-header'>기간은 어떻게 되시나요?</h2>
+            <p>일정 선택 최대 10일까지 가능</p>
             <div className="calendar-container">
                 <DayPicker
                     mode="range"

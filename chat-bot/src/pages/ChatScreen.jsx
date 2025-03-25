@@ -21,13 +21,13 @@ const ChatBot = () => {
     const inputRef = useRef(null);
     const placeData = placeOptions.find(option => option.label === state.inputValues.placeOption)?.value || 'nomatter';
     const backgroundImage = `/assets/${placeData}Background.jfif`;
-    const { planType, selectedDates, personnelOption = '1', region, placeOption = 'nomatter', transportOption = 'nomatter', travelStyleOption = 'nomatter' } = state.inputValues;
+    const { planType, selectedDates, personnelOption = '1', region, placeOption, transportOption, travelStyleOption = 'nomatter' } = state.inputValues;
 
     const isOneDayTrip = selectedDates[0] === selectedDates[1];
     
     const systemMessage = planType === "random"
-        ? `너는 랜덤 여행 플래너야. 사용자가 정해준 날짜와 지역을 바탕으로 일정만 추천해줘. ${isOneDayTrip ? '반드시 ✅당일치기 (날짜) 형식으로 오전, 오후, 저녁' : '반드시 ✅n일차 (날짜, 차수) 형식으로 오전, 오후, 저녁, 숙박'} 계획을 작성해. ✅를 기준으로 줄바꿈 해줘`
-        : `너는 여행 플래너야. ${isOneDayTrip ? '반드시 ✅당일치기 (날짜) 형식으로 오전, 오후, 저녁' : '반드시 ✅n일차 (날짜, 차수) 형식으로 오전, 오후, 저녁, 숙박'} 계획을 작성해. ✅를 기준으로 줄바꿈 해줘`;
+        ? `너는 랜덤 여행 플래너야. 가급적 존댓말을 사용하고 사용자가 정해준 날짜와 지역을 바탕으로 일정만 추천해줘. ${isOneDayTrip ? '반드시 ✅당일치기 (날짜) 형식으로 시간대별 추천대신 오전, 오후, 저녁' : '반드시 ✅n일차 (날짜, 차수) 형식으로 오전, 오후, 저녁, 숙박'} 계획을 작성해. ✅를 기준으로 줄바꿈 해줘`
+        : `너는 여행 플래너야. 가급적 존댓말을 사용해줘. ${isOneDayTrip ? '반드시 ✅당일치기 (날짜) 형식으로 오전, 오후, 저녁' : '반드시 ✅n일차 (날짜, 차수) 형식으로 오전, 오후, 저녁, 숙박'} 계획을 작성해. ✅를 기준으로 줄바꿈 해줘`;
 
     const initMessage = planType === "random"
         ? `${selectedDates[0]}${selectedDates[1] ? `부터 ${selectedDates[1]}까지` : ''}
@@ -49,7 +49,7 @@ const ChatBot = () => {
             const userInfoMessage = {
                 id: uuidv4(),
                 type: "response",
-                text: `📅 여행일정: ${formatDate(selectedDates[0])}${selectedDates[1] ? `부터 ${formatDate(selectedDates[1])}까지` : ' (당일 하루)'}\n📍 여행지역: ${region}`,
+                text: `📅 일정:${isOneDayTrip ? ` ${formatDate(selectedDates[0])} (당일 하루)` : `\n${formatDate(selectedDates[0])}부터 ${formatDate(selectedDates[1])}까지`}\n📍 목적지: ${region}`,
                 timestamp: new Date().toLocaleDateString("ko-KR"),
             };
     

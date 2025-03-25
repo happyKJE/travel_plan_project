@@ -39,11 +39,6 @@ const Header = () => {
                         onClick={() => navigate("/travelReviews")}
                         className="review-link"
                     >여행 후기</li>
-
-                    <li
-                        onMouseEnter={handleMouseEnter}
-                        onClick={() => navigate("/")}
-                    >2조화이팅</li>
                 </ul>
 
                 {/* 움직이는 hover bar */}
