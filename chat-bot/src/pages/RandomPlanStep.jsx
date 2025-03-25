@@ -1,10 +1,10 @@
 /**
  * @file RandomPlanStep.jsx
- * @description 랜덤 플랜을 위한 옵션 표출 컨포넌트
+ * @description 랜덤 플랜을 위한 옵션 표출 컨포넌트(지역,문화재,반려동반선택)
  * @author jaeyeol
  * @created 2025-03-11
  * @lastModifiedBy Sunny
- * @lastModifiedDate 2025-03-25
+ * @lastModifiedDate 2025-03-26
  */
 
 import React, {useState, useEffect} from 'react';
