@@ -102,12 +102,12 @@ const RandomPlanStep = () => {
             <h2>나오는대로 가실꺼죠?</h2>
             <div className="roulette-select-with-icon">
                     <span className="mode-icon">
-                    {mode === 'location' && '🌍'}
+                        {mode === 'location' && '🌍'}
                         {mode === 'island' && '🏝️'}
                         {mode === 'cultural' && '🏛️'}
                     </span>
 
-                <select value={mode} onChange={(e) => setMode(e.target.value)}>
+                <select value={mode} disabled={mustSpin} onChange={(e) => setMode(e.target.value)}>
                     <option value="location">전국~~</option>
                     <option value="island">섬도 가능?</option>
                     <option value="cultural">나의문화유산답</option>
@@ -154,7 +154,7 @@ const RandomPlanStep = () => {
             <NavigationButtons
                 onBack={() => navigate('/dates-selection')}
                 onNext={() => navigate('/chat')}
-                onDisabled={isDisabled}
+                onDisabled={isDisabled || mustSpin}
             />
 
         </motion.div>
