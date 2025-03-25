@@ -40,7 +40,7 @@ const Register = () => {
 
         } catch (err) {
             console.error(err);
-            setMessage('서버 오류');
+            showModal('서버 오류: 잠시후 다시 시도해주세요.');
         }
     };
 
