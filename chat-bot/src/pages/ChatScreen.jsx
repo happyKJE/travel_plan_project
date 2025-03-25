@@ -9,14 +9,17 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 import '../styles/ChatBot.css';
 import useStore from "../context/UseStore.jsx";
+import saveIcon from "../assets/saveImage.png";
 import { placeOptions } from "../data/OptionsData.jsx";
 
 const ChatBot = () => {
     const [showPlane, setShowPlane] = useState(false);
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false); // 로딩 상태 추가
+    const navigate = useNavigate();
     const { state } = useStore();
     const inputRef = useRef(null);
     const placeData = placeOptions.find(option => option.label === state.inputValues.placeOption)?.value || 'nomatter';
@@ -67,6 +70,12 @@ const ChatBot = () => {
         if (!inputRef.current.value.trim()) return;
         sendMessage(inputRef.current.value, true);
         inputRef.current.value = "";
+    };
+
+    // 채팅 내용 저장 함수
+    const handleSaveButtonClick = () => {
+        console.log(messages);
+        navigate('/saving', { state: { messages } });;  // 저장하기 버튼 클릭 시 /saving 경로로 이동
     };
 
     // OpenAI API에 메시지 전송
@@ -160,6 +169,14 @@ const ChatBot = () => {
                 </div>
 
                 <div className="chat-input-container">
+                    <button className='save-button' onClick={handleSaveButtonClick}>
+                      <img
+                        src={saveIcon}
+                        alt="저장하기"
+                        className="save-button-image"
+                        title="저장하기"
+                      />
+                    </button>
                     <input
                         type="text"
                         className="chat-input"

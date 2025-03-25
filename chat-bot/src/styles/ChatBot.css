@@ -120,6 +120,26 @@
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* 저장 버튼 */
+.save-button{
+    background: linear-gradient(135deg, #3fa9f5, #57c1ff);
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.save-button:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #57c1ff, #3fa9f5);
+}
+
+.save-button-image{
+    height: 20px;
+}
+
 /* 입력창 */
 .chat-input-container {
     display: flex;
@@ -140,7 +160,7 @@
 
 /* 전송 버튼 */
 .send-button {
-    background: #4A90E2;
+    background: linear-gradient(135deg, #3fa9f5, #57c1ff);
     color: white;
     border: none;
     padding: 10px 15px;
@@ -150,7 +170,8 @@
 }
 
 .send-button:hover {
-    background: #357ABD;
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #57c1ff, #3fa9f5);
 }
 
 /* 비행기 애니메이션 */

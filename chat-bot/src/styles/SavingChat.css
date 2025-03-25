@@ -1,0 +1,52 @@
+.modal {
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+  }
+
+.input-info{
+    width: 70%;
+    margin: 20px;
+    font-size: 18px;
+    align-items: center;
+}
+
+.input-info label{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px;
+    font-weight: bold;
+}
+
+.input-info input{
+    font-size: 18px;
+    padding: 5px;
+    width: 80%;
+}
+
+.modal-actions{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.modal-actions button {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #3fa9f5, #57c1ff);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.modal-actions button:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #57c1ff, #3fa9f5);
+}

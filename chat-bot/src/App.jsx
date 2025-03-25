@@ -17,6 +17,7 @@ const RegionSelection = lazy(() => import("./pages/RegionSelection"));
 const RandomPlanStep = lazy(() => import("./pages/RandomPlanStep"));
 const CustomizedPlanStep = lazy(() => import("./pages/CustomizedPlanStep"));
 const ChatScreen = lazy(() => import("./pages/ChatScreen"));
+const SavingChat = lazy(() => import("./pages/SavingChat"));
 const TravelReviews = lazy(() => import("./pages/TravelReviews"));
 const TravelReviewDetail = lazy(() => import("./pages/TravelReviewDetail"));
 const ReviewArea = lazy(() => import("./pages/reviewArea"));
@@ -58,6 +59,7 @@ const App = () => {
                                             <Route path="plan-details/random" element={<RandomPlanStep />} />
                                             <Route path="plan-details/custom" element={<CustomizedPlanStep />} />
                                             <Route path="chat" element={<ChatScreen />} />
+                                            <Route path="saving" element={<SavingChat />} />
                                             <Route path="travelReviews" element={<TravelReviews />} />
                                             <Route path="review/:reviewId" element={<TravelReviewDetail />} />
                                             <Route path="reviewArea" element={<ReviewArea />} />
