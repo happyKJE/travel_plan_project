@@ -22,7 +22,7 @@ const RandomPlanStep = () => {
 
     const [mustSpin, setMustSpin] = useState(false);
     const [prizeNumber, setPrizeNumber] = useState(0);
-    const [rouletteOptions, setRouletteOptions] = useState([]);
+    const [rouletteOptions, setRouletteOptions] = useState(locations);
     const [mode, setMode] = useState("location");
 
     const isDisabled = !state.inputValues.region;
