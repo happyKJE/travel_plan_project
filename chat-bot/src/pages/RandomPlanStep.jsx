@@ -1,6 +1,6 @@
 /**
  * @file RandomPlanStep.jsx
- * @description 랜덤 플랜을 위한 옵션 표출 컨포넌트(지역,문화재,반려동반선택)
+ * @description 랜덤 플랜을 위한 옵션 표출 컨포넌트(지역,문화재,반려동반선택),결과 텍스로 띄우기
  * @author jaeyeol
  * @created 2025-03-11
  * @lastModifiedBy Sunny
