@@ -7,13 +7,14 @@
  * @lastModifiedDate 2025-03-24
  */
 
-import React, { useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import '../styles/TravelDestination.css';
 import destinations from '../data/TravelDestination.js';
 
 const TravelDestination = () => {
+    const ref = useRef();
     const [selectedDestination, setSelectedDestination] = useState(null);
-
+    const [isVisible, setIsVisible] = useState(false);
     const openModal = (destination) => {
         setSelectedDestination(destination);
     };
@@ -21,22 +22,38 @@ const TravelDestination = () => {
     const closeModal = () => {
         setSelectedDestination(null);
     };
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+            },
+            { threshold: 0.1 }
+        );
 
+        if (ref.current) observer.observe(ref.current);
+
+        return () => {
+            if (ref.current) observer.unobserve(ref.current);
+        };
+    }, []);
     return (
-        <section className="content-section">
-            <h2>어디로 여행을 떠나시겠어요?</h2>
-            <p>도시를 검색해 보세요.</p>
-            <ul className="card-container">
-                {destinations.map(destination => (
-                    <li key={destination.id} className="card" onClick={() => openModal(destination)}>
-                        <img src={destination.image} alt={destination.name} />
-                        <div className="info">
-                            <p>{destination.name}</p>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-
+        <section className="content-section" ref={ref}>
+            {isVisible && (
+                <>
+                    <h2>어디로 여행을 떠나시겠어요?</h2>
+                    <p>도시를 검색해 보세요.</p>
+                    <ul className="card-container">
+                        {destinations.map(destination => (
+                            <li key={destination.id} className="card" onClick={() => openModal(destination)}>
+                                <img src={destination.image} alt={destination.name} />
+                                <div className="info">
+                                    <p>{destination.name}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
             {selectedDestination && (
                 <div className="travel-destination-modal" onClick={closeModal}>
                     <div className="modal-content" onClick={e => e.stopPropagation()}>

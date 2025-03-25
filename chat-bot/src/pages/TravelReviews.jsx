@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/TravelReviews.css"; // 스타일 파일
-import reviews from "../data/reviewsData"; //  데이터 파일에서 가져오기
 
 const TravelReviews = () => {
     const navigate = useNavigate();
@@ -18,16 +17,16 @@ const TravelReviews = () => {
 
                 {/* 후기 목록 */}
                 <ul className="review-list">
-                    {reviews.map((review) => (
-                        <li
-                            key={review.id}
-                            className="review-item"
-                            onClick={() => navigate(`/review/${review.id}`, { state: review })} //  클릭 시 상세 페이지로 이동
-                        >
-                            <h3 className="review-title">{review.title}</h3>
-                            <p className="review-content-preview">{review.content}</p>
-                        </li>
-                    ))}
+                    {/*{reviews.map((review) => (*/}
+                    {/*    <li*/}
+                    {/*        key={review.id}*/}
+                    {/*        className="review-item"*/}
+                    {/*        onClick={() => navigate(`/review/${review.id}`, { state: review })} //  클릭 시 상세 페이지로 이동*/}
+                    {/*    >*/}
+                    {/*        <h3 className="review-title">{review.title}</h3>*/}
+                    {/*        <p className="review-content-preview">{review.content}</p>*/}
+                    {/*    </li>*/}
+                    {/*))}*/}
                 </ul>
             </div>
         </div>

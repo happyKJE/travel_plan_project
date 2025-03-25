@@ -1,0 +1,59 @@
+.cloud-loading-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom, #007fff, #fff);
+    overflow: hidden;
+    text-align: center;
+}
+
+.cloud {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: float 10s linear infinite;
+}
+
+.cloud1 {
+    width: 120px;
+    height: 60px;
+    top: 50px;
+    left: -150px;
+    animation-delay: 0s;
+}
+
+.cloud2 {
+    width: 180px;
+    height: 90px;
+    top: 80px;
+    left: -200px;
+    animation-delay: 0s;
+}
+
+.cloud3 {
+    width: 100px;
+    height: 50px;
+    top: 30px;
+    left: 500px;
+    animation-delay: 0s;
+}
+
+@keyframes float {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(120vw); }
+}
+
+.loading-text {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    font-size: 24px;
+    color: #555;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}

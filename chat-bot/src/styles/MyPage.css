@@ -1,0 +1,108 @@
+.mypage-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: "Malgun Gothic", serif;
+}
+.mypage-nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.mypage-nav li {
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.125rem;
+    transition: background 0.3s;
+    color: rgb(170 177 184);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: unset;
+}
+
+.mypage-nav li.active {
+    color: rgb(152 221 227);
+}
+
+.mypage-nav li:hover {
+    color: rgb(152 221 227);
+}
+
+.mypage-content {
+    padding: 20px;
+}
+
+.profile-section, .plans-section {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 50px auto;
+}
+
+.profile-section h3, .plans-section h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.profile-section input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.profile-section input:focus {
+    border-color: #4c74ff;
+    outline: none;
+}
+
+.profile-info p {
+    margin: 8px 0;
+}
+
+.profile-section button {
+    padding: 12px 25px;
+    margin-right: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #4c74ff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profile-section button:hover {
+    background-color: #3b5ee8;
+}
+
+.profile-section button:last-child {
+    background-color: #ccc;
+    color: #333;
+}
+
+.profile-section button:last-child:hover {
+    background-color: #bbb;
+}
+
+
+.edit-form input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}

@@ -100,6 +100,19 @@ const RandomPlanStep = () => {
             transition={{ duration: 0.5 }}
         >
             <h2>나오는대로 가실꺼죠?</h2>
+            <div className="roulette-select-with-icon">
+                    <span className="mode-icon">
+                    {mode === 'location' && '🌍'}
+                        {mode === 'island' && '🏝️'}
+                        {mode === 'cultural' && '🏛️'}
+                    </span>
+
+                <select value={mode} onChange={(e) => setMode(e.target.value)}>
+                    <option value="location">전국~~</option>
+                    <option value="island">섬도 가능?</option>
+                    <option value="cultural">나의문화유산답</option>
+                </select>
+            </div>
             <div className='Roulette-box'>
                 {rouletteOptions.length > 0 && (
                     <Wheel
@@ -130,35 +143,14 @@ const RandomPlanStep = () => {
                         fontSize={18}
                     />
                     )}
-                <div className='roulette-type'>
-                    <button
-                        className={mode === 'location' ? 'selected' : ''}
-                        onClick={() => setMode('location')}
-                    >
-                        전국~~
-                    </button>
-                    <button
-                        className={mode === 'island' ? 'selected' : ''}
-                        onClick={() => setMode('island')}
-                    >
-                        섬도 가능?
-                    </button>
-                    <button
-                        className={mode === 'cultural' ? 'selected' : ''}
-                        onClick={() => setMode('cultural')}
-                    >
-                        나의문화유산답
-                    </button>
-                </div>
             </div>
-
             <button
+                className='spin-btn'
                 onClick={handleSpinClick}
                 disabled={mustSpin}
             >
                 돌려돌려 돌림판
             </button>
-
             <NavigationButtons
                 onBack={() => navigate('/dates-selection')}
                 onNext={() => navigate('/chat')}
