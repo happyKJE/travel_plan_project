@@ -29,7 +29,7 @@ nav {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 18px;
   cursor: pointer;
-  padding: 5px 0;
+  padding: 10px 22px;
   color: #333;
 }
 
@@ -42,4 +42,18 @@ nav {
   background-color: #3fa9f5;
   transition: all 0.3s ease;
   border-radius: 2px;
+}
+.logout-btn {
+  padding: 10px 22px;
+  background-color: #4c74ffbf;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #e63946;
 }

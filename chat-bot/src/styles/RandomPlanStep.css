@@ -7,6 +7,50 @@
     align-items: center;
 }
 
-.roulette-type button {
-    height: 150px;
+.roulette-select-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mode-icon {
+    font-size: 28px;
+}
+
+.roulette-select-with-icon select {
+    width: 200px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%234c74ff" height="24" viewBox="0 0 24 24" width="24"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+}
+
+.roulette-select-with-icon select:focus {
+    border-color: #4c74ff;
+    outline: none;
+}
+
+.spin-btn {
+    padding: 15px 40px;
+    background-color: #4c74ff;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(76, 116, 255, 0.4);
+    transition: all 0.3s;
+}
+
+.spin-btn:hover {
+    background-color: #3b5ee8;
+    box-shadow: 0 8px 20px rgba(76, 116, 255, 0.6);
+    transform: translateY(-3px);
 }
