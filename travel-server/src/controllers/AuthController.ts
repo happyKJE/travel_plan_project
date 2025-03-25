@@ -1,11 +1,12 @@
-import prisma from '../../config/PrismaClient.js';
+import prisma from '../config/PrismaClient';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import { Request, Response, NextFunction } from 'express';
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET as string;
 
 //로그인
-export const login = async (req, res) => {
+export const login = async (req:Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
@@ -25,7 +26,7 @@ export const login = async (req, res) => {
 };
 
 //회원가입
-export const register = async (req, res) => {
+export const register = async (req:Request, res:Response) => {
   const { email, password, phoneNumber, name } = req.body;
 
   try {
@@ -44,7 +45,7 @@ export const register = async (req, res) => {
     });
 
     res.json({ message: '회원가입 성공', user });
-  } catch (err) {
+  } catch (err:any) {
     console.error(err);
     res.status(500).json({ message: '회원가입 실패', error: err.message });
   }
