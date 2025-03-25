@@ -11,7 +11,7 @@ const Header = () => {
     const navRef = useRef(null);
     const [lineStyle, setLineStyle] = useState({ width: 0, left: 0 });
     const { state,dispatch } = useStore();
-    const showModal = useModal();
+    const { showModal } = useModal();
 
     const handleMouseEnter = (e) => {
         const target = e.target;
