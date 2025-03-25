@@ -1,10 +1,10 @@
 /**
  * @file travelDestination.jsx
- * @description 맞춤형 여행을 위한 질문 옵션 표출 컨포넌트
+ * @description 맞춤형 여행을 위한 질문 옵션 표출 컨포넌트,검색어 입력창에서 실시간으로 searchQuery 업데이트
  * @author jungeun
  * @created 2025-03-20
  * @lastModifiedBy sunny
- * @lastModifiedDate 2025-03-25
+ * @lastModifiedDate 2025-03-26
  */
 
 import React, { useState } from 'react';
