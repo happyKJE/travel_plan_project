@@ -4,9 +4,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "prebuild": "npm install",
-    "build": "npx tsc",
+    "build": "npm install && npm run generate && npx tsc",
     "start": "node dist/server.js",
+    "generate": "prisma generate",
     "queries": "ts-node ./src/queries.ts",
     "caching": "ts-node ./src/caching.ts",
     "prisma:generate": "prisma generate",
