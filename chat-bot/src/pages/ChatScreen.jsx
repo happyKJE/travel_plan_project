@@ -20,7 +20,6 @@ const ChatBot = () => {
     const [showPlane, setShowPlane] = useState(false);
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false); // 로딩 상태 추가
-    const navigate = useNavigate();
     const { state } = useStore();
     const { showModal } = useModal();
     const inputRef = useRef(null);
@@ -75,7 +74,6 @@ const ChatBot = () => {
 
     // 채팅 내용 저장 함수
     const handleSaveButtonClick = async () => {
-        setFormData({...formData, [messages]:messages });
         try {
             const res = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/chat/save`, {
                 method: 'POST',
@@ -174,7 +172,7 @@ const ChatBot = () => {
         <div className="app-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
             <div className="chatbot-container">
                 <div className="chatbot-header">
-                    <div className="logo"><img width="70px" alt="" src="/src/assets/logo_wheretogo.png" /></div>
+                    <div className="logo"><img width="70px" alt="" src="../assets/logo_wheretogo.png" /></div>
                 </div>
 
                 <div className="chat-messages">

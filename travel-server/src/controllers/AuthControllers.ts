@@ -1,7 +1,7 @@
 import prisma from '../config/PrismaClient';
 import bcrypt from 'bcryptjs';
-import jwt, { JwtPayload } from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+import { Request, Response } from 'express';
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
