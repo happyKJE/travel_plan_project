@@ -18,7 +18,7 @@
 }
 
 .roulette-select-with-icon select {
-    width: 200px;
+    width: fit-content;
     padding: 12px 15px;
     border-radius: 8px;
     border: 1px solid #ccc;
