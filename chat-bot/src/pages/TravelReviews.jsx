@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/TravelReviews.css"; // 스타일 파일
+import "../styles/TravelReviews.css";
 
 const TravelReviews = () => {
     const navigate = useNavigate();
+    const [reviews, setReviews] = useState([]);
+
+    // 리스트 조회
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const res = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/posts/list`);
+                const data = await res.json();
+                if (res.ok) setReviews(data);
+                else console.error("후기 목록 조회 실패:", data.message);
+                console.log(data);
+            } catch (err) {
+                console.error("서버 오류:", err);
+            }
+        };
+        fetchReviews();
+    }, []);
+
     return (
         <div className="travel-reviews-overlay">
             <div className="travel-reviews">
@@ -17,16 +35,20 @@ const TravelReviews = () => {
 
                 {/* 후기 목록 */}
                 <ul className="review-list">
-                    {/*{reviews.map((review) => (*/}
-                    {/*    <li*/}
-                    {/*        key={review.id}*/}
-                    {/*        className="review-item"*/}
-                    {/*        onClick={() => navigate(`/review/${review.id}`, { state: review })} //  클릭 시 상세 페이지로 이동*/}
-                    {/*    >*/}
-                    {/*        <h3 className="review-title">{review.title}</h3>*/}
-                    {/*        <p className="review-content-preview">{review.content}</p>*/}
-                    {/*    </li>*/}
-                    {/*))}*/}
+                    {reviews.map((review) => (
+                        <li
+                            key={review.id}
+                            className="review-item"
+                            onClick={() => navigate(`/review/${review.id}`, { state: review.id })}
+                        >
+                            <h3 className="review-title">{review.title}</h3>
+                            <div
+                                className="review-content-preview"
+                                dangerouslySetInnerHTML={{ __html: review.content.slice(0, 100) + "..." }}
+                            />
+                        </li>
+                    ))}
+                    {reviews.length === 0 && <p>등록된 후기가 없습니다.</p>}
                 </ul>
             </div>
         </div>

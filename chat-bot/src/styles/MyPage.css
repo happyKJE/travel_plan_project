@@ -106,3 +106,100 @@
     border-radius: 8px;
     border: 1px solid #ccc;
 }
+
+.plans-section {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Pretendard', sans-serif;
+}
+
+.plans-section h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.plans-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.plans-section li {
+    background-color: #f9f9f9;
+    padding: 20px 25px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease;
+}
+
+.plans-section li:hover {
+    background-color: #e8f1ff;
+}
+
+.plans-section li strong {
+    font-size: 18px;
+    color: #2c92ff;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.plans-section li span {
+    font-size: 16px;
+    color: #555;
+}
+.profile-section {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Pretendard', sans-serif;
+}
+
+.profile-section h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.profile-section p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    border-left: 4px solid #2c92ff;
+}
+
+.profile-section button {
+    width: 100%;
+    padding: 15px;
+    background-color: #2c92ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.profile-section button:hover {
+    background-color: #1a75d2;
+    transform: translateY(-2px);
+}
+
+.profile-section button:active {
+    background-color: #155ba6;
+    transform: scale(0.98);
+}

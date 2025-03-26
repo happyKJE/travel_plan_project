@@ -59,7 +59,7 @@ const App = () => {
                                             <Route path="chat" element={<ChatScreen />} />
                                             <Route path="saving" element={<SavingChat />} />
                                             <Route path="travelReviews" element={<TravelReviews />} />
-                                            <Route path="review/:reviewId" element={<TravelReviewDetail />} />
+                                            <Route path="review/:id" element={<TravelReviewDetail />} />
                                             <Route path="reviewArea" element={<ReviewArea />} />
                                     </Route>
 

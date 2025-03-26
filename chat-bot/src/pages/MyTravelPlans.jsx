@@ -19,9 +19,9 @@ const MyTravelPlans = (myPlans) => {
                 (
                     <>
                         <p>등록된 여행 일정이 없습니다.</p>
-                        <Link to={'/'} >여행일정 만들러 가기</ Link>
                     </>
                 )}
+            <Link to={'/'} >여행일정 만들러 가기</ Link>
         </section>
     );
 };
