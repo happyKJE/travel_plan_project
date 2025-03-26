@@ -165,7 +165,7 @@ const RandomPlanStep = () => {
                         // ✅ 폰트 사이즈 조금 키우기
                         fontSize={18}
                     />
-                    )}
+                )}
             </div>
             <button
                 className='spin-btn'

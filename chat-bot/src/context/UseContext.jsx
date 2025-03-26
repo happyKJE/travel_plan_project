@@ -45,11 +45,11 @@ const chatReducer = (state, action) => {
                     [action.payload.type]: action.payload.value,
                 },
             };
-        // ✅ 로그인 처리
+        // 로그인 처리
         case "LOGIN":
             localStorage.setItem('token', action.payload);  // 토큰 저장
             return { ...state, isLoggedIn: true };
-        // ✅ 로그아웃 처리
+        // 로그아웃 처리
         case "LOGOUT":
             localStorage.removeItem('token');
             return { ...state, isLoggedIn: false };

@@ -46,27 +46,27 @@ const App = () => {
                     <main>
                         <IntroSection />
                         <Suspense fallback={<CloudLoading />}>
-                                <Routes>
-                                    <Route path="/" element={<PlanSelection />} />
-                                    <Route path="plan-selection" element={<PlanSelection />} />
+                            <Routes>
+                                <Route path="/" element={<PlanSelection />} />
+                                <Route path="plan-selection" element={<PlanSelection />} />
 
-                                    <Route path="" element={<ModalRoute />}>
-                                            <Route path="people-count" element={<PeopleCount />} />
-                                            <Route path="dates-selection" element={<DatesSelection />} />
-                                            <Route path="region-selection" element={<RegionSelection />} />
-                                            <Route path="plan-details/random" element={<RandomPlanStep />} />
-                                            <Route path="plan-details/custom" element={<CustomizedPlanStep />} />
-                                            <Route path="chat" element={<ChatScreen />} />
-                                            <Route path="saving" element={<SavingChat />} />
-                                            <Route path="travelReviews" element={<TravelReviews />} />
-                                            <Route path="review/:reviewId" element={<TravelReviewDetail />} />
-                                            <Route path="reviewArea" element={<ReviewArea />} />
-                                    </Route>
+                                <Route path="" element={<ModalRoute />}>
+                                    <Route path="people-count" element={<PeopleCount />} />
+                                    <Route path="dates-selection" element={<DatesSelection />} />
+                                    <Route path="region-selection" element={<RegionSelection />} />
+                                    <Route path="plan-details/random" element={<RandomPlanStep />} />
+                                    <Route path="plan-details/custom" element={<CustomizedPlanStep />} />
+                                    <Route path="chat" element={<ChatScreen />} />
+                                    <Route path="saving" element={<SavingChat />} />
+                                    <Route path="travelReviews" element={<TravelReviews />} />
+                                    <Route path="review/:reviewId" element={<TravelReviewDetail />} />
+                                    <Route path="reviewArea" element={<ReviewArea />} />
+                                </Route>
 
-                                    <Route path="login" element={<Login />} />
-                                    <Route path="join" element={<Join />} />
-                                    <Route path="mypage" element={<MyPage />} />
-                                </Routes>
+                                <Route path="login" element={<Login />} />
+                                <Route path="join" element={<Join />} />
+                                <Route path="mypage" element={<MyPage />} />
+                            </Routes>
                             <Background />
                             <TravelDestination />
                         </Suspense>

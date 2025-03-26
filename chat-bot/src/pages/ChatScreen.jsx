@@ -55,14 +55,14 @@ const ChatBot = () => {
                 text: `📅 여행일정: ${formatDate(selectedDates[0])}${selectedDates[1] ? `부터 ${formatDate(selectedDates[1])}까지` : ' (당일 하루)'}\n📍 여행지역: ${region}`,
                 timestamp: new Date().toLocaleDateString("ko-KR"),
             };
-    
+
             setMessages([userInfoMessage]);
             sendMessage(initMessage, false, systemMessage);
             executed = true;
         }
     }, []);
-    
-    
+
+
 
     // 메시지 전송 함수
     const handleSendMessage = (e) => {
@@ -193,12 +193,12 @@ const ChatBot = () => {
                 <div className="chat-input-container">
                     <div className='save-wrapper'>
                         <button className={`save-button ${state.isLoggedIn?'active':''}`} onClick={handleSaveButtonClick} disabled={!state.isLoggedIn}>
-                          <img
-                            src={saveIcon}
-                            alt="저장하기"
-                            className="save-button-image"
-                            title="저장하기"
-                          />
+                            <img
+                                src={saveIcon}
+                                alt="저장하기"
+                                className="save-button-image"
+                                title="저장하기"
+                            />
                         </button>
                         {!state.isLoggedIn && (
                             <div className="save-tooltip">로그인 시 저장 가능합니다</div>
