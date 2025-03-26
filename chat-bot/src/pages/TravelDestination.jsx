@@ -7,14 +7,15 @@
  * @lastModifiedDate 2025-03-26
  */
 
-import React, { useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import '../styles/TravelDestination.css';
 import destinations from '../data/TravelDestination.js';
 
 const TravelDestination = () => {
+    const ref = useRef();
     const [selectedDestination, setSelectedDestination] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
-
+    const [isVisible, setIsVisible] = useState(false);
     const openModal = (destination) => {
         setSelectedDestination(destination);
     };
@@ -28,31 +29,49 @@ const TravelDestination = () => {
         destination.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    return (
-        <section className="content-section">
-            <h2>어디로 여행을 떠나시겠어요?</h2>
-            <div className="search-container">
-                <p>도시를 검색해 보세요.</p> 
-                {/*검색어 입력창에서 실시간으로 searchQuery 업데이트*/}
-                <input
-                    type="text"
-                    placeholder="도시 이름을 입력하세요"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="search-input"
-                />
-            </div>
-            <ul className="card-container">
-                {filteredDestinations.map(destination => (
-                    <li key={destination.id} className="card" onClick={() => openModal(destination)}>
-                        <img src={destination.image} alt={destination.name} />
-                        <div className="info">
-                            <p>{destination.name}</p>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+            },
+            { threshold: 0.1 }
+        );
 
+        if (ref.current) observer.observe(ref.current);
+
+        return () => {
+            if (ref.current) observer.unobserve(ref.current);
+        };
+    }, []);
+
+    return (
+        <section className="content-section" ref={ref}>
+            {isVisible && (
+                <>
+                    <h2>어디로 여행을 떠나시겠어요?</h2>
+                    <div className="search-container">
+                        <p>도시를 검색해 보세요.</p>
+                        {/*검색어 입력창에서 실시간으로 searchQuery 업데이트*/}
+                        <input
+                            type="text"
+                            placeholder="도시 이름을 입력하세요"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="search-input"
+                        />
+                    </div>
+                    <ul className="card-container">
+                        {filteredDestinations.map(destination => (
+                            <li key={destination.id} className="card" onClick={() => openModal(destination)}>
+                                <img src={destination.image} alt={destination.name} />
+                                <div className="info">
+                                    <p>{destination.name}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
             {selectedDestination && (
                 <div className="travel-destination-modal" onClick={closeModal}>
                     <div className="modal-content" onClick={e => e.stopPropagation()}>

@@ -71,7 +71,7 @@
     display: flex;
     flex-direction: column;
     background: rgba(230, 250, 270, 0.6);
-    border-radius: 15px;
+    border-radius: 8px;
     padding: 15px;
     box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -119,6 +119,55 @@
     max-width: 70%;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
+.save-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/* 저장 버튼 */
+.save-button{
+    background-color: #ccc;
+    border: none;
+    cursor: not-allowed;
+    transition: background-color 0.3s;
+    color: white;
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+
+.save-button.active {
+    transform: translateY(-3px);
+    cursor: pointer;
+    background-color: #3fa9f5;
+}
+
+.save-button.active:hover {
+    background-color: #3b5ee8;
+}
+
+.save-button-image{
+    height: 20px;
+}
+
+.save-tooltip {
+    position: absolute;
+    top: -40px;
+    left: 100px;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.save-wrapper:hover .save-tooltip {
+    opacity: 1;
+}
 
 /* 입력창 */
 .chat-input-container {
@@ -138,9 +187,13 @@
     outline: none;
 }
 
+.save-button-image{
+    height: 20px;
+}
+
 /* 전송 버튼 */
 .send-button {
-    background: #4A90E2;
+    background: linear-gradient(135deg, #3fa9f5, #57c1ff);
     color: white;
     border: none;
     padding: 10px 15px;
@@ -150,7 +203,8 @@
 }
 
 .send-button:hover {
-    background: #357ABD;
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #57c1ff, #3fa9f5);
 }
 
 /* 비행기 애니메이션 */

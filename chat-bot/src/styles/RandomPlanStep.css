@@ -1,87 +1,56 @@
-.content-section {
-    min-height: 300vh;
-    background-color: #fff;
-    padding: 2rem;
-}
-
-.roulette-container {
+.Roulette-box {
     display: flex;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    align-items: flex-start;
-}
-
-.roulette-content {
-    flex: 0 0 auto;
 }
 
 .roulette-type {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
-}
-
-.roulette-type button {
-    height: 80px;
-    border: none;
-    border-radius: 12px;
-    background: #f8f9fa;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    padding: 1rem;
-}
-
-.roulette-type button:hover {
-    background: #e9ecef;
-    transform: translateY(-2px);
-}
-
-.roulette-type button.selected {
-    background: #339af0;
-    color: white;
-}
-
-.roulette-controls {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
 }
 
-.result-text {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #333;
+.roulette-select-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.result-text span {
-    font-weight: bold;
-    color: #3498db;
-    margin-left: 0.5rem;
+.mode-icon {
+    font-size: 28px;
 }
 
-.spin-button {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    border: none;
+.roulette-select-with-icon select {
+    width: fit-content;
+    padding: 12px 15px;
     border-radius: 8px;
-    background: #339af0;
-    color: white;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
     cursor: pointer;
-    transition: all 0.3s ease;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%234c74ff" height="24" viewBox="0 0 24 24" width="24"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
 }
 
-.spin-button:hover {
-    background: #228be6;
-    transform: translateY(-2px);
+.roulette-select-with-icon select:focus {
+    border-color: #4c74ff;
+    outline: none;
 }
 
-.spin-button:disabled {
-    background: #adb5bd;
-    cursor: not-allowed;
-    transform: none;
+.spin-btn {
+    padding: 15px 40px;
+    background-color: #4c74ff;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(76, 116, 255, 0.4);
+    transition: all 0.3s;
+}
+
+.spin-btn:hover {
+    background-color: #3b5ee8;
+    box-shadow: 0 8px 20px rgba(76, 116, 255, 0.6);
+    transform: translateY(-3px);
 }

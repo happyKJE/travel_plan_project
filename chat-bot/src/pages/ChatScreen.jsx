@@ -9,25 +9,29 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 import '../styles/ChatBot.css';
 import useStore from "../context/UseStore.jsx";
+import saveIcon from "../assets/saveImage.png";
 import { placeOptions } from "../data/OptionsData.jsx";
+import {useModal} from "../components/ModalProvider.jsx";
 
 const ChatBot = () => {
     const [showPlane, setShowPlane] = useState(false);
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false); // 로딩 상태 추가
     const { state } = useStore();
+    const { showModal } = useModal();
     const inputRef = useRef(null);
     const placeData = placeOptions.find(option => option.label === state.inputValues.placeOption)?.value || 'nomatter';
     const backgroundImage = `/assets/${placeData}Background.jfif`;
-    const { planType, selectedDates, personnelOption = '1', region, placeOption = 'nomatter', transportOption = 'nomatter', travelStyleOption = 'nomatter' } = state.inputValues;
-
+    const { planType, selectedDates, personnelOption = '1', region, placeOption, transportOption, travelStyleOption = 'nomatter' } = state.inputValues;
     const isOneDayTrip = selectedDates[0] === selectedDates[1];
-    
+    const formatDate = (dateStr) => dateStr?.split('T')[0];
+
     const systemMessage = planType === "random"
-        ? `너는 랜덤 여행 플래너야. 사용자가 정해준 날짜와 지역을 바탕으로 일정만 추천해줘. ${isOneDayTrip ? '반드시 ✅당일치기 (날짜) 형식으로 오전, 오후, 저녁' : '반드시 ✅n일차 (날짜, 차수) 형식으로 오전, 오후, 저녁, 숙박'} 계획을 작성해. ✅를 기준으로 줄바꿈 해줘`
-        : `너는 여행 플래너야. ${isOneDayTrip ? '반드시 ✅당일치기 (날짜) 형식으로 오전, 오후, 저녁' : '반드시 ✅n일차 (날짜, 차수) 형식으로 오전, 오후, 저녁, 숙박'} 계획을 작성해. ✅를 기준으로 줄바꿈 해줘`;
+        ? `너는 랜덤 여행 플래너야. 가급적 존댓말을 사용하고 사용자가 정해준 날짜와 지역을 바탕으로 일정만 추천해줘. ${isOneDayTrip ? '반드시 ✅당일치기 (날짜) 형식으로 시간대별 추천대신 오전, 오후, 저녁' : '반드시 ✅n일차 (날짜, 차수) 형식으로 오전, 오후, 저녁, 숙박'} 계획을 작성해. ✅를 기준으로 줄바꿈 해줘`
+        : `너는 여행 플래너야. 가급적 존댓말을 사용해줘. ${isOneDayTrip ? '반드시 ✅당일치기 (날짜) 형식으로 오전, 오후, 저녁' : '반드시 ✅n일차 (날짜, 차수) 형식으로 오전, 오후, 저녁, 숙박'} 계획을 작성해. ✅를 기준으로 줄바꿈 해줘`;
 
     const initMessage = planType === "random"
         ? `${selectedDates[0]}${selectedDates[1] ? `부터 ${selectedDates[1]}까지` : ''}
@@ -39,27 +43,26 @@ const ChatBot = () => {
             여행 스타일은 ${travelStyleOption === "nomatter" ? "상관없음" : travelStyleOption}이야.
             일정 추천해줘.`;
 
+    const title = `${formatDate(selectedDates[0])}${selectedDates[1] ? `~${formatDate(selectedDates[0])}` : ''} ${region} ${personnelOption}명의 여행 계획`;
 
     //실행 여부를 추적하는 변수
     let executed = false;
     useEffect(() => {
         if (!executed) {
-            const formatDate = (dateStr) => dateStr?.split('T')[0];
-    
             const userInfoMessage = {
                 id: uuidv4(),
                 type: "response",
                 text: `📅 여행일정: ${formatDate(selectedDates[0])}${selectedDates[1] ? `부터 ${formatDate(selectedDates[1])}까지` : ' (당일 하루)'}\n📍 여행지역: ${region}`,
                 timestamp: new Date().toLocaleDateString("ko-KR"),
             };
-    
+
             setMessages([userInfoMessage]);
             sendMessage(initMessage, false, systemMessage);
             executed = true;
         }
     }, []);
-    
-    
+
+
 
     // 메시지 전송 함수
     const handleSendMessage = (e) => {
@@ -67,6 +70,34 @@ const ChatBot = () => {
         if (!inputRef.current.value.trim()) return;
         sendMessage(inputRef.current.value, true);
         inputRef.current.value = "";
+    };
+
+    // 채팅 내용 저장 함수
+    const handleSaveButtonClick = async () => {
+        try {
+            const res = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/chat/save`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+                body: JSON.stringify({
+                    title,
+                    date: `${formatDate(selectedDates[0])}${selectedDates[1] ? `~${formatDate(selectedDates[0])}` : ''}`,
+                    messages: JSON.stringify(messages),
+                }),
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+                showModal('여행 플랜이 저장되었습니다.','/mypage');
+            } else {
+                showModal(`여행 플랜 저장 오류: ${data.message}`);
+            }
+        } catch (err) {
+            console.error('채팅 저장 실패:', err);
+            showModal('서버 오류: 잠시후 다시 시도해 주세요.');
+        }
     };
 
     // OpenAI API에 메시지 전송
@@ -141,7 +172,7 @@ const ChatBot = () => {
         <div className="app-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
             <div className="chatbot-container">
                 <div className="chatbot-header">
-                    <div className="logo"><img width="70px" alt="" src="/src/assets/logo_wheretogo.png" /></div>
+                    <div className="logo"><img width="70px" alt="" src="../assets/logo_wheretogo.png" /></div>
                 </div>
 
                 <div className="chat-messages">
@@ -160,6 +191,19 @@ const ChatBot = () => {
                 </div>
 
                 <div className="chat-input-container">
+                    <div className='save-wrapper'>
+                        <button className={`save-button ${state.isLoggedIn?'active':''}`} onClick={handleSaveButtonClick} disabled={!state.isLoggedIn}>
+                            <img
+                                src={saveIcon}
+                                alt="저장하기"
+                                className="save-button-image"
+                                title="저장하기"
+                            />
+                        </button>
+                        {!state.isLoggedIn && (
+                            <div className="save-tooltip">로그인 시 저장 가능합니다</div>
+                        )}
+                    </div>
                     <input
                         type="text"
                         className="chat-input"

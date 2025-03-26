@@ -17,8 +17,7 @@
  *    createContext :컴포넌트 간 props 없이 상태 공유 가능.
  */
 
-import { createContext, useReducer, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { createContext, useReducer } from "react";
 
 //상태를 전역적으로 관리하기 위한 context 생성
 const UseContext = createContext({});
@@ -29,9 +28,8 @@ const initialState = {
     inputValues: {},
     chats: [],
     activeChatId: null,
+    isLoggedIn: !!localStorage.getItem('token')
 };
-
-const STORAGE_KEY = "travelAppState";
 
 const chatReducer = (state, action) => {
     switch (action.type) {
@@ -47,39 +45,14 @@ const chatReducer = (state, action) => {
                     [action.payload.type]: action.payload.value,
                 },
             };
-        case "CREATE_CHAT": {
-            const newChat = {
-                id: uuidv4(),
-                displayId: `${new Date().toLocaleString("ko-KR")}`,
-                messages: [],
-            };
-            return {
-                ...state,
-                chats: [newChat, ...state.chats],
-                activeChatId: newChat.id,
-            };
-        }
-        case "ADD_MESSAGE": {
-            const { chatId, message } = action.payload;
-            return {
-                ...state,
-                chats: state.chats.map((chat) =>
-                    chat.id === chatId
-                        ? { ...chat, messages: [...chat.messages, message] }
-                        : chat
-                ),
-            };
-        }
-        case "DELETE_CHAT": {
-            const updatedChats = state.chats.filter((chat) => chat.id !== action.payload);
-            return {
-                ...state,
-                chats: updatedChats,
-                activeChatId: updatedChats.length > 0 ? updatedChats[0].id : null,
-            };
-        }
-        case "SET_ACTIVE_CHAT":
-            return { ...state, activeChatId: action.payload };
+        // 로그인 처리
+        case "LOGIN":
+            localStorage.setItem('token', action.payload);  // 토큰 저장
+            return { ...state, isLoggedIn: true };
+        // 로그아웃 처리
+        case "LOGOUT":
+            localStorage.removeItem('token');
+            return { ...state, isLoggedIn: false };
         default:
             return state;
     }
