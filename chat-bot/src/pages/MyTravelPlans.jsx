@@ -6,10 +6,10 @@ const MyTravelPlans = (myPlans) => {
     return (
         <section className="plans-section">
             <h3>나의 여행 일정</h3>
-            {myPlans.length > 0 ?
+            {myPlans.myPlans.length > 0 ?
                 (
                     <ul>
-                        {myPlans.map(plan => (
+                        {myPlans.myPlans.map(plan => (
                             <li key={plan.id}>
                                 <strong>{plan.title}</strong> <br /> {plan.date}
                             </li>

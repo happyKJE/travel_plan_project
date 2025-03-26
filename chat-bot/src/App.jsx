@@ -1,9 +1,8 @@
 import React, {lazy, Suspense} from "react";
 import {BrowserRouter as Router, Routes, Route, Outlet} from "react-router-dom";
-
 import { ChatProvider } from "./context/UseContext.jsx";
 import Header from "./components/Header";
-import IntroSection from "./components/IntroSection.jsx";
+import IntroSection from "./components/IntroSection";
 import Modal from "./components/Modal.jsx";
 import PlanSelection from "./pages/PlanSelection.jsx";
 import ReloadHandler from "./components/ReloadHandler.jsx";
@@ -28,7 +27,6 @@ const Join = lazy(() => import("./pages/Register.jsx"));
 const MyPage = lazy(() => import("./pages/MyPage.jsx"));
 
 const App = () => {
-
     const ModalRoute = () => {
         return (
             <div>
