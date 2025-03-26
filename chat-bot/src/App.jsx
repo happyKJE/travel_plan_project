@@ -8,6 +8,7 @@ import PlanSelection from "./pages/PlanSelection.jsx";
 import ReloadHandler from "./components/ReloadHandler.jsx";
 import {ModalProvider} from "./components/ModalProvider.jsx";
 import CloudLoading from "./components/CloudLoading.jsx";
+import Footer from "./components/Footer.jsx";
 
 //laze : 컴포넌트를 동적으로 로드 => 필요할때만 호출. Suspense로 감싸지않으면 오류
 const PeopleCount = lazy(() => import("./pages/PeopleCount"));
@@ -71,7 +72,7 @@ const App = () => {
                             <TravelDestination />
                         </Suspense>
                     </main>
-                    <footer></footer>
+                    <Footer />
                 </ModalProvider>
             </Router>
         </ChatProvider>

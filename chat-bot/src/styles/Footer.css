@@ -1,0 +1,107 @@
+footer {
+    background: linear-gradient(to right, #dff6ff, #fef8ec); /* 하늘색 ~ 유채꽃빛 배경 */
+    padding-top: 2.5rem;
+    padding-bottom: 2rem;
+    color: #444;
+    font-family: 'Pretendard', sans-serif;
+    border-top: 1px solid #d1e6f9;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .footer-company-info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+  
+  .footer-company-info h5 {
+    font-size: 0.75rem;
+    color: #6b7280; /* soft gray */
+    margin-top: 0.25rem;
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: #444;
+    margin: 1rem 0;
+  }
+  
+  .footer-links a,
+  .footer-links button {
+    color: #444;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover,
+  .footer-links button:hover {
+    color: #008dd5; /* 하늘색 포인트 */
+    text-decoration: underline;
+  }
+  
+  .footer-social-buttons {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .footer-social-buttons button {
+    width: 42px;
+    height: 42px;
+    background-color: #fff;
+    border-radius: 9999px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+  }
+  
+  .footer-social-buttons button:hover {
+    transform: translateY(-2px);
+    background-color: #fefae0; /* 유채빛 */
+  }
+  
+  .footer-store-links {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 0;
+    gap: 1rem;
+  }
+  
+  .footer-store-links img {
+    width: 100%;
+    max-width: 120px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    font-size: 0.7rem;
+    color: #6b7280;
+    padding-top: 1rem;
+    border-top: 1px dashed #cce4f0;
+  }
+  

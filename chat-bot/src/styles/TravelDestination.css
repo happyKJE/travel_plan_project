@@ -10,13 +10,13 @@
     height: 300px;
     background-position: center;
     background-size: cover;
-    filter: brightness(0.7);
+    filter: brightness(0.8);
   }
   
   .cover-wide-panel .box {
     position: relative;
     max-width: 900px;
-    margin: -100px auto 0;
+    margin: -130px auto 200px;
     background-color: #fff;
     padding: 60px 250px;
     border-radius: 64px;
