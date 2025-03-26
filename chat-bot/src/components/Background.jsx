@@ -1,44 +1,42 @@
-/**
- * @file Background.jsx
- * @description 백그라운드 이미지 애니메이션 효과 (스크롤 이동 적용)
- * @author jaeyeol
- * @created 2025-03-11
- * @lastModifiedBy jungeun
- * @lastModifiedDate 2025-03-21
- */
-
-import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import "../styles/Background.css";
 
 const Background = () => {
-  const bgRef = useRef(null);
+  const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    
+    if (currentScrollY > lastScrollY && currentScrollY > 50) {
+      // 아래로 스크롤하면 숨김
+      setShow(false);
+    } else if (currentScrollY < lastScrollY && currentScrollY < 80) {
+      // 위로 스크롤해도 300 이하로 올라오면 보임
+      setShow(true);
+    }
+
+    setLastScrollY(currentScrollY);
+  };
+  
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      if (bgRef.current) {
-        // 0.5로 속도 조절
-        bgRef.current.style.transform = `translateY(${scrollY * 0.5}px)`;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    // 컴포넌트 unmount 시 이벤트 제거
+    window.addEventListener("scroll", handleScroll);
+    
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [lastScrollY]);
 
   return (
-    <motion.div
-      initial={{ y: -150, opacity: 1 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.5, duration: 1.5, ease: "easeInOut" }}
+    <div
       className="background-container"
-      id="background" ref={bgRef}
-    />
+      style={{
+        opacity: show ? 1 : 0,
+        transition: "opacity 1.5s ease",
+        pointerEvents: show ? 'auto' : 'none', 
+      }}
+    >
+    </div>
   );
 };
 
