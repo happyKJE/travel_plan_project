@@ -128,11 +128,11 @@ const RandomPlanStep = () => {
                     </span>
 
                 <select value={mode} disabled={mustSpin} onChange={(e) => setMode(e.target.value)}>
-                    <option value="location">전국~~</option>
-                    <option value="island">섬도 가능?</option>
-                    <option value="cultural">나의문화유산답</option>
-                    <option value="petPlace">반려동물과 함께 공원에 가요</option>
-                    <option value="petCulture">반려동물과 함께 문화를 즐겨요</option>
+                    <option value="location">🗺️전국자치구 250개!!</option>
+                    <option value="island">🏝️어디까지 가봤니? 섬ver</option>
+                    <option value="cultural">👣나의문화유산답사기</option>
+                    <option value="petPlace">🐶달려달려 강아지</option>
+                    <option value="petCulture">🐕교양있는 멍멍이</option>
                 </select>
             </div>
             <div className='Roulette-box'>
