@@ -4,6 +4,8 @@
   color: #333;
   font-family: 'Pretendard', sans-serif;
   border-top: 2px solid #d0ebff;
+  position: static;
+  margin-top: 10rem;
 }
 
 .footer-container {
