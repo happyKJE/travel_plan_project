@@ -95,7 +95,6 @@ const RandomPlanStep = () => {
     const handleStopSpinning = () => {
         setMustSpin(false);
         const result = rouletteOptions[prizeNumber].option;
-        setSelectedPlace(result);
         console.log("룰렛 결과 : ", result);
     };
 
