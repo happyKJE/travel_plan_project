@@ -27,6 +27,5 @@ app.use('/uploads', express.static('uploads')); // 업로드 파일 접근 경�
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
-app.use('/api/posts', postsRoutes); // 게시판 라우트
-
+app.use('/api/posts', postsRoutes);
 export default app;

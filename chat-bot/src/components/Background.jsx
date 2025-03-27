@@ -22,7 +22,7 @@ const Background = () => {
 
       if (currentScrollY > lastScrollY && currentScrollY > 80) {
         setShow(false);
-      } else if (currentScrollY < lastScrollY && currentScrollY <= 90 && !isHiddenPage) {
+      } else if (currentScrollY < lastScrollY && currentScrollY <= 80 && !isHiddenPage) {
         setShow(true);
       }
 

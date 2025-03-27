@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../styles/Header.css";
-import logoImg from "../assets/images/logo_wheretogo.png";
 import useStore from "../context/UseStore.jsx";
 import {useModal} from "./ModalProvider.jsx";
 
@@ -12,6 +11,10 @@ const Header = () => {
     const [lineStyle, setLineStyle] = useState({ width: 0, left: 0 });
     const { state,dispatch } = useStore();
     const { showModal } = useModal();
+
+    const handleReset = () => {
+        dispatch({ type: "RESET_STATE" }); // 상태 초기화 액션 디스패치
+    };
 
     const handleMouseEnter = (e) => {
         const target = e.target;
@@ -35,18 +38,18 @@ const Header = () => {
     return (
         <header className="header">
             <div className="logo">
-                <img src={logoImg} width="100px" alt="로고" onClick={() => navigate("/")} />
+                <img src='/assets/images/logo_wheretogo.png' width="100px" alt="로고" onClick={() => navigate("/")} />
             </div>
             <nav ref={navRef} onMouseLeave={handleMouseLeave}>
                 <ul className="mainmenu">
                     <li
                         onMouseEnter={handleMouseEnter}
-                        onClick={() => navigate("/")}
+                        onClick={() => {navigate("/"); handleReset();}}
                     >홈</li>
 
                     <li
                         onMouseEnter={handleMouseEnter}
-                        onClick={() => navigate("/travelReviews")}
+                        onClick={() => {navigate("/travelReviews") }}
                         className="review-link"
                     >여행 후기</li>
                 {state.isLoggedIn ? (
