@@ -29,13 +29,15 @@ const MyTravelPlans = ({ myPlans, setMyPlans }) => {
         <section className="plans-section">
             <h3>나의 여행 일정</h3>
             {myPlans.length > 0 ? (
-                <ul>
+                <ul className="plan-list">
                     {myPlans.map(plan => (
-                        <li key={plan.id}>
+                        <li key={plan.id} className="plan-item">
+                          <Link to={`/mypage/plan/${plan.id}`} className="plan-link">
                             <strong>{plan.title}</strong>
                             <button onClick={() => handleDelete(plan.id)} style={{ marginLeft: '10px' }}>
                                 삭제
                             </button>
+                          </Link>
                         </li>
                     ))}
                 </ul>

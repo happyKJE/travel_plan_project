@@ -241,6 +241,70 @@
     text-align: left;
     animation: dots 1s infinite;
 }
+.message-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    margin: 8px 0;
+    position: relative;
+}
+
+.msg-save-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.msg-save-button {
+    background-color: #cfddf3;
+    border: 1px solid #a3c3dd;
+    border-radius: 50%;
+    padding: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(255, 200, 200, 0.2);
+    transition: all 0.2s ease;
+}
+
+.msg-save-button img {
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+}
+
+.msg-save-button:hover {
+    background-color: rgba(132, 194, 255, 0.7);
+    transform: scale(1.05);
+}
+
+.msg-save-button:hover + .save-tooltip {
+    opacity: 1;
+    transform: translateY(-4px);
+    pointer-events: auto;
+}
+
+/* ✨ 귀여운 툴팁 스타일 */
+.save-tooltip {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    background-color: rgb(226, 241, 255);
+    color: #4a4545;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 10;
+}
 
 @keyframes dots {
     0%, 20% {

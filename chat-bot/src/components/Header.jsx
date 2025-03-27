@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../styles/Header.css";
-import logoImg from "../assets/images/logo_wheretogo.png";
 import useStore from "../context/UseStore.jsx";
 import {useModal} from "./ModalProvider.jsx";
 
@@ -39,7 +38,7 @@ const Header = () => {
     return (
         <header className="header">
             <div className="logo">
-                <img src={logoImg} width="100px" alt="로고" onClick={() => {navigate("/"); handleReset();}} />
+                <img src='/assets/images/logo_wheretogo.png' width="100px" alt="로고" onClick={() => navigate("/")} />
             </div>
             <nav ref={navRef} onMouseLeave={handleMouseLeave}>
                 <ul className="mainmenu">

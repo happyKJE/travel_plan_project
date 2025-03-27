@@ -43,7 +43,6 @@ const MyInfo = (userInfo,setUserInfo) => {
                 <p>이름: {userInfo.userInfo.name}</p>
                 <p>이메일: {userInfo.userInfo.email}</p>
                 <p>전화번호: {userInfo.userInfo.phoneNumber}</p>
-                <button onClick={() => setEditMode(true)}>정보 수정</button>
             </>
             )}
 

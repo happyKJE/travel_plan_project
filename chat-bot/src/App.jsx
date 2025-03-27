@@ -9,6 +9,7 @@ import ReloadHandler from "./components/ReloadHandler.jsx";
 import {ModalProvider} from "./components/ModalProvider.jsx";
 import CloudLoading from "./components/CloudLoading.jsx";
 import Footer from "./components/Footer.jsx";
+import MyPlanDetail from "./pages/MyPlanDetail.jsx";
 
 //laze : 컴포넌트를 동적으로 로드 => 필요할때만 호출. Suspense로 감싸지않으면 오류
 const PeopleCount = lazy(() => import("./pages/PeopleCount"));
@@ -62,6 +63,7 @@ const App = () => {
                                     <Route path="travelReviews" element={<TravelReviews />} />
                                     <Route path="review/:id" element={<TravelReviewDetail />} />
                                     <Route path="reviewArea" element={<ReviewArea />} />
+                                    <Route path="/mypage/plan/:id" element={<MyPlanDetail />} />
                                 </Route>
 
                                 <Route path="login" element={<Login />} />
