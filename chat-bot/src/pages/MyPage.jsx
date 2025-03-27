@@ -50,7 +50,7 @@ const MyPage = () => {
 
       <div className="mypage-content">
         {activeTab === 'info' && userInfo && <MyInfo userInfo={userInfo} setUserInfo={setUserInfo} />}
-        {activeTab === 'plans' && myPlans && <MyTravelPlans myPlans={myPlans} />}
+        {activeTab === 'plans' && myPlans && <MyTravelPlans myPlans={myPlans} setMyPlans={setMyPlans} />}
       </div>
     </div>
   );

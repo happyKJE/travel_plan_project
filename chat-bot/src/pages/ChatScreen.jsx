@@ -43,7 +43,10 @@ const ChatBot = () => {
             여행 스타일은 ${travelStyleOption === "nomatter" ? "상관없음" : travelStyleOption}이야.
             일정 추천해줘.`;
 
-    const title = `${formatDate(selectedDates[0])}${selectedDates[1] ? `~${formatDate(selectedDates[0])}` : ''} ${region} ${personnelOption}명의 여행 계획`;
+    const title = `📅 ${isOneDayTrip 
+        ? `${formatDate(selectedDates[0])},` 
+        : `${formatDate(selectedDates[0])} ~ ${formatDate(selectedDates[1])}  `
+        }  \n📍 ${region}`;
 
     //실행 여부를 추적하는 변수
     let executed = false;
