@@ -34,7 +34,11 @@ const initialState = {
 const chatReducer = (state, action) => {
     switch (action.type) {
         case "RESET_STATE":
-            return { ...initialState }; // 초기 상태로 리셋
+            return {
+                ...initialState,
+                token: state.token,         // 기존 토큰 유지
+                isLoggedIn: state.isLoggedIn // 로그인 상태도 유지
+            };
         case "SELECT_PLAN":
             return { ...state, planType: action.payload };
         case "SET_OPTION":
