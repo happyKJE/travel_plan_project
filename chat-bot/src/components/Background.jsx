@@ -1,43 +1,49 @@
-/**
- * @file Background.jsx
- * @description 백그라운드 이미지 애니메이션 효과 (스크롤 이동 적용)
- * @author jaeyeol
- * @created 2025-03-11
- * @lastModifiedBy jungeun
- * @lastModifiedDate 2025-03-21
- */
-
-import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import "../styles/Background.css";
+import { useLocation } from "react-router-dom";
 
 const Background = () => {
-  const bgRef = useRef(null);
+  const [show, setShow] = useState(true);
+  const location = useLocation();
 
+  const isHiddenPage = ["/login", "/join", "/mypage"].includes(location.pathname);
+
+  //경로 바뀌면 show 변경
   useEffect(() => {
+    setShow(!isHiddenPage);
+  }, [isHiddenPage]);
+
+  //스크롤 이벤트
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      if (bgRef.current) {
-        // 0.5로 속도 조절
-        bgRef.current.style.transform = `translateY(${scrollY * 0.5}px)`;
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        setShow(false);
+      } else if (currentScrollY < lastScrollY && currentScrollY <= 90 && !isHiddenPage) {
+        setShow(true);
       }
+
+      lastScrollY = currentScrollY;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-    // 컴포넌트 unmount 시 이벤트 제거
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isHiddenPage]);
 
   return (
-    <motion.div
-      initial={{ y: -150, opacity: 1 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.5, duration: 1.5, ease: "easeInOut" }}
+    <div
       className="background-container"
-      id="background" ref={bgRef}
+      style={{
+        opacity: show ? 1 : 0,
+        transition: "opacity 1.5s ease",
+        pointerEvents: show ? "auto" : "none",
+      }}
     />
   );
 };

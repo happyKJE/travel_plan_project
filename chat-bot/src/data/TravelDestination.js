@@ -2,6 +2,8 @@ const regions = [
     {
       id: 1,
       name: '제주도(Jeju)',
+      koreanName:'제주도',
+      englishName:'Jeju',
       image: '/assets/region_images/Jeju.jpg',
       description: '섬 전체가 하나의 거대한 관광자원인 제주도. \n에메랄드 빛 물빛이 인상적인 협재 해수욕장은 제주 대표 여행지며, \n파도가 넘보는 주상절리와 바다 위 산책로인 용머리 해안은 제주에서만 볼 수 있는 천혜의 자연경관으로 손꼽힌다. \n드라마 촬영지로 알려진 섭지코스는 꾸준한 사랑을 받고 있으며 한라봉과 흑돼지, 은갈치 등은 제주를 대표하는 음식이다.',
       flight: '없음',
@@ -12,6 +14,8 @@ const regions = [
     {
       id: 2,
       name: '부산(Busan)',
+      koreanName:'부산',
+      englishName:'Busan',
       image: '/assets/region_images/busan.jpg',
       description: '우리나라 제2의 수도 부산광역시. 부산 대표 관광지로 손꼽히는 해운대는 밤에는 마린시티의 야경이 더해져 더욱 화려한 해변이 된다. 감천문화마을은 사진 찍기에 좋으며, 매해 가을마다 개최되는 아시아 최대규모의 영화제인 부산국제영화제와 함께 부산의 구석구석을 즐겨보는 것도 좋다. 전통시장 투어가 있을 만큼 먹거리가 가득한 부산의 맛기행은 필수!',
       flight: '없음',
@@ -22,6 +26,8 @@ const regions = [
     {
       id: 3,
       name: '서울(Seoul)',
+      koreanName:'서울',
+      englishName:'Seoul',
       image: '/assets/region_images/Seoul.jpg',
       description: '과거와 현재가 공존하며 하루가 다르게 변하는 서울을 여행하는 일은 매일이 새롭다. 도시 한복판에서 600년의 역사를 그대로 안고 있는 아름다운 고궁들과 더불어 대한민국의 트렌드를 이끌어나가는 예술과 문화의 크고 작은 동네들을 둘러볼 수 있는 서울은 도시 여행에 최적화된 장소다.',
       flight: '없음',
@@ -32,6 +38,8 @@ const regions = [
     {
       id: 4,
       name: '경주(Gyeongju)',
+      koreanName:'경주',
+      englishName:'Gyeongju',
       image: '/assets/region_images/kyungJu.JPG',
       description: '지붕 없는 박물관 경주. 경주는 그만큼 발길이 닿는 어느 곳이든 문화유적지를 만날 수 있는 곳이다. 밤이면 더 빛나는 안압지를 비롯해 첨성대, 불국사, 석굴암까지 어느 하나 빼놓을 수 없다. 16곳의 명소를 탐방하며 찍는 도장을 모으는 스탬프 투어도 재미있다.',
       flight: '없음',
@@ -42,6 +50,8 @@ const regions = [
     {
       id: 5,
       name: '강릉(Gangneung)',
+      koreanName:'강릉',
+      englishName:'Gangneung',
       image: '/assets/region_images/gangneung.jpg',
       description: '은은한 커피향이 남다른 강원도 강릉시. 안목해변의 카페거리와 정동진의 일출, 경포대의 야경은 강릉 여행의 대표 코스다. 해발 1,100m에 위치한 안반데기에서 바라보는 일출도 일품이다.',
       flight: '없음',
@@ -52,6 +62,8 @@ const regions = [
     {
       id: 6,
       name: '여수(Yeosu)',
+      koreanName:'여수',
+      englishName:'Yeosu',
       image: '/assets/region_images/yeosu.jpg',
       description: '국제 해양관광의 중심 전남 여수시. 오동도, 해상케이블카, 돌산대교, 그리고 다양한 해산물 요리까지 낭만과 맛을 모두 즐길 수 있는 만점 관광지다.',
       flight: '없음',
@@ -62,6 +74,8 @@ const regions = [
     {
       id: 7,
       name: '거제통영(GeojeTongyeong)',
+      koreanName:'거제통영',
+      englishName:'JeGeojeTongyeongju',
       image: '/assets/region_images/toungyoung.jpg',
       description: '예술과 음식의 맛에 혼을 빼앗기는 통영. 장사도, 박경리 유적지, 충무김밥과 꿀빵 등 통영 여행의 즐거움을 더해주는 볼거리와 먹거리가 가득하다.',
       flight: '없음',
@@ -72,6 +86,8 @@ const regions = [
     {
       id: 8,
       name: '남원(Namwon)',
+      koreanName:'남원',
+      englishName:'Namwon',
       image: '/assets/region_images/namwon.jpg',
       description: '춘향과 몽룡의 사랑이 깃든 남원. 광한루, 오작교, 혼불문학관, 지리산 바래봉 철쭉제까지 봄 여행지로 제격인 곳이다.',
       flight: '없음',
@@ -82,6 +98,8 @@ const regions = [
     {
       id: 9,
       name: '전주(Jeonju)',
+      koreanName:'전주',
+      englishName:'Jeonju',
       image: '/assets/region_images/jeonju.jpg',
       description: '한옥마을, 경기전, 전동성당, 자만벽화마을 등 한국의 멋과 맛이 살아 숨쉬는 도시. 전주야경투어도 인기다.',
       flight: '없음',
@@ -92,6 +110,8 @@ const regions = [
     {
       id: 10,
       name: '포항(Pohang)',
+      koreanName:'포항',
+      englishName:'Pohang',
       image: '/assets/region_images/pohang.jpg',
       description: '한반도에서 가장 빠른 해돋이 명소 포항. 구룡포, 호미곶, 칠포해수욕장, 국립등대박물관 등 바다와 어우러진 풍경이 인상적이다.',
       flight: '없음',
@@ -102,6 +122,8 @@ const regions = [
     {
       id: 11,
       name: '인천(Incheon)',
+      koreanName:'인천',
+      englishName:'Incheon',
       image: '/assets/region_images/incheon.jpg',
       description: '내륙과 해양 관광이 모두 가능한 인천광역시. 을왕리 해수욕장, 월미도, 차이나타운 등 다양한 테마로 여행하기 좋은 도시다.',
       flight: '없음',
@@ -112,6 +134,8 @@ const regions = [
     {
       id: 12,
       name: '춘천(Chuncheon)',
+      koreanName:'춘천',
+      englishName:'Chuncheon',
       image: '/assets/region_images/chuncheon.jpg',
       description: '경춘선 청춘열차로 더욱 가까워진 춘천. 남이섬, 김유정 문학관, 닭갈비골목 등 문학과 예술, 자연을 모두 느낄 수 있는 도시다.',
       flight: '없음',
@@ -122,6 +146,8 @@ const regions = [
     {
       id: 13,
       name: '군산(Gunsan)',
+      koreanName:'군산',
+      englishName:'Gunsan',
       image: '/assets/region_images/gunsan.jpg',
       description: '1930년대 우리나라 근대역사를 고스란히 간직한 도시 군산. 근대문화유산 투어 코스를 따라 걷다보면 곳곳에 남아있는 일본식 주택과 근대 건축물들을 쉽게 볼 수 있다. 2.5km 길이의 오래된 철도가 놓인 경암동 철길마을은 출사지로도 유명. 우리나라에서 가장 오래된 빵집, 전국 5대 짬뽕 맛집, 70년 역사의 호떡집 등 군산 맛집 먹방 여행도 추천한다.',
       flight: '없음',
@@ -132,6 +158,8 @@ const regions = [
     {
       id: 14,
       name: '목포(Mokpo)',
+      koreanName:'목포',
+      englishName:'Mokpo',
       image: '/assets/region_images/mokpo.jpg',
       description: '유달산에서 다도해의 경관을 한눈에 감상할 수 있는 목포. 아름다운 바다와 해변, 음악분수, 바다분수, 춤추는 분수쇼 등 독특한 볼거리가 가득하다. 갓벌 속의 인삼이라 불리는 세발낙지는 목포의 대표 특산품 중 하나.',
       flight: '없음',
@@ -142,6 +170,8 @@ const regions = [
     {
       id: 15,
       name: '안동(Andong)',
+      koreanName:'안동',
+      englishName:'Andong',
       image: '/assets/region_images/andong.jpg',
       description: '안동 하회마을은 유네스코 세계문화유산으로 등재된 전통 마을. 도산서원, 월영교, 신세동 벽화마을 등 유교문화와 전통이 어우러진 볼거리가 많다.',
       flight: '없음',
@@ -152,6 +182,8 @@ const regions = [
     {
       id: 16,
       name: '울릉도(Ulleung)',
+      koreanName:'울릉도',
+      englishName:'Ulleung',
       image: '/assets/region_images/ulleung.jpg',
       description: '나리분지, 관음도, 코끼리바위, 독도전망대 등 이색적인 자연경관이 가득한 울릉도. 다양한 바위 지형과 해양기암, 해산물 먹방 여행으로 유명하며 겨울에도 매력적인 여행지다.',
       flight: '없음',
@@ -162,6 +194,8 @@ const regions = [
     {
       id: 17,
       name: '가평(Gapyeong)',
+      koreanName:'가평',
+      englishName:'Gapyeong',
       image: '/assets/region_images/gapyeong.jpg',
       description: '자라섬 재즈페스티벌, 아침고요수목원, 남이섬 등 자연과 음악이 어우러진 힐링 도시. 뀌띠프랑스의 이국적인 분위기 또한 인상적이다.',
       flight: '없음',
@@ -172,6 +206,8 @@ const regions = [
     {
       id: 18,
       name: '제천(Jecheon)',
+      koreanName:'제천',
+      englishName:'Jecheon',
       image: '/assets/region_images/jecheon.jpg',
       description: '충북 제천은 청풍문화재단지를 시작으로 베론성지, 월악산 송계계곡 등 풍부한 자연과 문화유산이 공존하는 도시다. 피서지로도 인기 높다.',
       flight: '없음',
@@ -182,6 +218,8 @@ const regions = [
     {
       id: 19,
       name: '수원(Suwon)',
+      koreanName:'수원',
+      englishName:'Suwon',
       image: '/assets/region_images/suwon.jpg',
       description: '수원화성, 광교호수공원, 통닭골목까지 다양한 명소와 먹거리가 공존하는 도시 수원. 도심 속 역사 탐방과 야경 산책이 모두 가능하다.',
       flight: '없음',
@@ -192,6 +230,8 @@ const regions = [
     {
       id: 20,
       name: '영월(Yeongwol)',
+      koreanName:'영월',
+      englishName:'Yeongwol',
       image: '/assets/region_images/Yeongyal.jpg',
       description: '고씨동굴, 선암마을, 청령포, 동강 등 천혜의 자연과 역사적 이야기가 함께하는 영월. 여름에는 래프팅, 겨울에는 얼음낚시까지 계절별 재미도 풍부하다.',
       flight: '없음',

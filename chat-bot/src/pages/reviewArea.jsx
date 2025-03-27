@@ -1,144 +1,96 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import "../styles/reviewArea.css";
-import "../styles/TravelReviews.css"; // 스타일 파일
-import addImageIcon from "../assets/addImage.png";
-import submitIcon from "../assets/submit.png";
+import "../styles/TravelReviews.css";
+import addImageIcon from "../assets/images/addImage.png";
+import submitIcon from "../assets/images/submit.png";
+import { useModal } from "../components/ModalProvider.jsx";
 
 const ReviewArea = () => {
     const [title, setTitle] = useState("");
-    const [nickname, setNickname] = useState("");
     const [content, setContent] = useState("");
-
     const contentRef = useRef(null);
     const fileInputRef = useRef(null);
-    const titleRef = useRef(null);  // 제목 입력 필드 참조
-    const nicknameRef = useRef(null);  // 닉네임 입력 필드 참조
-    const submitButtonRef = useRef(null); // 제출 버튼 참조
-    const imgButtonRef = useRef(null);  // 이미지 추가 버튼 참조
+    const { showModal } = useModal();
 
-    // 제목 입력 핸들링
-    const handleTitleChange = (e) => {
-        setTitle(e.target.value);
-    };
-
-    // 닉네임 입력 핸들링
-    const handleNicknameChange = (e) => {
-        setNickname(e.target.value);
-    }
-
-    // 내용 입력 핸들링 (줄바꿈을 <p> 태그로 변환)
-    const handleContentChange = () => {
-        let contentHTML = contentRef.current.innerHTML;
-
-        contentHTML = contentHTML
-            .split("<br>")
-            .map((line) => (line.trim() !== "" ? `<p>${line}</p>` : ""))
-            .join("");
-
-        setContent(contentHTML);
-    };
-
-    // 제출 처리
-    const handleSubmit = () => {
-        const reviewArray = [
-            `<h2>${title}</h2>`, // 제목을 <h2>로 변환
-            `<h4>${nickname}</h4>`, // 닉네임을 <h4>로 변환
-            content, // 내용은 이미 <p> 태그로 변환된 상태
-        ];
-
-        if (reviewArray[0] === "<h2></h2>") {
-            alert("제목을 입력해주세요.");
-            return;
-        }
-
-        if (reviewArray[1] === "<h4></h4>") {
-            alert("닉네임을 입력해주세요.");
-            return;
-        }
-
-        console.log(reviewArray);
-        alert("제출이 완료되었습니다.");
-        window.location.href = "/lists"; // 페이지 이동
-    };
-
-    // 이미지 추가 핸들링
-    const handleImageAdd = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const imageUrl = reader.result;
-                const imgTag = `<img src="${imageUrl}" alt="Uploaded Image" style="max-width: 100%; height: auto;" />`;
-                contentRef.current.innerHTML += imgTag;
+    // 이미지 서버 업로드 후 URL 받아서 content에 추가
+    const handleImageUpload  = useCallback(async (file) => {
+        const formData = new FormData();
+        formData.append('image', file);
+        try {
+            const res = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/posts/image`, {
+                method: 'POST',
+                body: formData,
+            });
+            const data = await res.json();
+            if (res.ok) {
+                // 이미지 URL 받아서 content에 추가
+                contentRef.current.innerHTML += `<img src="${import.meta.env.VITE_REACT_APP_API_URL+data.imageUrl}" alt="업로드 이미지" style="max-width: 100%; height: auto;" />`;
                 setContent(contentRef.current.innerHTML);
-            };
-            reader.readAsDataURL(file);
+            } else {
+                showModal('이미지 업로드 실패');
+            }
+        } catch (err) {
+            console.error('이미지 업로드 실패:', err);
+            showModal('서버 오류: 이미지 업로드 실패');
         }
-    };
+    }, []);
 
-    // 플레이스홀더 관리
-    const handleFocus = () => {
-        if (contentRef.current.innerHTML === "") {
-            contentRef.current.innerText = "";
-        }
-    };
+    const handleImageAdd = useCallback((e) => {
+        const file = e.target.files[0];
+        if (file) handleImageUpload(file);
+    }, [handleImageUpload]);
 
-    const handleBlur = () => {
-        if (contentRef.current.innerHTML === "<br>") {
-            contentRef.current.innerText = "";
-            contentRef.current.setAttribute("data-placeholder", "내용");
+    // 제출
+    const handleSubmit = useCallback(async () => {
+        if (!title.trim()) return showModal("제목을 입력해주세요.");
+        if (!contentRef.current.innerHTML.trim()) return showModal("내용을 입력해주세요.");
+
+        try {
+            const res = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/posts/upload`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify({
+                    title,
+                    content: contentRef.current.innerHTML
+                })
+            });
+            const data = await res.json();
+            if (res.ok) showModal('여행 후기가 저장되었습니다.', '/lists');
+            else showModal(data.message);
+        } catch (err) {
+            console.error('저장 실패:', err);
+            showModal('서버 오류: 잠시 후 다시 시도해 주세요.');
         }
+    }, [title, content, showModal]);
+
+    // 내용 입력 시 상태 업데이트
+    const handleContentChange = () => {
+        setContent(contentRef.current.innerHTML);
     };
 
     useEffect(() => {
-        if (contentRef.current.innerText.trim() !== "") {
+        if (contentRef.current.innerText.trim()) {
             contentRef.current.removeAttribute("data-placeholder");
         }
     }, [content]);
 
-    // input-review 영역 클릭 시 contentRef 포커스
-    const handleContainerClick = (e) => {
-        // 제목, 닉네임, 이미지 추가 버튼, 제출 버튼을 클릭했을 때는 포커스를 설정하지 않음
-        if (
-            contentRef.current.contains(e.target) ||
-            e.target === contentRef.current ||
-            (titleRef.current && titleRef.current.contains(e.target)) ||
-            (nicknameRef.current && nicknameRef.current.contains(e.target)) ||
-            (submitButtonRef.current && submitButtonRef.current.contains(e.target)) ||
-            (imgButtonRef.current && imgButtonRef.current.contains(e.target))
-        ) {
-            return;
-        }
-
-        // 그 외의 빈 공간을 클릭하면 content에 포커스를 설정
-        contentRef.current.focus();
-    };
-
     return (
         <div className="travel-reviews-overlay">
             <div className="travel-reviews">
-                <div className="input-review" onClick={handleContainerClick}>
+                <div className="input-review">
                     <div className="review-area-title">
                         <input
                             type="text"
                             className="title"
                             placeholder="제목"
                             value={title}
-                            onChange={handleTitleChange}
-                            ref={titleRef} // 제목 ref 추가
+                            onChange={(e) => setTitle(e.target.value)}
                         />
-                        <button
-                            type="button"
-                            className="imgButton"
-                            onClick={() => fileInputRef.current.click()}
-                            ref={imgButtonRef} // 이미지 추가 버튼 ref 추가
-                        >
-                            <img
-                                src={addImageIcon}
-                                alt="이미지 추가"
-                                className="addNewImage"
-                                title="이미지 추가"
-                            />
+                        <button onClick={() => fileInputRef.current.click()} className="imgButton">
+                            <img src={addImageIcon} alt="이미지 추가" className="addNewImage" />
                         </button>
                         <input
                             type="file"
@@ -147,33 +99,10 @@ const ReviewArea = () => {
                             accept="image/*"
                             onChange={handleImageAdd}
                         />
-                        <button
-                            type="submit"
-                            className="sendButton"
-                            onClick={handleSubmit}
-                            ref={submitButtonRef} // 제출 버튼 ref 추가
-                        >
-                            <img
-                                src={submitIcon}
-                                alt="제출용"
-                                className="submitImage"
-                                title="제출"
-                            />
-                        </button>
                     </div>
+
                     <hr />
-                    <div className="review-area-nickname">
-                        <h4>닉네임: </h4>
-                        <input
-                            type="text"
-                            placeholder="닉네임을 입력해주세요."
-                            className="nickname-field"
-                            value={nickname}
-                            onChange={handleNicknameChange}
-                            ref={nicknameRef} // 닉네임 ref 추가
-                        />
-                    </div>
-                    <hr />
+
                     <div className="review-area-content">
                         <div
                             className="content"
@@ -181,9 +110,10 @@ const ReviewArea = () => {
                             ref={contentRef}
                             data-placeholder="내용"
                             onInput={handleContentChange}
-                            onFocus={handleFocus}
-                            onBlur={handleBlur}
                         ></div>
+                    </div>
+                    <div className='submit-container'>
+                        <button onClick={handleSubmit} className="sendButton">저장</button>
                     </div>
                 </div>
             </div>

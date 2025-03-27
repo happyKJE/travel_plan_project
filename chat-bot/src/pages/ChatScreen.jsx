@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import '../styles/ChatBot.css';
 import useStore from "../context/UseStore.jsx";
-import saveIcon from "../assets/saveImage.png";
+import saveIcon from "../assets/images/saveImage.png";
 import { placeOptions } from "../data/OptionsData.jsx";
 import {useModal} from "../components/ModalProvider.jsx";
 
@@ -172,7 +172,7 @@ const ChatBot = () => {
         <div className="app-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
             <div className="chatbot-container">
                 <div className="chatbot-header">
-                    <div className="logo"><img width="70px" alt="" src="../assets/logo_wheretogo.png" /></div>
+                    <div className="logo"><img width="70px" alt="" src="../assets/images/logo_wheretogo.png" /></div>
                 </div>
 
                 <div className="chat-messages">
