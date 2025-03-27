@@ -125,7 +125,7 @@ const ChatBot = () => {
             const payload = {
                 title,
                 date: `${formatDate(selectedDates[0])}${selectedDates[1] ? `~${formatDate(selectedDates[1])}` : ''}`,
-                days,
+                messages:JSON.stringify(days),
                 summary: summary.trim(),
                 rawText: text,
             };
