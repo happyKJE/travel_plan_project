@@ -13,6 +13,10 @@ const Header = () => {
     const { state,dispatch } = useStore();
     const { showModal } = useModal();
 
+    const handleReset = () => {
+        dispatch({ type: "RESET_STATE" }); // 상태 초기화 액션 디스패치
+    };
+
     const handleMouseEnter = (e) => {
         const target = e.target;
         const navLeft = navRef.current.getBoundingClientRect().left;
@@ -35,18 +39,18 @@ const Header = () => {
     return (
         <header className="header">
             <div className="logo">
-                <img src={logoImg} width="100px" alt="로고" onClick={() => navigate("/")} />
+                <img src={logoImg} width="100px" alt="로고" onClick={() => {navigate("/"); handleReset();}} />
             </div>
             <nav ref={navRef} onMouseLeave={handleMouseLeave}>
                 <ul className="mainmenu">
                     <li
                         onMouseEnter={handleMouseEnter}
-                        onClick={() => navigate("/")}
+                        onClick={() => {navigate("/"); handleReset();}}
                     >홈</li>
 
                     <li
                         onMouseEnter={handleMouseEnter}
-                        onClick={() => navigate("/travelReviews")}
+                        onClick={() => {navigate("/travelReviews") }}
                         className="review-link"
                     >여행 후기</li>
                 {state.isLoggedIn ? (
