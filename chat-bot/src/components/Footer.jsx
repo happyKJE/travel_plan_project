@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Footer.css";
-import logoImg from "../assets/logo_wheretogo.png";
+import logoImg from "../assets/images/logo_wheretogo.png";
 
 const Footer = () => {
   return (
@@ -36,9 +36,6 @@ const Footer = () => {
             <button>
               <img src="/assets/images/naver_blog_icon.png" alt="Naver Blog" />
             </button>
-            <button><i className="fab fa-instagram"></i></button>
-            <button><i className="fab fa-facebook-square"></i></button>
-            <button><i className="fab fa-youtube"></i></button>
           </div>
           <div className="footer-apps">
             <button>
@@ -51,7 +48,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>Copyright © MYRO. All Rights Reserved.</p>
+        <p>Copyright © WHERETOGO. All Rights Reserved.</p>
       </div>
     </footer>
   );

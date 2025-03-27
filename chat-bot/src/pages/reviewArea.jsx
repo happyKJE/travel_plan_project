@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import "../styles/reviewArea.css";
 import "../styles/TravelReviews.css";
-import addImageIcon from "../assets/addImage.png";
-import submitIcon from "../assets/submit.png";
+import addImageIcon from "../assets/images/addImage.png";
+import submitIcon from "../assets/images/submit.png";
 import { useModal } from "../components/ModalProvider.jsx";
 
 const ReviewArea = () => {

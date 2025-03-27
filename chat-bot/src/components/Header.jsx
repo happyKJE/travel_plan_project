@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../styles/Header.css";
-import logoImg from "../assets/logo_wheretogo.png";
+import logoImg from "../assets/images/logo_wheretogo.png";
 import useStore from "../context/UseStore.jsx";
 import {useModal} from "./ModalProvider.jsx";
 
