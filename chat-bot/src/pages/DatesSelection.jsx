@@ -1,6 +1,6 @@
 /**
  * @file RegionSelection.jsx
- * @description 지도 기능 추가
+ * @description 달력 기능 추가
  * @author jaeyeol
  * @created 2025-03-13
  * @lastModifiedBy jungeun
@@ -21,7 +21,7 @@ const DatesSelection = () => {
     const navigate = useNavigate();
 
     const [values, setValues] = useState(() => {
-        const savedDates = state.inputValues?.selectedDates;
+        const savedDates = state.inputValues?.selectedDatesISO;
         return savedDates && savedDates.length === 2
             ? { from: new Date(savedDates[0]), to: new Date(savedDates[1]) }
             : { from: undefined, to: undefined };
@@ -31,11 +31,31 @@ const DatesSelection = () => {
 
     //날짜 저장
     useEffect(() => {
-        if (!state.inputValues.selectedDate && values.from && values.to) {
+        if (values.from && values.to) {
+            // 한국 시간 기준 저장용 포맷 함수
+            const formatDate = (date) => {
+                const year = date.getFullYear();
+                const month = (`0${date.getMonth() + 1}`).slice(-2);
+                const day = (`0${date.getDate()}`).slice(-2);
+                return `${year}-${month}-${day}`;
+            };
+
             dispatch({
                 type: "SET_OPTION",
                 payload: {
                     type: "selectedDates",
+                    value: [
+                        formatDate(values.from),
+                        formatDate(values.to)
+                    ]
+                }
+            });
+
+            // 날짜 유지용 ISO 포맷도 저장해두고 싶다면 따로 저장
+            dispatch({
+                type: "SET_OPTION",
+                payload: {
+                    type: "selectedDatesISO",
                     value: [
                         values.from.toISOString(),
                         values.to.toISOString()
