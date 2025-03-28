@@ -28,7 +28,7 @@ const MyInfo = (userInfo,setUserInfo) => {
         }
     };
     return (
-        <section classNameName="profile-section">
+        <section className="profile-section">
             {editMode ? (
             <>
                 <input name="name" value={editedInfo.name} onChange={handleChange} />

@@ -19,6 +19,7 @@ import "../styles/DatesSelection.css";
 const DatesSelection = () => {
     const { state, dispatch } = useStore();
     const navigate = useNavigate();
+    const isOneDayTrip = state.inputValues?.selectedDates[0] === state.inputValues?.selectedDates[1];
 
     const [values, setValues] = useState(() => {
         const savedDates = state.inputValues?.selectedDatesISO;
@@ -95,7 +96,10 @@ const DatesSelection = () => {
     };
 
     const footer = values?.from && values?.to
-        ? `여행 기간: ${values.from.toLocaleDateString('ko-KR')} ~ ${values.to.toLocaleDateString('ko-KR')}`
+        ? `여행 기간: ${isOneDayTrip
+            ? `${values.from.toLocaleDateString('ko-KR')}`
+            : `${values.from.toLocaleDateString('ko-KR')} ~ ${values.to.toLocaleDateString('ko-KR')}  `
+        }`
         : '여행 시작일과 종료일을 선택하세요.';
     return (
         <motion.div
@@ -105,7 +109,7 @@ const DatesSelection = () => {
             transition={{ duration: 1 }}
         >
             <h2 className='option-header'>기간은 어떻게 되시나요?</h2>
-            <p>일정 선택 최대 10일까지 가능</p>
+            <p>최대 10일까지 일정 선택</p>
             <div className="calendar-container">
                 <DayPicker
                     mode="range"

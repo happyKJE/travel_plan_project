@@ -14,11 +14,17 @@ import ToFirstPageButton from './ToFirstPageButton';
 import { useNavigate } from 'react-router-dom';
 import useStore from '../context/UseStore.jsx';
 import PagesIndex from './PagesIndex.jsx';
-import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
-const Modal = ({ children }) => {
+const Modal = ({ children, onFirstPage  }) => {
     const navigate = useNavigate();
     const { dispatch } = useStore(); // 추가
+    const location = useLocation();
+    const isMyPagePlan = location.pathname.startsWith('/mypage/plan/');
+    const defaultHandler = () => {
+        dispatch({ type: 'SELECT_PLAN', payload: null });
+        navigate('/plan-selection', { state: { fromModal: true } });
+    };
 
     return (
 
@@ -27,12 +33,11 @@ const Modal = ({ children }) => {
                 <div className='modal-header'>
                     {<PagesIndex />}
                 </div>
-                <div className='modal-body'>
-                    <ToFirstPageButton onFirstPage={() => {
-                        dispatch({ type: 'SELECT_PLAN', payload: null }); // 오류 해결
-                        navigate('/plan-selection', { state: { fromModal: true } });
-                    }} />
-                    {children}
+                <div className="modal-body">
+                    <ToFirstPageButton onFirstPage={onFirstPage || defaultHandler} />
+                    <div className={`modal-children-wrapper ${isMyPagePlan ? 'scroll-enabled' : ''}`}>
+                        {children}
+                    </div>
                 </div>
             </div>
         </div>

@@ -9,7 +9,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
 import '../styles/ChatBot.css';
 import useStore from "../context/UseStore.jsx";
 import { placeOptions } from "../data/OptionsData.jsx";
@@ -20,7 +19,6 @@ const ChatBot = () => {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
     const { state } = useStore();
-    const { showModal } = useModal();
     const inputRef = useRef(null);
     const placeData = placeOptions.find(option => option.label === state.inputValues.placeOption)?.value || 'nomatter';
     const backgroundImage = `/assets/${placeData}Background.jfif`;
@@ -32,13 +30,13 @@ const ChatBot = () => {
       ? `너는 여행지역을 무작위으로 선택한 도전적인 사용자에게 가볼만한 관광지를 추천해주는 여행 플래너야. 사용자가 입력한 날짜와 지역 정보를 바탕으로 여행 일정을 추천해줘. 
     ${isOneDayTrip 
       ? '형식은 반드시 아래와 같아야 해:\n✅ 당일치기 (YYYY-MM-DD)\n추천 관광지:' 
-      : '형식은 반드시 아래와 같아야 해:\n✅ n일차 (YYYY-MM-DD)\n추천 관광지: n.장소 (최소 두곳)\n밤에가볼만한 곳:(추천할만한 곳이 있다면)'}
-    반드시 ✅ 기호를 사용하여 일자별로 구분해, 반드시 실존하는 관광지를 추천해주고 없으면 추천관광지가 없으니 작은 지역카페에서 시간을 보내보길 추천해줘`
+      : '여행일자 수만큼 일자별로 안내해주고 형식은 반드시 아래와 같아야 해:\n✅ n일차 (YYYY-MM-DD)\n추천 관광지: n.장소 (최소 두곳)'}
+    반드시 ✅ 기호를 사용하여 일자별로 구분해, 반드시 실존하는 관광지를 추천해주고 간략하게 해당 장소에대해서 소개시켜줘`
       : `너는 안정적인 여행을 원하는 사용자에게 가볼만한 관광지를 추천해주는 여행 플래너야. 사용자가 입력한 날짜, 인원, 지역, 선호 옵션을 바탕으로 여행 일정을 추천해줘.
     ${isOneDayTrip 
       ? '형식은 반드시 아래와 같아야 해:\n✅ 당일치기 (YYYY-MM-DD)\n추천 관광지: n.장소' 
-      : '형식은 반드시 아래와 같아야 해:\n✅ n일차 (YYYY-MM-DD)\n추천 관광지: n.장소(최소 두곳)\n밤에가볼만한 곳:(추천할만한 곳이 있다면)'}
-    반드시 ✅ 기호를 사용하여 일자별로 구분해, 반드시 실존하는 관광지를 추천해주고 없으면 추천관광지가 없으니 작은 지역카페에서 시간을 보내보길 추천해줘`;
+      : '여행일자 수만큼 일자별로 안내해주고 형식은 반드시 아래와 같아야 해:\n✅ n일차 (YYYY-MM-DD)\n추천 관광지: n.장소(최소 두곳)'}
+    반드시 ✅ 기호를 사용하여 일자별로 구분해, 반드시 실존하는 관광지를 추천해주고 간략하게 해당 장소에대해서 소개시켜줘`;
 
 
     const initMessage = planType === "random"
