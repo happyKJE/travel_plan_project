@@ -17,7 +17,9 @@
  *    createContext :컴포넌트 간 props 없이 상태 공유 가능.
  */
 
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
+import { jwtDecode } from 'jwt-decode';
+
 
 //상태를 전역적으로 관리하기 위한 context 생성
 const UseContext = createContext({});
@@ -25,16 +27,23 @@ const UseContext = createContext({});
 //초기값
 const initialState = {
     planType: null,
-    inputValues: {},
+    inputValues: {
+        selectedDates: [],
+    },
     chats: [],
     activeChatId: null,
-    isLoggedIn: !!localStorage.getItem('token')
+    isLoggedIn: !!localStorage.getItem('token',),
+    token: localStorage.getItem('token') || null
 };
 
 const chatReducer = (state, action) => {
     switch (action.type) {
         case "RESET_STATE":
-            return { ...initialState }; // 초기 상태로 리셋
+            return {
+                ...initialState,
+                token: state.token,         // 기존 토큰 유지
+                isLoggedIn: state.isLoggedIn // 로그인 상태도 유지
+            };
         case "SELECT_PLAN":
             return { ...state, planType: action.payload };
         case "SET_OPTION":
@@ -48,11 +57,11 @@ const chatReducer = (state, action) => {
         // 로그인 처리
         case "LOGIN":
             localStorage.setItem('token', action.payload);  // 토큰 저장
-            return { ...state, isLoggedIn: true };
+            return { ...state, isLoggedIn: true, token: action.payload };
         // 로그아웃 처리
         case "LOGOUT":
             localStorage.removeItem('token');
-            return { ...state, isLoggedIn: false };
+            return { ...state, isLoggedIn: false, token: null };
         default:
             return state;
     }
@@ -60,6 +69,26 @@ const chatReducer = (state, action) => {
 
 export const ChatProvider = ({ children }) => {
     const [state, dispatch] = useReducer(chatReducer, initialState);
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            try {
+                const decoded = jwtDecode(token);
+                const currentTime = Date.now() / 1000;
+
+                if (decoded.exp < currentTime) {
+                    // 만료됨
+                    localStorage.removeItem('token');
+                    dispatch({ type: 'LOGOUT' });
+                }
+            } catch (e) {
+                // 잘못된 토큰
+                localStorage.removeItem('token');
+                dispatch({ type: 'LOGOUT' });
+            }
+        }
+    }, []);
     return <UseContext.Provider value={{ state, dispatch }}>{children}</UseContext.Provider>;
 };
 
