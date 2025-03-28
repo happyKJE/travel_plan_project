@@ -50,14 +50,14 @@ const PlanSelection = () => {
             <Button
                 type="random-plan"
                 text="여행지역 랜덤뽑기 ▶"
-                animationDelay={1.2}
+                animationDelay={0.4}
                 onClick={() => { handlePlanSelect('random') }}
             />
 
             <Button
                 type="custom-plan"
                 text="나만의 여행 꾸미기 ▶"
-                animationDelay={1.6}
+                animationDelay={0.8}
                 onClick={() => handlePlanSelect('custom')}
             />
         </div>
