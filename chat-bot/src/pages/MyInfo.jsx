@@ -28,8 +28,7 @@ const MyInfo = (userInfo,setUserInfo) => {
         }
     };
     return (
-        <section className="profile-section">
-            <h3>내 정보</h3>
+        <section classNameName="profile-section">
             {editMode ? (
             <>
                 <input name="name" value={editedInfo.name} onChange={handleChange} />
@@ -40,9 +39,20 @@ const MyInfo = (userInfo,setUserInfo) => {
             </>
             ):
             (<>
-                <p>이름: {userInfo.userInfo.name}</p>
-                <p>이메일: {userInfo.userInfo.email}</p>
-                <p>전화번호: {userInfo.userInfo.phoneNumber}</p>
+               <section className="profile-section">
+                  <div className="profile-row">
+                    <span className="label">이름</span>
+                    <span className="value">{userInfo.userInfo.name}</span>
+                  </div>
+                  <div className="profile-row">
+                    <span className="label">이메일</span>
+                    <span className="value">{userInfo.userInfo.email}</span>
+                  </div>
+                  <div className="profile-row">
+                    <span className="label">전화번호</span>
+                    <span className="value">{userInfo.userInfo.phoneNumber}</span>
+                  </div>
+                </section>
             </>
             )}
 

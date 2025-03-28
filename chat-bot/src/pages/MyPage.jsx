@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import '../styles/MyPage.css'
 import MyInfo from "./MyInfo.jsx";
 import MyTravelPlans from "./MyTravelPlans.jsx";
+import {Outlet} from "react-router-dom";
 
 const MyPage = () => {
   const [activeTab, setActiveTab] = useState('info');
@@ -30,30 +31,32 @@ const MyPage = () => {
 
 
   return (
+      
     <div className="mypage-container">
+      <Outlet />
       <h2>마이페이지</h2>
+      <div className="mypage-form">
+        <ul className="mypage-nav">
+          <li
+              className={activeTab === 'info' ? 'active' : ''}
+              onClick={() => setActiveTab('info')}
+          >
+            내 정보
+          </li>
+          <li
+              className={activeTab === 'plans' ? 'active' : ''}
+              onClick={() => setActiveTab('plans')}
+          >
+            나의 여행 일정
+          </li>
+        </ul>
 
-      <ul className="mypage-nav">
-        <li
-            className={activeTab === 'info' ? 'active' : ''}
-            onClick={() => setActiveTab('info')}
-        >
-          내 정보
-        </li>
-        <li
-            className={activeTab === 'plans' ? 'active' : ''}
-            onClick={() => setActiveTab('plans')}
-        >
-          나의 여행 일정
-        </li>
-      </ul>
-
-      <div className="mypage-content">
-        {activeTab === 'info' && userInfo && <MyInfo userInfo={userInfo} setUserInfo={setUserInfo} />}
-        {activeTab === 'plans' && myPlans && <MyTravelPlans myPlans={myPlans} setMyPlans={setMyPlans} />}
+        <div className="mypage-content">
+          {activeTab === 'info' && userInfo && <MyInfo userInfo={userInfo} setUserInfo={setUserInfo} />}
+          {activeTab === 'plans' && myPlans && <MyTravelPlans myPlans={myPlans} setMyPlans={setMyPlans} />}
+        </div>
       </div>
     </div>
   );
 };
-
 export default MyPage;

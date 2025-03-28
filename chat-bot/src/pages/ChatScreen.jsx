@@ -32,12 +32,12 @@ const ChatBot = () => {
       ? `너는 여행지역을 무작위으로 선택한 도전적인 사용자에게 가볼만한 관광지를 추천해주는 여행 플래너야. 사용자가 입력한 날짜와 지역 정보를 바탕으로 여행 일정을 추천해줘. 
     ${isOneDayTrip 
       ? '형식은 반드시 아래와 같아야 해:\n✅ 당일치기 (YYYY-MM-DD)\n추천 관광지:' 
-      : '형식은 반드시 아래와 같아야 해:\n✅ n일차 (YYYY-MM-DD)\n추천 관광지:(최소 두곳)\n밤에가볼만한 곳:(추천할만한 곳이 있다면)'}
+      : '형식은 반드시 아래와 같아야 해:\n✅ n일차 (YYYY-MM-DD)\n추천 관광지: n.장소 (최소 두곳)\n밤에가볼만한 곳:(추천할만한 곳이 있다면)'}
     반드시 ✅ 기호를 사용하여 일자별로 구분해, 반드시 실존하는 관광지를 추천해주고 없으면 추천관광지가 없으니 작은 지역카페에서 시간을 보내보길 추천해줘`
       : `너는 안정적인 여행을 원하는 사용자에게 가볼만한 관광지를 추천해주는 여행 플래너야. 사용자가 입력한 날짜, 인원, 지역, 선호 옵션을 바탕으로 여행 일정을 추천해줘.
     ${isOneDayTrip 
-      ? '형식은 반드시 아래와 같아야 해:\n✅ 당일치기 (YYYY-MM-DD)\n추천 관광지:' 
-      : '형식은 반드시 아래와 같아야 해:\n✅ n일차 (YYYY-MM-DD)\n추천 관광지:(최소 두곳)\n밤에가볼만한 곳:(추천할만한 곳이 있다면)'}
+      ? '형식은 반드시 아래와 같아야 해:\n✅ 당일치기 (YYYY-MM-DD)\n추천 관광지: n.장소' 
+      : '형식은 반드시 아래와 같아야 해:\n✅ n일차 (YYYY-MM-DD)\n추천 관광지: n.장소(최소 두곳)\n밤에가볼만한 곳:(추천할만한 곳이 있다면)'}
     반드시 ✅ 기호를 사용하여 일자별로 구분해, 반드시 실존하는 관광지를 추천해주고 없으면 추천관광지가 없으니 작은 지역카페에서 시간을 보내보길 추천해줘`;
 
 
@@ -75,16 +75,17 @@ const ChatBot = () => {
 
             const days = [];
             let currentDay = null;
-            let summary = "";
+            let section = null; // 현재 위치: "locations" 또는 "night"
+
+            const isNumberedLine = (line) => /^\d+\.\s*/.test(line);
 
             lines.forEach((line) => {
                 const trimmed = line.trim();
 
-                // ✅1일차 (2025-04-06)
-                const multiDayMatch = trimmed.match(/^✅ (\d+일차) \(([\d-]+)\)/);
-
-                // 당일치기 (2025년 4월 5일)
-                const oneDayMatch = trimmed.match(/^✅ 당일치기\s*\((.+?)\)/);
+                // ✅ 1일차 (YYYY-MM-DD)
+                const multiDayMatch = trimmed.match(/^✅\s*(\d+일차)\s*\((\d{4}-\d{2}-\d{2})\)/);
+                // ✅ 당일치기 (YYYY-MM-DD)
+                const oneDayMatch = trimmed.match(/^✅\s*당일치기\s*\((\d{4}-\d{2}-\d{2})\)/);
 
                 if (multiDayMatch) {
                     if (currentDay) days.push(currentDay);
@@ -92,30 +93,40 @@ const ChatBot = () => {
                         type: "multi",
                         day: multiDayMatch[1],
                         date: multiDayMatch[2],
+                        locations: [],
+                        night: [],
                     };
-                } else if (oneDayMatch) {
+                    section = null;
+                    return;
+                }
+
+                if (oneDayMatch) {
                     if (currentDay) days.push(currentDay);
                     currentDay = {
                         type: "oneDay",
                         label: "당일치기",
                         date: oneDayMatch[1],
+                        locations: [],
+                        night: [],
                     };
-                } else if (currentDay && trimmed.includes(':')) {
-                    // 예: 오전: 경주 도착
-                    const [time, content] = trimmed.split(':');
-                    if (time && content) {
-                        const key = time.trim();
-                        const value = content.trim();
-                        // 시간대별 항목이 배열이면 여러 개 모을 수 있도록
-                        if (!currentDay[key]) {
-                            currentDay[key] = [value];
-                        } else {
-                            currentDay[key].push(value);
-                        }
-                    }
-                } else if (trimmed && !trimmed.startsWith('✅')) {
-                    // 요약 문구 저장
-                    summary += trimmed + " ";
+                    section = null;
+                    return;
+                }
+
+                if (trimmed.startsWith("추천 관광지")) {
+                    section = "locations";
+                    return;
+                }
+                
+                if (currentDay && section && isNumberedLine(trimmed)) {
+                    const cleaned = trimmed.replace(/^\d+\.\s*/, ''); // "1. 장소" → "장소"
+                    currentDay[section].push(cleaned);
+                    return;
+                }
+
+                // 기타 요약용 문장
+                if (trimmed && !trimmed.startsWith("✅")) {
+                    currentDay.night = (currentDay.night || "") + trimmed + " ";
                 }
             });
 
@@ -124,8 +135,8 @@ const ChatBot = () => {
             const payload = {
                 title,
                 date: `${formatDate(selectedDates[0])}${selectedDates[1] ? `~${formatDate(selectedDates[1])}` : ''}`,
-                messages:JSON.stringify(days),
-                summary: summary.trim(),
+                messages: JSON.stringify(days),
+                night: days.map(d => d.night).join(" ").trim(),
                 rawText: text,
             };
 
@@ -140,15 +151,17 @@ const ChatBot = () => {
 
             const data = await res.json();
             if (res.ok) {
-                console.log('여행 플랜이 저장되었습니다.');
+                console.log('✅ 여행 플랜이 저장되었습니다.');
             } else {
-                console.log(`여행 플랜 저장 오류: ${data.message}`);
+                console.log(`🚨 여행 플랜 저장 오류: ${data.message}`);
             }
         } catch (err) {
-            console.error('채팅 저장 실패:', err);
+            console.error('❌ 채팅 저장 실패:', err);
             console.log('서버 오류: 잠시후 다시 시도해 주세요.');
         }
     };
+
+
 
     const sendMessage = async (userMessage, showUserMessage, systemMessage) => {
         if (!userMessage) return;

@@ -58,7 +58,7 @@ const ReviewArea = () => {
                 })
             });
             const data = await res.json();
-            if (res.ok) showModal('여행 후기가 저장되었습니다.', '/lists');
+            if (res.ok) showModal('여행 후기가 저장되었습니다.', '/travelReviews');
             else showModal(data.message);
         } catch (err) {
             console.error('저장 실패:', err);

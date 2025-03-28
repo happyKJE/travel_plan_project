@@ -1,16 +1,17 @@
-import React, {lazy, Suspense} from "react";
-import {BrowserRouter as Router, Routes, Route, Outlet} from "react-router-dom";
+import React, { lazy, Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import { ChatProvider } from "./context/UseContext.jsx";
+import MainLayout from "./layout/MainLayout";
+import NoIntroLayout from "./layout/NoIntroLayout";
 import Header from "./components/Header";
-import IntroSection from "./components/IntroSection";
-import Modal from "./components/Modal.jsx";
-import PlanSelection from "./pages/PlanSelection.jsx";
 import ReloadHandler from "./components/ReloadHandler.jsx";
-import {ModalProvider} from "./components/ModalProvider.jsx";
+import { ModalProvider } from "./components/ModalProvider.jsx";
 import Footer from "./components/Footer.jsx";
-import MyPlanDetail from "./pages/MyPlanDetail.jsx";
+import Modal from "./components/Modal.jsx";
+import Background from "./components/Background.jsx";
 
-//laze : 컴포넌트를 동적으로 로드 => 필요할때만 호출. Suspense로 감싸지않으면 오류
+// Lazy-loaded 컴포넌트들
+const PlanSelection = lazy(() => import("./pages/PlanSelection.jsx"));
 const PeopleCount = lazy(() => import("./pages/PeopleCount"));
 const DatesSelection = lazy(() => import("./pages/DatesSelection.jsx"));
 const RegionSelection = lazy(() => import("./pages/RegionSelection"));
@@ -21,64 +22,79 @@ const SavingChat = lazy(() => import("./pages/SavingChat"));
 const TravelReviews = lazy(() => import("./pages/TravelReviews"));
 const TravelReviewDetail = lazy(() => import("./pages/TravelReviewDetail"));
 const ReviewArea = lazy(() => import("./pages/reviewArea"));
-const Background = lazy(() => import("./components/Background"));
-const TravelDestination = lazy(() => import("./pages/TravelDestination"));
 const Login = lazy(() => import("./pages/Login"));
 const Join = lazy(() => import("./pages/Register.jsx"));
 const MyPage = lazy(() => import("./pages/MyPage.jsx"));
+const MyPlanDetail = lazy(() => import("./pages/MyPlanDetail.jsx"));
+const TravelDestination = lazy(() => import("./pages/TravelDestination.jsx"));
+
+// Layout 컴포넌트
+
+
+// 모달용 라우트 컴포넌트
+const ModalRoute = () => {
+    return (
+        <div>
+            <Modal>
+                <Outlet /> {/* 모달 내부에 렌더링될 컴포넌트 */}
+            </Modal>
+        </div>
+    );
+};
+
 
 const App = () => {
-    const ModalRoute = () => {
-        return (
-            <div>
-                <Modal>
-                    <Outlet /> {/* 여기서 선택페이지 렌더링 */}
-                </Modal>
-            </div>
-        );
-    };
-
     return (
         <Suspense>
-        <ChatProvider>
-            <Router>
-                <ReloadHandler />
-                <ModalProvider>
-                    <Header />
-                    <main>
-                        <IntroSection />
-
-                            <Routes>
-                                <Route path="/" element={<PlanSelection />} />
-                                <Route path="plan-selection" element={<PlanSelection />} />
-
-                                <Route path="" element={<ModalRoute />}>
-                                    <Route path="people-count" element={<PeopleCount />} />
-                                    <Route path="dates-selection" element={<DatesSelection />} />
-                                    <Route path="region-selection" element={<RegionSelection />} />
-                                    <Route path="plan-details/random" element={<RandomPlanStep />} />
-                                    <Route path="plan-details/custom" element={<CustomizedPlanStep />} />
-                                    <Route path="chat" element={<ChatScreen />} />
-                                    <Route path="saving" element={<SavingChat />} />
-                                    <Route path="travelReviews" element={<TravelReviews />} />
-                                    <Route path="review/:id" element={<TravelReviewDetail />} />
-                                    <Route path="reviewArea" element={<ReviewArea />} />
-                                    <Route path="/mypage/plan/:id" element={<MyPlanDetail />} />
-                                </Route>
-
-                                <Route path="login" element={<Login />} />
-                                <Route path="join" element={<Join />} />
-                                <Route path="mypage" element={<MyPage />} />
-                            </Routes>
-                            <Background />
-                            <TravelDestination />
-
-                    </main>
-                    <Footer />
-                </ModalProvider>
-            </Router>
-        </ChatProvider>
+            <ChatProvider>
+                <Router>
+                    <ReloadHandler />
+                    <ModalProvider>
+                        <Header />
+                        <main>
+                                <Routes>
+                                    {/* IntroSection이 포함된 라우트 */}
+                                    <Route element={<MainLayout />}>
+                                        <Route path="/" element={<PlanSelection />} />
+                                        <Route path="plan-selection" element={<PlanSelection />} />
+    
+                                        {/* 모달용 경로 (예: people-count, dates-selection 등) */}
+                                        <Route element={<ModalRoute />}>
+                                            <Route path="people-count" element={<PeopleCount />} />
+                                            <Route path="dates-selection" element={<DatesSelection />} />
+                                            <Route path="region-selection" element={<RegionSelection />} />
+                                            <Route path="plan-details/random" element={<RandomPlanStep />} />
+                                            <Route path="plan-details/custom" element={<CustomizedPlanStep />} />
+                                            <Route path="chat" element={<ChatScreen />} />
+                                            <Route path="saving" element={<SavingChat />} />
+                                            <Route path="travelReviews" element={<TravelReviews />} />
+                                            <Route path="review/:id" element={<TravelReviewDetail />} />
+                                            <Route path="reviewArea" element={<ReviewArea />} />
+                                        </Route>
+                                    </Route>
+    
+                                    {/* IntroSection이 없는 라우트 */}
+                                    <Route element={<NoIntroLayout />}>
+                                        <Route path="login" element={<Login />} />
+                                        <Route path="join" element={<Join />} />
+                                        <Route path="mypage" element={<MyPage />}>
+                                            <Route path="plan/:id" element={
+                                                <Modal>
+                                                    <MyPlanDetail />
+                                                </Modal>
+                                            } />
+                                        </Route>
+                                    </Route>
+                                </Routes>
+                                <Background />
+                                <TravelDestination />
+                        </main>
+                        <Footer />
+                    </ModalProvider>
+                </Router>
+            </ChatProvider>
         </Suspense>
+            
     );
 };
 
