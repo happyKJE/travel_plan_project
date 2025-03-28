@@ -45,9 +45,10 @@ const MyPlanDetail = () => {
 
     return (
         <div className="plan-detail-container">
-            <h2>📍 {plan.title}</h2>
-            <p className="plan-date">📅 {plan.date}</p>
-
+            <h2 className="trip-title">
+                <span className="trip-date">📅 {plan.date}</span><br/>
+                <span className="trip-location">📍 {plan.title}</span>
+            </h2>
             {plan.days && plan.days.map((day, index) => (
                 <div key={index} className="plan-day-card">
                     <h3>{day.label || day.day} - {day.date}</h3>

@@ -32,12 +32,12 @@ const MyTravelPlans = ({ myPlans, setMyPlans }) => {
                 <ul className="plan-list">
                     {myPlans.map(plan => (
                         <li key={plan.id} className="plan-item">
-                          <Link to={`/mypage/plan/${plan.id}`} className="plan-link">
-                            <strong>{plan.title}</strong>
+                            <Link to={`/mypage/plan/${plan.id}`} className="plan-link">
+                                <strong>{plan.title}</strong>
+                            </Link>
                             <button onClick={() => handleDelete(plan.id)} style={{ marginLeft: '10px' }}>
                                 삭제
                             </button>
-                          </Link>
                         </li>
                     ))}
                 </ul>
