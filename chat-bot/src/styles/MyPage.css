@@ -1,13 +1,23 @@
-.mypage-container {
+.mypage-container{
     max-width: 900px;
-    margin: 50px auto;
+    margin: 150px auto 0;
     padding: 20px;
     font-family: 'Noto Sans KR', sans-serif;
+}
+.mypage-form {
+    padding: 20px;
     background: linear-gradient(to bottom, #fffaf4, #e0f7fa);
     border-radius: 20px;
     box-shadow: 0 6px 20px rgba(255, 205, 100, 0.15);
 }
-
+.mypage-container h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 62px;
+    color: #333;
+    border-left: 4px solid #ffcf66;
+    padding-left: 18px;
+}
 .mypage-nav {
     display: flex;
     gap: 14px;
@@ -38,76 +48,38 @@
     padding: 20px;
 }
 
-/* Profile Section */
 .profile-section {
-    background-color: #fffef9;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 5px 15px rgba(255, 210, 150, 0.2);
-    max-width: 640px;
-    margin: 50px auto;
-    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 350px;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.profile-section h3 {
-    font-size: 26px;
-    font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 30px;
+.profile-row {
+    display: flex;
+    justify-content: revert-layer;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
 }
 
-.profile-section p {
-    font-size: 17px;
-    color: #555;
-    margin-bottom: 16px;
-    padding-left: 12px;
-    border-left: 4px solid #ffcf66;
+.profile-row:last-child {
+    border-bottom: none;
 }
 
-.profile-section input {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    font-size: 15px;
-    transition: border-color 0.3s;
-    background: #fffdf6;
-}
-
-.profile-section input:focus {
-    border-color: #ffcc66;
-    outline: none;
-}
-
-.profile-section button {
-    width: 100%;
-    padding: 14px;
-    background-color: #2ec4b6;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 17px;
+.label {
     font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #555;
+    width: 100px;
 }
 
-.profile-section button:hover {
-    background-color: #28b2a7;
-    transform: scale(1.02);
+.value {
+    color: #222;
+    flex: 1;
 }
 
-.profile-section button:last-child {
-    background-color: #ddd;
-    color: #444;
-}
 
-.profile-section button:last-child:hover {
-    background-color: #ccc;
-}
-
-/* Plans Section */
 .plans-section {
     background-color: #fdfcf9;
     padding: 40px;
@@ -173,3 +145,4 @@
 .plans-section li button:hover {
     background-color: #ffd358;
 }
+

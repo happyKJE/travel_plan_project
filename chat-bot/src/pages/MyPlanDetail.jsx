@@ -19,11 +19,11 @@ const MyPlanDetail = () => {
 
                 let parsed;
                 try {
-                    const temp = JSON.parse(data.description); // 1차 파싱
+                    const temp = JSON.parse(data.description);
                     parsed = Array.isArray(temp)
                         ? { days: temp }
                         : typeof temp === "string"
-                            ? { days: JSON.parse(temp) } // 2차 파싱
+                            ? { days: JSON.parse(temp) }
                             : temp;
                 } catch {
                     parsed = { rawText: data.description };
@@ -43,28 +43,51 @@ const MyPlanDetail = () => {
 
     if (!plan) return <div className="loading">로딩 중...</div>;
 
+    const renderTimeSections = (day) => {
+        const excludedKeys = ["type", "label", "day", "date", "locations", "night"];
+        const timeKeys = Object.keys(day).filter(key => !excludedKeys.includes(key));
+
+        return timeKeys.map((period) => (
+            <div key={period} className="plan-time-section">
+                <div className="section-header">🕒 {period}</div>
+                <ul>
+                    {(Array.isArray(day[period]) ? day[period] : [day[period]]).map((item, i) => (
+                        <li key={i}>• {item}</li>
+                    ))}
+                </ul>
+            </div>
+        ));
+    };
+
     return (
         <div className="plan-detail-container">
             <h2 className="trip-title">
-                <span className="trip-date">📅 {plan.date}</span><br/>
                 <span className="trip-location">📍 {plan.title}</span>
             </h2>
+
             {plan.days && plan.days.map((day, index) => (
                 <div key={index} className="plan-day-card">
                     <h3>{day.label || day.day} - {day.date}</h3>
                     <div className="plan-day-content">
-                        {["오전", "오후", "저녁", "숙박"].map((period) => (
-                            day[period] && (
-                                <div key={period} className="plan-time-section">
-                                    <div className="section-header">🕒 {period}</div>
-                                    <ul>
-                                        {(Array.isArray(day[period]) ? day[period] : [day[period]]).map((item, i) => (
-                                            <li key={i}>• {item}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )
-                        ))}
+                        {day.locations?.length > 0 && (
+                            <div className="plan-time-section">
+                                <div className="section-header">📌 추천 관광지</div>
+                                <ul>
+                                    {day.locations.map((loc, i) => <li key={i}>• {loc}</li>)}
+                                </ul>
+                            </div>
+                        )}
+
+                        {renderTimeSections(day)}
+
+                        {day.night?.length > 0 && (
+                            <div className="plan-time-section">
+                                <div className="section-header">🌙 밤에 가볼만한 곳</div>
+                                    <div className="plan-summary-bubble">
+                                        {day.night}
+                                    </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             ))}

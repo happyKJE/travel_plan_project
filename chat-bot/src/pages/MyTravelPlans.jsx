@@ -11,7 +11,6 @@ const MyTravelPlans = ({ myPlans, setMyPlans }) => {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
-
             if (res.ok) {
                 // 삭제 성공 후 myPlans에서 해당 항목 제거
                 setMyPlans(prevPlans => prevPlans.filter(plan => plan.id !== id));

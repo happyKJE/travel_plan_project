@@ -10,9 +10,12 @@
 
 import React from 'react';
 import '../styles/ToFirstPageButton.css'
-import useStore from '../context/UseStore.jsx'; // 추가
+import useStore from '../context/UseStore.jsx';
+import {useLocation} from "react-router-dom"; // 추가
 
 const ToFirstPageButton = ({ onFirstPage }) => {
+    const location = useLocation();
+    const isMyPage = ["/plan/:id"].includes(location.pathname);
     const { dispatch } = useStore(); // 추가
     const handleReset = () => {
         dispatch({ type: "RESET_STATE" }); // 상태 초기화 액션 디스패치
@@ -22,8 +25,7 @@ const ToFirstPageButton = ({ onFirstPage }) => {
         <div className='to-first-page'>
             <button className="to-first-page-button" onClick={() => {
                 console.log("첫페이지 이동");
-                handleReset();
-                onFirstPage();
+                if(!isMyPage)onFirstPage();
             }}>&times;</button>
         </div>
     )
