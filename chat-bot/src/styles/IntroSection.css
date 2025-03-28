@@ -7,3 +7,15 @@
 .intro h1 {
     margin-bottom: 20px;
 }
+
+/* IntroSection.css */
+
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

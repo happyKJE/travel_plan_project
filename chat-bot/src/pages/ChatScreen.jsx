@@ -12,7 +12,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import '../styles/ChatBot.css';
 import useStore from "../context/UseStore.jsx";
-import saveIcon from "../../public/assets/images/saveico.png";
 import { placeOptions } from "../data/OptionsData.jsx";
 import { useModal } from "../components/ModalProvider.jsx";
 

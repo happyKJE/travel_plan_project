@@ -7,7 +7,6 @@ import Modal from "./components/Modal.jsx";
 import PlanSelection from "./pages/PlanSelection.jsx";
 import ReloadHandler from "./components/ReloadHandler.jsx";
 import {ModalProvider} from "./components/ModalProvider.jsx";
-import CloudLoading from "./components/CloudLoading.jsx";
 import Footer from "./components/Footer.jsx";
 import MyPlanDetail from "./pages/MyPlanDetail.jsx";
 
@@ -40,6 +39,7 @@ const App = () => {
     };
 
     return (
+        <Suspense>
         <ChatProvider>
             <Router>
                 <ReloadHandler />
@@ -47,7 +47,7 @@ const App = () => {
                     <Header />
                     <main>
                         <IntroSection />
-                        <Suspense fallback={<CloudLoading />}>
+
                             <Routes>
                                 <Route path="/" element={<PlanSelection />} />
                                 <Route path="plan-selection" element={<PlanSelection />} />
@@ -72,12 +72,13 @@ const App = () => {
                             </Routes>
                             <Background />
                             <TravelDestination />
-                        </Suspense>
+
                     </main>
                     <Footer />
                 </ModalProvider>
             </Router>
         </ChatProvider>
+        </Suspense>
     );
 };
 
