@@ -10,7 +10,6 @@ const TravelDestination = () => {
 
   const [selectedDestination, setSelectedDestination] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isVisible, setIsVisible] = useState(false);
 
   const openModal = (destination) => setSelectedDestination(destination);
   const closeModal = () => setSelectedDestination(null);
@@ -18,17 +17,6 @@ const TravelDestination = () => {
   const filteredDestinations = destinations.filter((destination) =>
     destination.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => {
-      if (ref.current) observer.unobserve(ref.current);
-    };
-  }, [location]);
 
   if (!isHome) return null;
 
@@ -83,7 +71,6 @@ const TravelDestination = () => {
       </div>
 
       <section className="content-section" id="list_title" ref={ref}>
-        {isVisible && (
           <>
             <h2>지금, 마음 가는 여행지를 찾아보세요</h2>
             <div className="bar"></div>
@@ -113,7 +100,6 @@ const TravelDestination = () => {
               ))}
             </ul>
           </>
-        )}
 
         {selectedDestination && (
           <div className="travel-destination-modal" onClick={closeModal}>
@@ -125,22 +111,6 @@ const TravelDestination = () => {
                 <h3>{selectedDestination.name}</h3>
                 <p className="description">{selectedDestination.description}</p>
                 <div className="travel-details">
-                  <div className="detail-item">
-                    <span className="label">✈️ 항공:</span>
-                    <span>{selectedDestination.flight}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="label">🪪비자:</span>
-                    <span>{selectedDestination.visa}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="label">🔌전압:</span>
-                    <span>{selectedDestination.voltage}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="label">🕒시차:</span>
-                    <span>{selectedDestination.time}</span>
-                  </div>
                 </div>
               </div>
               <div className="modal-image">
