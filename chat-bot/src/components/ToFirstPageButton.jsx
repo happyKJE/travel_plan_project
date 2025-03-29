@@ -25,6 +25,7 @@ const ToFirstPageButton = ({ onFirstPage }) => {
         <div className='to-first-page'>
             <button className="to-first-page-button" onClick={() => {
                 console.log("첫페이지 이동");
+                window.scrollTo(0, 0); // 스크롤을 맨 위로 이동
                 if(!isMyPage)onFirstPage();
             }}>&times;</button>
         </div>

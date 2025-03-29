@@ -71,9 +71,9 @@ const RandomPlanStep = () => {
         let data;
         if (mode === 'location') data = locations;
         else if (mode === 'island') data = islands;
-        else if (mode === 'cultural') data = cultural;
-        else if (mode === 'petPlace') data = petPlaces;
-        else if (mode === 'petCulture') data= petCulture;
+        // else if (mode === 'cultural') data = cultural;
+        // else if (mode === 'petPlace') data = petPlaces;
+        // else if (mode === 'petCulture') data= petCulture;
         if (Array.isArray(data) && data.length > 0) {
             const randomOptions = getRandomOptions(data);
             setRouletteOptions(randomOptions);
@@ -124,15 +124,15 @@ const RandomPlanStep = () => {
                     <span className="mode-icon">
                         {mode === 'location' && '🌍'}
                         {mode === 'island' && '🏝️'}
-                        {mode === 'cultural' && '🏛️'}
+                        {/*{mode === 'cultural' && '🏛️'}*/}
                     </span>
 
                 <select value={mode} disabled={mustSpin} onChange={(e) => setMode(e.target.value)}>
                     <option value="location">🗺️전국자치구 250개!!</option>
                     <option value="island">🏝️어디까지 가봤니? 섬ver</option>
-                    <option value="cultural">👣나의문화유산답사기</option>
-                    <option value="petPlace">🐶달려달려 강아지</option>
-                    <option value="petCulture">🐕교양있는 멍멍이</option>
+                    {/*<option value="cultural">👣나의문화유산답사기</option>*/}
+                    {/*<option value="petPlace">🐶달려달려 강아지</option>*/}
+                    {/*<option value="petCulture">🐕교양있는 멍멍이</option>*/}
                 </select>
             </div>
             <div className='Roulette-box'>

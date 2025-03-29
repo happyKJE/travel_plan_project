@@ -21,7 +21,7 @@
     min-width: 600px;
     max-width: 800px;
     height: auto; /* 내용에 따라 자동 조정 */
-    max-height: none; /* 최대 높이 제한 없음 */
+    max-height: 90%; /* 최대 높이 제한 없음 */
     padding: 20px;
     position: relative;
 }
@@ -30,8 +30,18 @@
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    overflow-x: hidden; /* 스크롤 숨김 -> 돌림판 떨림문제 해결 */
     overflow-y: hidden; /* 스크롤 숨김 */
     position: relative;
+}
+
+.modal-children-wrapper {
+    max-height: none;
+    overflow-y: hidden;
+}
+.scroll-enabled {
+    max-height: 60vh;
+    overflow-y: auto !important;
 }
 
 .modal-header {

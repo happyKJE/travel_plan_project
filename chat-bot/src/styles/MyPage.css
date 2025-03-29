@@ -13,9 +13,7 @@
 .mypage-container h2 {
     font-size: 24px;
     font-weight: 700;
-    margin-bottom: 62px;
     color: #333;
-    border-left: 4px solid #ffcf66;
     padding-left: 18px;
 }
 .mypage-nav {
@@ -59,7 +57,7 @@
 
 .profile-row {
     display: flex;
-    justify-content: revert-layer;
+    /*justify-content: revert-layer;*/
     padding: 8px 0;
     border-bottom: 1px solid #eee;
 }

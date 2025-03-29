@@ -82,7 +82,7 @@ const MyPlanDetail = () => {
 
                         {day.night?.length > 0 && (
                             <div className="plan-time-section">
-                                <div className="section-header">🌙 밤에 가볼만한 곳</div>
+                                <div className="section-header"></div>
                                     <div className="plan-summary-bubble">
                                         {day.night}
                                     </div>
