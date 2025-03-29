@@ -32,7 +32,7 @@ const Login = () => {
             const data = await res.json();
 
             if (!res.ok) {
-                setError(data.message || '로그인 실패');
+                showModal(data.message || '로그인 실패');
                 return;
             }
 

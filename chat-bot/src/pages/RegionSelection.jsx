@@ -12,6 +12,7 @@ const RegionSelection = () => {
     useEffect(() => {
         requestAnimationFrame(() => {
             if (window.simplemaps_countrymap && typeof window.simplemaps_countrymap.load === 'function') {
+                console.log('✅ Map loaded via requestAnimationFrame');
                 window.simplemaps_countrymap.load();
                 if(state.inputValues.region_code) {
                     state.inputValues.region_code.forEach((region) => {
@@ -42,23 +43,21 @@ const RegionSelection = () => {
             try {
                 await loadScript("/src/map/mapdata.js");
                 await loadScript("/src/map/countrymap.js");
-                window.simplemaps_countrymap.load();
+                window[simplemaps_countrymap];
+                // window.simplemaps_countrymap.load();
                 await loadScript("/src/map/select.js");
 
                 window.simplemaps_select.map = window.simplemaps_countrymap;
-                window.simplemaps_select.max = 3;
+                window.simplemaps_select.max = 1;
 
                 console.log("✅ Map scripts loaded and ready");
-                setScriptsLoaded(true); // ✅ 한 번만 로딩
             } catch (error) {
                 console.error("❌ Failed to load map scripts", error);
             }
         };
 
-        if (!scriptsLoaded) {
             loadMapScripts();
-        }
-    }, [scriptsLoaded]);
+    }, []);
 
     // 다음 버튼 클릭 시 선택된 지역 상태 업데이트
     const handleOnNext = () => {
@@ -66,9 +65,6 @@ const RegionSelection = () => {
             const data = window.simplemaps_select.selected.map((region) => {
                 return simplemaps_countrymap_mapdata?.data?.data[region] || "Unknown";
             });
-            console.log("3"+state);
-
-            console.log("Selected Regions:", data);
             dispatch({
                 type: "SET_OPTION",
                 payload: { type: "region", value: data }
@@ -94,7 +90,7 @@ const RegionSelection = () => {
             transition={{ duration: 1 }}
         >
             <h2 className='option-header'>어디로 가볼까요?</h2>
-            <p style={{ color: "gray", textDecorationLine: "underline" }}>(최대 3개 지역 선택 가능)</p>
+            <p style={{ color: "gray", textDecorationLine: "underline" }}>(※ 지역은 한 곳만 선택 가능합니다.)</p>
             <div id="map"></div>
             <NavigationButtons onBack={() => navigate('/dates-selection')} onNext={handleOnNext} />
         </motion.div>

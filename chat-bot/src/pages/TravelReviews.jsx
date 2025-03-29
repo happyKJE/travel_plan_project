@@ -53,7 +53,7 @@ const TravelReviews = () => {
                             <h3 className="review-title">{review.title}</h3>
                             <div
                                 className="review-content-preview"
-                                dangerouslySetInnerHTML={{ __html: review.content.slice(0, 100) + "..." }}
+                                dangerouslySetInnerHTML={{ __html: review.content.slice(0, 15   ) + "..." }}
                             />
                         </li>
                     ))}
