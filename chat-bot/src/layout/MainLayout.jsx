@@ -10,8 +10,6 @@ const MainLayout = () => {
         <>
             <IntroSection />
             <Outlet />
-            <Background />
-            <TravelDestination />
         </>
     );
 };
