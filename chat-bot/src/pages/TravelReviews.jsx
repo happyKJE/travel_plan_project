@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/TravelReviews.css";
+import useStore from "../context/UseStore.jsx";
 
 const TravelReviews = () => {
     const navigate = useNavigate();
     const [reviews, setReviews] = useState([]);
+    const { state } = useStore();
+    const isLoggedIn = state.isLoggedIn;
 
     // 리스트 조회
     useEffect(() => {
@@ -28,8 +31,14 @@ const TravelReviews = () => {
                 <div className="review-header-container">
                     <div className="review-header">여행 후기 게시판</div>
                     <div className="review-header-buttons">
-                        <button className="write-btn" onClick={() => navigate('/reviewArea')}>글쓰기</button>
-                        {/*<button className="close-btn" onClick={() => navigate('/')}>×</button>*/}
+                        <button
+                            className={`write-btn ${!isLoggedIn ? "disabled tooltip-wrapper" : ""}`}
+                            onClick={() => isLoggedIn && navigate('/reviewArea')}
+                            disabled={!isLoggedIn}
+                        >
+                            글쓰기
+                            {!isLoggedIn && <span className="tooltip-text">로그인 후 이용해주세요</span>}
+                        </button>
                     </div>
                 </div>
 
