@@ -13,14 +13,3 @@ export const getMyPage = async (req, res) => {
     }
 };
 
-export const updateUser = async (req, res) => {
-    const userId = req.user.id;
-    const { name, email, phone } = req.body;
-    try {
-        await db.query('UPDATE users SET name = ?, email = ?, phoneNumber = ? WHERE id = ?', [name, email, phone, userId]);
-        res.json({ message: '정보 수정 성공' });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: '정보 수정 실패' });
-    }
-};
