@@ -162,7 +162,8 @@ const RandomPlanStep = () => {
                         radiusLineWidth={2}
 
                         // ✅ 폰트 사이즈 조금 키우기
-                        fontSize={18}
+                        fontSize={20}
+
                     />
                 )}
             </div>

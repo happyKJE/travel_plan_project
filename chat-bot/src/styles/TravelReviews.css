@@ -151,3 +151,44 @@
     transform: translateY(-3px);
     box-shadow: 0 6px 16px rgba(108, 99, 255, 0.5);
 }
+
+
+
+/* 비활성화 버튼 스타일 */
+.write-btn.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    position: relative;
+}
+
+/* 툴팁 스타일 */
+.tooltip-wrapper {
+    position: relative;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 140px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 6px 8px;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 13px;
+}
+
+/* 마우스 올렸을 때 툴팁 보이게 */
+.tooltip-wrapper:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}

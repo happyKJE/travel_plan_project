@@ -1,5 +1,6 @@
 .Roulette-box {
     display: flex;
+    transform: scale(0.89);
 }
 
 .roulette-type {
