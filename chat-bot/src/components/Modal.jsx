@@ -8,7 +8,7 @@
  * @note 
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../styles/Modal.css';
 import ToFirstPageButton from './ToFirstPageButton';
 import { useNavigate } from 'react-router-dom';
@@ -25,6 +25,17 @@ const Modal = ({ children, onFirstPage  }) => {
         dispatch({ type: 'SELECT_PLAN', payload: null });
         navigate('/plan-selection', { state: { fromModal: true } });
     };
+    useEffect(()=>{
+        if(location.pathname.startsWith('/mypage/plan/')){
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+
+        return () => {
+            document.body.style.overflow = "auto"; // cleanup
+        };
+    },[location.pathname]);
 
     return (
 
