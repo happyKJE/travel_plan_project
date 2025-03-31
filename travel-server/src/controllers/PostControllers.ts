@@ -55,25 +55,32 @@ export const getAllPosts = async (req: Request, res: Response) => {
 };
 
 // 후기 상세 조회
-export const getPostById = async (req: Request, res: Response) => {
+export const getPostById = async (req: AuthenticatedRequest, res: Response) => {
     const { id } = req.params;
-
+    const userId = req.user?.id;
     try {
         const post = await prisma.travelPost.findUnique({
-            where: { id: Number(id) },
-            select: {
-                id: true,
-                title: true,
-                content: true,
-                image_url: true,
-                created_at: true,
-            },
+            where: { id: Number(id),
+                user_id: userId
+             },
+            include: {
+                user: {
+                  select: { name: true }
+                }
+              }
         });
 
         if (!post) return res.status(404).json({ message: '후기를 찾을 수 없습니다.' });
 
-        res.json(post);
-    } catch (err) {
+        res.json({
+              id: post.id,
+              title: post.title,
+              content: post.content,
+              image_url: post.image_url,
+              created_at: post.created_at,
+              user_name: post.user?.name || "익명"
+            });
+    } catch (err:any) {
         console.error('상세 조회 실패:', err);
         res.status(500).json({ message: '상세 조회 실패' });
     }

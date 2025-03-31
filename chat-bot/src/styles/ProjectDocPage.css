@@ -1,0 +1,88 @@
+/* 전체 배경 및 레이아웃 */
+.doc-wrapper {
+    background-color: #e0f2fe; /* sky-100 느낌 */
+    padding: 130px 16px;
+    min-height: 100vh;
+    font-family: 'Pretendard', 'Arial', sans-serif;
+    color: #1e293b;
+}
+
+.doc-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* 타이틀 */
+.doc-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    color: #0284c7;
+    margin-bottom: 40px;
+}
+
+/* 스크롤 영역 */
+.doc-scroll {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* 각 섹션 스타일 */
+.doc-section {
+    margin-bottom: 32px;
+}
+
+.doc-section-title {
+    font-size: 20px;
+    color: #0369a1;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #bae6fd;
+    padding-bottom: 4px;
+}
+
+/* 리스트 */
+.doc-list {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.doc-list li {
+    margin-bottom: 6px;
+}
+
+/* 코드 블럭 */
+.doc-code-block {
+    background-color: #f0f9ff;
+    padding: 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    white-space: pre-wrap;
+    border-radius: 8px;
+    border: 1px solid #bae6fd;
+}
+
+/* 푸터 버튼 */
+.doc-footer {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.pdf-save-btn {
+    background-color: #0ea5e9;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pdf-save-btn:hover {
+    background-color: #0284c7;
+}

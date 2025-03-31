@@ -63,7 +63,7 @@ export const getPlan = async (req:AuthenticatedRequest, res:Response) => {
         user_id: userId,
         id: Number(id)
       },
-      select: {id: true, title: true, date: true,description:true,created_at:true},
+      select: {id: true,user_id:true, title: true, date: true,description:true,created_at:true},
     })
     res.json(plan);
   } catch (err) {

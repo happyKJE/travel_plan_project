@@ -44,8 +44,8 @@ const Header = () => {
                 <ul className="mainmenu">
                     <li
                         onMouseEnter={handleMouseEnter}
-                        onClick={() => {navigate("/"); handleReset();}}
-                    >홈</li>
+                        onClick={() => {navigate("/project-doc");}}
+                    >개발 일지</li>
 
                     <li
                         onMouseEnter={handleMouseEnter}
