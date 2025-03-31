@@ -6,11 +6,6 @@ const router = express.Router();
 
 router.post('/save', authMiddleware, saveChat);
 router.delete('/delete/:id', authMiddleware, deleteChat);
-router.get('/plan/:id', authMiddleware, saveChat);
+router.get('/plan/:id', authMiddleware, getPlan);
 
 export default router;
-
-
-router.post('/save', authMiddleware, saveChat);
-router.delete('/delete/:id', authMiddleware, deleteChat);
-router.get("/plan/:id", authMiddleware, getPlan);
