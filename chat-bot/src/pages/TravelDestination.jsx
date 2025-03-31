@@ -110,8 +110,24 @@ const TravelDestination = () => {
               <div className="modal-info">
                 <h3>{selectedDestination.name}</h3>
                 <p className="description">{selectedDestination.description}</p>
-                <div className="travel-details">
-                </div>
+                {/*<div className="travel-details">*/}
+                {/*    <div className="detail-item">*/}
+                {/*        <span className="label">✈️ 항공:</span>*/}
+                {/*        <span>{selectedDestination.flight}</span>*/}
+                {/*    </div>*/}
+                {/*    <div className="detail-item">*/}
+                {/*        <span className="label">🪪비자:</span>*/}
+                {/*        <span>{selectedDestination.visa}</span>*/}
+                {/*    </div>*/}
+                {/*    <div className="detail-item">*/}
+                {/*        <span className="label">🔌전압:</span>*/}
+                {/*        <span>{selectedDestination.voltage}</span>*/}
+                {/*    </div>*/}
+                {/*    <div className="detail-item">*/}
+                {/*        <span className="label">🕒시차:</span>*/}
+                {/*        <span>{selectedDestination.time}</span>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
               </div>
               <div className="modal-image">
                 <img src={selectedDestination.image} alt={selectedDestination.name} />
