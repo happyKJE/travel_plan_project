@@ -61,18 +61,23 @@ export const getPostById = async (req: Request, res: Response) => {
     try {
         const post = await prisma.travelPost.findUnique({
             where: { id: Number(id) },
-            select: {
-                id: true,
-                title: true,
-                content: true,
-                image_url: true,
-                created_at: true,
-            },
+            include: {
+                user: {
+                  select: { name: true }
+                }
+              }
         });
 
         if (!post) return res.status(404).json({ message: '후기를 찾을 수 없습니다.' });
 
-        res.json(post);
+        res.json({
+              id: post.id,
+              title: post.title,
+              content: post.content,
+              image_url: post.image_url,
+              created_at: post.created_at,
+              user_name: post.user?.name || "익명"
+            });
     } catch (err) {
         console.error('상세 조회 실패:', err);
         res.status(500).json({ message: '상세 조회 실패' });

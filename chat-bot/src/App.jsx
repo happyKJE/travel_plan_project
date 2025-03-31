@@ -9,6 +9,7 @@ import { ModalProvider } from "./components/ModalProvider.jsx";
 import Footer from "./components/Footer.jsx";
 import Modal from "./components/Modal.jsx";
 import Background from "./components/Background.jsx";
+import ProjectDocPage from "./pages/projectDoc/ProjectDocPage.jsx";
 
 // Lazy-loaded 컴포넌트들
 const PlanSelection = lazy(() => import("./pages/PlanSelection.jsx"));
@@ -75,6 +76,7 @@ const App = () => {
     
                                     {/* IntroSection이 없는 라우트 */}
                                     <Route element={<NoIntroLayout />}>
+                                        <Route path="project-doc" element={<ProjectDocPage />} />
                                         <Route path="login" element={<Login />} />
                                         <Route path="join" element={<Join />} />
                                         <Route path="mypage" element={<MyPage />}>
@@ -94,7 +96,6 @@ const App = () => {
                 </Router>
             </ChatProvider>
         </Suspense>
-            
     );
 };
 

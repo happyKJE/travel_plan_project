@@ -43,7 +43,7 @@
 
 /* 이미지 스타일 */
 .review-content img {
-    /*width: 100%;*/
+    width: 100%;
     height: auto;
     border-radius: 8px;
     margin: 20px 0;
@@ -193,4 +193,31 @@
 .tooltip-wrapper:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
+}
+.no-review-message {
+    font-size: 14px;
+    color: #64748b;
+    text-align: center;
+    padding: 40px 0;
+}
+
+.loading-indicator {
+    font-size: 50px;
+    color: #555;
+    display: inline-block;
+    align-self: self-start;
+    background: #FFFFFF;
+    padding: 12px;
+    border-radius: 18px;
+    margin: 5px;
+    max-width: 70%;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.loading-indicator::after {
+    content: '...';
+    display: inline-block;
+    width: 1em;
+    text-align: left;
+    animation: dots 0.5s infinite;
 }
