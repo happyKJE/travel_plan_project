@@ -55,7 +55,7 @@ export const getAllPosts = async (req: Request, res: Response) => {
 };
 
 // 후기 상세 조회
-export const getPostById = async (req: Request, res: Response) => {
+export const getPostById = async (req: AuthenticatedRequest, res: Response) => {
     const { id } = req.params;
     const userId = req.user?.id;
     try {
