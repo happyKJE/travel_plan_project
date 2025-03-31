@@ -57,10 +57,12 @@ export const getAllPosts = async (req: Request, res: Response) => {
 // 후기 상세 조회
 export const getPostById = async (req: Request, res: Response) => {
     const { id } = req.params;
-
+    const userId = req.user?.id;
     try {
         const post = await prisma.travelPost.findUnique({
-            where: { id: Number(id) },
+            where: { id: Number(id),
+                user_id: userId
+             },
             include: {
                 user: {
                   select: { name: true }
@@ -78,7 +80,7 @@ export const getPostById = async (req: Request, res: Response) => {
               created_at: post.created_at,
               user_name: post.user?.name || "익명"
             });
-    } catch (err) {
+    } catch (err:any) {
         console.error('상세 조회 실패:', err);
         res.status(500).json({ message: '상세 조회 실패' });
     }
