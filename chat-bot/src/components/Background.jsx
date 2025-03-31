@@ -6,7 +6,8 @@ const Background = () => {
   const [show, setShow] = useState(true);
   const location = useLocation();
 
-  const isHiddenPage = ["/login", "/join", "/mypage"].includes(location.pathname);
+  const isHiddenPage = ["/login", "/join"].includes(location.pathname) || location.pathname.startsWith("/mypage");
+
 
   //경로 바뀌면 show 변경
   useEffect(() => {

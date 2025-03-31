@@ -14,7 +14,9 @@ model User {
   phoneNumber String
   name        String?
   created_at  DateTime      @default(now())
+
   travelPlans TravelPlan[]
+  travelPosts TravelPost[]
 }
 
 model TravelPlan {
@@ -26,6 +28,20 @@ model TravelPlan {
   created_at  DateTime @default(now())
 
   user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id])
+}
+
+model TravelPost {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  title      String
+  content    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  image_url  String?
+
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@index([user_id])
 }
